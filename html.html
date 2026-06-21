@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pablo's House: Comeback</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Black', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Neon Glow Effects */
+        .glow-text {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.6),
+                         0 0 20px rgba(255, 51, 51, 0.4),
+                         0 0 40px rgba(255, 51, 51, 0.2);
+        }
+
+        .neon-accent {
+            color: #ff3333;
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.8),
+                         0 0 30px rgba(255, 51, 51, 0.6);
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-reveal {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .scale-reveal.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Sections Structure */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid #111111;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, #000000 100%);
+            justify-content: space-between;
+            padding: 60px 20px;
+        }
+
+        .hero-top {
+            font-size: 1.5rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .hero-main h1 {
+            font-size: 4rem;
+            letter-spacing: -2px;
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-main h2 {
+            font-size: 2rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        @media (max-width: 768px) {
+            .hero-main h1 { font-size: 2.8rem; }
+            .hero-main h2 { font-size: 1.3rem; letter-spacing: 4px; }
+        }
+
+        /* Hook Section */
+        #hook {
+            background: #030303;
+        }
+
+        .hook-text {
+            font-size: 2.2rem;
+            max-width: 800px;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .hook-text { font-size: 1.4rem; }
+        }
+
+        /* Location Section */
+        #location {
+            background: radial-gradient(circle at center, #110505 0%, #000000 100%);
+            overflow: hidden;
+        }
+
+        .map-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.07;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,20 Q40,10 60,15 T80,40 T70,70 T40,80 T20,50 Z" fill="none" stroke="%23ff3333" stroke-width="0.5"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: scale(1.5);
+        }
+
+        .location-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .location-sub {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .location-title { font-size: 1.6rem; }
+            .location-sub { font-size: 1.1rem; }
+        }
+
+        /* BYOB Section */
+        #byob {
+            background: #000000;
+        }
+
+        .warning-box {
+            border: 2px solid #ff3333;
+            padding: 40px;
+            max-width: 750px;
+            background: rgba(255, 51, 51, 0.02);
+            box-shadow: 0 0 30px rgba(255, 51, 51, 0.05);
+            border-radius: 4px;
+        }
+
+        .warning-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .warning-box p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #dddddd;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .warning-box { padding: 25px 15px; }
+            .warning-box h3 { font-size: 1.4rem; }
+            .warning-box p { font-size: 0.95rem; }
+        }
+
+        /* Rules Section */
+        #rules {
+            background: #030303;
+        }
+
+        .rules-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .rules-list {
+            list-style: none;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .rules-list li {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            border-left: 4px solid #ff3333;
+            padding-left: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .rules-title { font-size: 1.8rem; margin-bottom: 30px; }
+            .rules-list li { font-size: 0.9rem; margin-bottom: 18px; padding-left: 12px; }
+        }
+
+        /* Tickets Section */
+        #tickets {
+            background: #000000;
+            min-height: auto;
+            padding: 80px 20px;
+        }
+
+        .tickets-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .widget-container {
+            width: 100%;
+            max-width: 600px;
+            background: #080808;
+            border: 1px solid #222222;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222222;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff3333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <div class="hero-top glow-text">Pablo's House</div>
+        <div class="hero-main">
+            <h1 class="scale-reveal">Presenta</h1>
+            <h2 class="neon-accent reveal">Comeback</h2>
+        </div>
+        <div style="height: 30px;"></div>
+    </section>
+
+    <!-- HOOK SECTION -->
+    <section id="hook">
+        <div class="hook-text reveal">
+            Por fin ha llegado la segunda edición de la fiesta que <span class="neon-accent">cierra el verano</span>.
+        </div>
+    </section>
+
+    <!-- LOCATION SECTION -->
+    <section id="location">
+        <div class="map-container"></div>
+        <div class="location-title reveal glow-text">No hace falta que te diga la ubicación...</div>
+        <div class="location-sub reveal neon-accent">Ya la sabes.</div>
+    </section>
+
+    <!-- BYOB WARNING SECTION -->
+    <section id="byob">
+        <div class="warning-box scale-reveal">
+            <h3 class="neon-accent">⚠️ AVISO IMPORTANTE</h3>
+            <p>CADA ASISTENTE ES RESPONSABLE DE ADQUIRIR TODOS LOS MATERIALES NECESARIOS (ALCOHOL, MEZCLA, VASOS, HIELO, PORROS, MONCHIS...) PARA LA CORRECTA REALIZACIÓN DEL EVENTO.</p>
+        </div>
+    </section>
+
+    <!-- RULES SECTION -->
+    <section id="rules">
+        <h2 class="rules-title glow-text">Normas Básicas</h2>
+        <ul class="rules-list">
+            <li class="reveal">OBLIGATORIO PRESENTAR LA ENTRADA.</li>
+            <li class="reveal">NO ESTARÁ PERMITIDO EL ACCESO AL INTERIOR DE LA VIVIENDA.</li>
+            <li class="reveal">MANTENER LAS BOTELLAS DE VIDRIO ALEJADAS DE LA ZONA DE PISCINA.</li>
+            <li class="reveal">SE LE DEBERÁ VENERAR A LA REINA DAILA.</li>
+            <li class="reveal">QUEDA PROHIBIDO LAS MICCIONES DENTRO DEL RECINTO (INCLUYENDO LA ZONA BAÑO).</li>
+        </ul>
+    </section>
+
+    <!-- TICKETS SECTION -->
+    <section id="tickets">
+        <h2 class="tickets-title neon-accent">Adquirir Entradas</h2>
+        <div class="widget-container reveal">
+            <!-- XCEED WIDGET INTEGRATION -->
+            <div id="xceed-widget"></div>
+            <script src="https://s3-eu-west-1.amazonaws.com/xceed-widget/2019-version/dist/loader.js" type="text/javascript"></script> 
+            <script src="https://widget.xceed.me/v2/loader.js"></script>
+        </div>
+    </section>
+
+    <!-- INTERSECTION OBSERVER FOR SCROLL ANIMATIONS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal, .scale-reveal');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: unobserve if you only want animation once
+                        // observer.unobserve(entry.target);
+                    } else {
+                        // Keeps it dynamic when scrolling back up/down
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, observerOptions);
+
+            reveals.forEach(element => {
+                revealOnScroll.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
