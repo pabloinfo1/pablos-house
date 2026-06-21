@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pablo's House: Comeback Vol. 2</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,400;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Space+Mono:wght@400;700&display=swap');
 
         * {
             margin: 0;
@@ -36,47 +36,127 @@
         }
 
         .neon-accent {
-            color: #ff4500; /* Vibrant Orange/Red neón matching Logo.png */
+            color: #ff4500; 
             text-shadow: 0 0 10px rgba(255, 69, 0, 0.8),
                          0 0 25px rgba(255, 69, 0, 0.6),
                          0 0 45px rgba(255, 69, 0, 0.3);
         }
 
-        /* Hero Section & Neon Turn-On Animation */
+        /* Hero Section */
         #hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 40px 20px;
+            padding: 40px 20px 20px 20px;
             position: relative;
-            background: radial-gradient(circle at center, rgba(255, 69, 0, 0.08) 0%, #000000 80%);
+            background-color: #000000;
+            background-image: radial-gradient(circle at 50% 55%, rgba(255, 69, 0, 0.12) 0%, transparent 75%);
         }
 
-        .hero-logo-container {
+        .hero-content-stack {
             flex: 1;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 900px;
-            padding: 20px;
+            max-width: 1100px;
+            margin-top: 2vh;
         }
 
-        .hero-logo {
-            width: 100%;
-            height: auto;
-            max-height: 70vh;
-            object-fit: contain;
+        /* 100% MATCH CON CARTEL ORIGINAL (FOTO 1) */
+        .hero-top-brand {
+            font-family: 'Space Mono', 'Courier New', monospace;
+            font-size: clamp(0.75rem, 2vw, 1.1rem);
+            letter-spacing: 0.45em;
+            color: #f0f0f0;
+            text-transform: uppercase;
             opacity: 0;
-            animation: neonPowerOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.3s;
+            animation: fadeInSimple 2s ease-out forwards;
+            animation-delay: 0.2s;
+            z-index: 3;
         }
 
-        @keyframes neonPowerOn {
+        .hero-main-title {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            margin-top: 0.5vh;
+            margin-bottom: -2.5vh; /* Cierra el hueco exactamente sobre la chimenea */
+            z-index: 3;
+        }
+
+        .comeback-text {
+            font-family: 'Anton', 'Impact', sans-serif;
+            font-size: clamp(3.8rem, 14.5vw, 10.5rem);
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            line-height: 0.9;
+            color: #ff8255; /* El tono melocotón del interior del tubo de neón */
+            text-transform: uppercase;
+            opacity: 0;
+            animation: textNeonTurnOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.4s;
+        }
+
+        .vol-text {
+            font-family: 'Anton', 'Impact', sans-serif;
+            font-size: clamp(1.3rem, 4.8vw, 3.4rem);
+            font-weight: 900;
+            color: #ff8255;
+            margin-left: 1vw;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: textNeonTurnOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInSimple {
+            from { opacity: 0; filter: blur(3px); }
+            to { opacity: 0.95; filter: blur(0); }
+        }
+
+        @keyframes textNeonTurnOn {
+            0% { opacity: 0.05; color: #330f00; text-shadow: none; }
+            12% { opacity: 1; color: #fff; text-shadow: 0 0 20px #ff3b00, 0 0 40px #ff3b00; }
+            16% { opacity: 0.1; color: #1f0900; text-shadow: none; }
+            22% { opacity: 0.8; color: #ff3b00; text-shadow: 0 0 15px #ff3b00; }
+            26% { opacity: 0.2; text-shadow: none; }
+            32%, 100% { 
+                opacity: 1; 
+                color: #ff8255; 
+                text-shadow: 0 0 10px #ff3b00,
+                             0 0 25px #ff3b00,
+                             0 0 50px #ff3b00,
+                             0 0 85px rgba(255, 59, 0, 0.8);
+            }
+        }
+
+        .hero-graphic-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-wireframe {
+            width: 100%;
+            max-height: 58vh;
+            object-fit: contain;
+            mix-blend-mode: screen; /* SOLUCIÓN AL RECUADRO GRIS: Vuelve transparente el fondo negro del PNG */
+            filter: drop-shadow(0 0 12px rgba(255, 69, 0, 0.3)); 
+            opacity: 0;
+            animation: wireframePowerOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes wireframePowerOn {
             0% { filter: brightness(0.05) grayscale(1); opacity: 0.1; }
-            15% { filter: brightness(0.8) drop-shadow(0 0 10px #ff4500); opacity: 0.7; }
+            15% { filter: brightness(0.8) drop-shadow(0 0 15px #ff4500); opacity: 0.7; }
             20% { filter: brightness(0.1) grayscale(0.8); opacity: 0.2; }
             25% { filter: brightness(1) drop-shadow(0 0 25px #ff4500); opacity: 0.9; }
             30% { filter: brightness(0.2); opacity: 0.4; }
@@ -90,7 +170,7 @@
             margin-bottom: 15px;
             opacity: 0;
             animation: fadeInPrompt 1.5s ease-out forwards;
-            animation-delay: 2.5s;
+            animation-delay: 2.8s;
             z-index: 10;
         }
 
@@ -322,6 +402,7 @@
             background: radial-gradient(circle at center, rgba(255, 69, 0, 0.15) 0%, #000000 80%);
             text-align: center;
             padding: 100px 20px;
+            position: relative; /* Esencial para anclar el texto legal */
         }
 
         .cta-subtitle {
@@ -381,10 +462,24 @@
             left: 100%;
         }
 
+        /* CARTELITO LEGAL ESQUINA INFERIOR DERECHA */
+        .disclaimer-satira {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            text-align: right;
+        }
+
         @media (max-width: 768px) {
             .cta-subtitle { font-size: 1.2rem; }
             .cta-hook { font-size: 1.8rem; margin-bottom: 35px; }
             .neon-btn { font-size: 1.25rem; padding: 20px 45px; width: 90%; max-width: 350px; }
+            .disclaimer-satira { font-size: 0.55rem; bottom: 8px; right: 10px; }
         }
 
         /* Custom Scrollbar */
@@ -398,11 +493,24 @@
 
     <!-- 1. HERO SECTION -->
     <section id="hero">
-        <div style="height: 1px;"></div> <!-- Spacer -->
+        <div style="height: 1px;"></div> 
         
-        <div class="hero-logo-container">
-            <!-- Referencia directa a Logo.png subido en GitHub -->
-            <img src="Logo.png" alt="Pablo's House Comeback Vol 2" class="hero-logo" onerror="this.src='https://via.placeholder.com/900x500/000000/ff4500?text=PABLO%27S+HOUSE%3A+COMEBACK';">
+        <div class="hero-content-stack">
+            <!-- PABLO'S HOUSE en pequeño, arriba y monoespaciado -->
+            <div class="hero-top-brand">
+                <span>PABLO'S HOUSE</span>
+            </div>
+
+            <!-- COMEBACK en gigante + VOL 2 a la derecha alineado a la base -->
+            <div class="hero-main-title">
+                <span class="comeback-text">COMEBACK</span>
+                <span class="vol-text">VOL 2</span>
+            </div>
+
+            <!-- Imagen referenciando a Logo.png con mix-blend-mode activado -->
+            <div class="hero-graphic-container">
+                <img src="Logo.png" alt="Pablo's House Comeback Vol 2" class="hero-wireframe" onerror="this.src='https://via.placeholder.com/900x500/000000/ff4500?text=PABLO%27S+HOUSE%3A+COMEBACK';">
+            </div>
         </div>
 
         <div class="scroll-prompt">
@@ -491,16 +599,18 @@
 
     <!-- 7. CTA / TICKETS BUTTON -->
     <section id="cta-section">
-        <div class="cta-subtitle reveal color-white">
+        <div class="cta-subtitle reveal glow-white">
             Después de esta presentación no te vas a quedar sin entradas...
         </div>
         <div class="cta-hook neon-accent reveal">
             ¿A qué esperas?
         </div>
         <div class="reveal" style="margin-top: 20px;">
-            <!-- Poner aquí el enlace real de taquilla en el href -->
             <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="neon-btn">COMPRAR ENTRADA</a>
         </div>
+
+        <!-- AVISO LEGAL ESQUINA -->
+        <div class="disclaimer-satira">Contenido satírico. Evento privado no comercial.</div>
     </section>
 
     <!-- JavaScript for Scroll Triggered Animations -->
@@ -513,7 +623,6 @@
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
                     } else {
-                        // Resetea la animación al salir de pantalla para que se vuelva a reproducir al hacer scroll
                         entry.target.classList.remove('active');
                     }
                 });
