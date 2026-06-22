@@ -64,9 +64,9 @@
             width: 100%;
             max-width: 1100px;
             margin-top: 2vh;
+            transform: translate3d(0, 0, 0); /* Forzado GPU WebKit iOS */
         }
 
-        /* 100% MATCH CON CARTEL ORIGINAL (FOTO 1) */
         .hero-top-brand {
             font-family: 'Space Mono', 'Courier New', monospace;
             font-size: clamp(0.75rem, 2vw, 1.1rem);
@@ -84,7 +84,7 @@
             align-items: baseline;
             justify-content: center;
             margin-top: 0.5vh;
-            margin-bottom: -2.5vh; /* Cierra el hueco exactamente sobre la chimenea */
+            margin-bottom: -2.5vh;
             z-index: 3;
         }
 
@@ -94,7 +94,7 @@
             font-weight: 900;
             letter-spacing: 0.02em;
             line-height: 0.9;
-            color: #ff8255; /* El tono melocotón del interior del tubo de neón */
+            color: #ff8255;
             text-transform: uppercase;
             opacity: 0;
             animation: textNeonTurnOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -147,22 +147,24 @@
             width: 100%;
             max-height: 58vh;
             object-fit: contain;
-            mix-blend-mode: screen; /* SOLUCIÓN AL RECUADRO GRIS: Vuelve transparente el fondo negro del PNG */
-            filter: drop-shadow(0 0 12px rgba(255, 69, 0, 0.3)); 
+            -webkit-mix-blend-mode: screen;
+            mix-blend-mode: screen;
+            transform: translateZ(0);
+            filter: contrast(140%) brightness(110%) drop-shadow(0 0 12px rgba(255, 69, 0, 0.3)); 
             opacity: 0;
             animation: wireframePowerOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             animation-delay: 0.5s;
         }
 
         @keyframes wireframePowerOn {
-            0% { filter: brightness(0.05) grayscale(1); opacity: 0.1; }
-            15% { filter: brightness(0.8) drop-shadow(0 0 15px #ff4500); opacity: 0.7; }
-            20% { filter: brightness(0.1) grayscale(0.8); opacity: 0.2; }
-            25% { filter: brightness(1) drop-shadow(0 0 25px #ff4500); opacity: 0.9; }
-            30% { filter: brightness(0.2); opacity: 0.4; }
-            35% { filter: brightness(1.2) drop-shadow(0 0 35px #ff4500); opacity: 1; }
-            40% { filter: brightness(0.5); opacity: 0.6; }
-            45%, 100% { filter: brightness(1.05) drop-shadow(0 0 25px rgba(255, 69, 0, 0.8)); opacity: 1; }
+            0% { filter: contrast(140%) brightness(0.05) grayscale(1); opacity: 0.1; }
+            15% { filter: contrast(140%) brightness(0.8) drop-shadow(0 0 15px #ff4500); opacity: 0.7; }
+            20% { filter: contrast(140%) brightness(0.1) grayscale(0.8); opacity: 0.2; }
+            25% { filter: contrast(140%) brightness(1) drop-shadow(0 0 25px #ff4500); opacity: 0.9; }
+            30% { filter: contrast(140%) brightness(0.2); opacity: 0.4; }
+            35% { filter: contrast(140%) brightness(1.2) drop-shadow(0 0 35px #ff4500); opacity: 1; }
+            40% { filter: contrast(140%) brightness(0.5); opacity: 0.6; }
+            45%, 100% { filter: contrast(140%) brightness(1.05) drop-shadow(0 0 25px rgba(255, 69, 0, 0.8)); opacity: 1; }
         }
 
         .scroll-prompt {
@@ -260,6 +262,29 @@
             transform: scale(1);
         }
 
+        /* Date & Time Section */
+        #datetime {
+            background-color: #030100;
+            border-bottom: 1px solid rgba(255, 69, 0, 0.2);
+        }
+
+        .date-box {
+            display: inline-block;
+            border: 2px solid #ff4500;
+            padding: 30px 50px;
+            border-radius: 8px;
+            background: rgba(255, 69, 0, 0.03);
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.15);
+        }
+
+        .date-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            color: #888888;
+            margin-bottom: 10px;
+        }
+
         /* Location Section */
         #location {
             background: radial-gradient(circle at center, rgba(255, 69, 0, 0.12) 0%, #000000 85%);
@@ -279,6 +304,36 @@
 
         .location-content {
             z-index: 2;
+        }
+
+        /* Parking Section */
+        #parking {
+            background-color: #010101;
+            border-bottom: 1px solid rgba(255, 69, 0, 0.15);
+        }
+
+        .neon-btn-secondary {
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ff4500;
+            text-decoration: none;
+            padding: 18px 45px;
+            background: rgba(255, 69, 0, 0.03);
+            border: 2px dashed #ff4500; /* Borde estilo plaza de parking */
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .neon-btn-secondary:hover {
+            background: rgba(255, 69, 0, 0.15);
+            color: #ffffff;
+            border-style: solid;
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.5);
+            transform: translateY(-2px);
         }
 
         /* BYOB Warning Box */
@@ -342,6 +397,8 @@
             .byob-container { padding: 35px 20px; }
             .byob-title { font-size: 1.5rem; }
             .byob-desc { font-size: 1.05rem; line-height: 1.5; }
+            .date-box { padding: 20px 30px; width: 90%; }
+            .neon-btn-secondary { font-size: 0.95rem; padding: 15px 30px; width: 90%; }
         }
 
         /* Rules Section */
@@ -367,7 +424,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 20px 25px;
             border-radius: 8px;
-            transition: transform 0.3s, border-color 0.3s;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .rule-item:hover {
@@ -390,6 +447,23 @@
             letter-spacing: 0.5px;
         }
 
+        /* NORMA DESTACADA (06) */
+        .rule-highlight {
+            background: linear-gradient(135deg, rgba(255, 69, 0, 0.15) 0%, rgba(20, 20, 20, 0.9) 100%);
+            border: 2px solid #ff4500;
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.25);
+        }
+
+        .rule-highlight .rule-number {
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500;
+        }
+
+        .rule-highlight .rule-text {
+            color: #ffffff;
+            font-weight: 900;
+        }
+
         @media (max-width: 768px) {
             .rules-header { font-size: 1.8rem; margin-bottom: 25px; }
             .rule-item { padding: 15px; margin-bottom: 15px; }
@@ -402,7 +476,7 @@
             background: radial-gradient(circle at center, rgba(255, 69, 0, 0.15) 0%, #000000 80%);
             text-align: center;
             padding: 100px 20px;
-            position: relative; /* Esencial para anclar el texto legal */
+            position: relative;
         }
 
         .cta-subtitle {
@@ -462,7 +536,6 @@
             left: 100%;
         }
 
-        /* CARTELITO LEGAL ESQUINA INFERIOR DERECHA */
         .disclaimer-satira {
             position: absolute;
             bottom: 15px;
@@ -473,13 +546,14 @@
             letter-spacing: 0.5px;
             pointer-events: none;
             text-align: right;
+            line-height: 1.4;
         }
 
         @media (max-width: 768px) {
             .cta-subtitle { font-size: 1.2rem; }
             .cta-hook { font-size: 1.8rem; margin-bottom: 35px; }
             .neon-btn { font-size: 1.25rem; padding: 20px 45px; width: 90%; max-width: 350px; }
-            .disclaimer-satira { font-size: 0.55rem; bottom: 8px; right: 10px; }
+            .disclaimer-satira { font-size: 0.55rem; bottom: 10px; right: 10px; }
         }
 
         /* Custom Scrollbar */
@@ -496,18 +570,15 @@
         <div style="height: 1px;"></div> 
         
         <div class="hero-content-stack">
-            <!-- PABLO'S HOUSE en pequeño, arriba y monoespaciado -->
             <div class="hero-top-brand">
                 <span>PABLO'S HOUSE</span>
             </div>
 
-            <!-- COMEBACK en gigante + VOL 2 a la derecha alineado a la base -->
             <div class="hero-main-title">
                 <span class="comeback-text">COMEBACK</span>
                 <span class="vol-text">VOL 2</span>
             </div>
 
-            <!-- Imagen referenciando a Logo.png con mix-blend-mode activado -->
             <div class="hero-graphic-container">
                 <img src="Logo.png" alt="Pablo's House Comeback Vol 2" class="hero-wireframe" onerror="this.src='https://via.placeholder.com/900x500/000000/ff4500?text=PABLO%27S+HOUSE%3A+COMEBACK';">
             </div>
@@ -536,7 +607,17 @@
         </div>
     </section>
 
-    <!-- 4. LOCATION PANEL -->
+    <!-- 4. DATE & TIME SECTION (RECOLOCADO AQUÍ) -->
+    <section id="datetime" class="story-panel">
+        <div class="date-box scale-reveal">
+            <div class="date-label">[ SECUENCIA DE ARRANQUE ]</div>
+            <div class="story-text neon-accent" style="font-size: clamp(2.2rem, 6.5vw, 4.5rem); letter-spacing: 2px;">
+                5 SEPTIEMBRE // 22:00
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. LOCATION PANEL -->
     <section id="location" class="story-panel">
         <div class="map-bg"></div>
         <div class="location-content reveal">
@@ -549,7 +630,20 @@
         </div>
     </section>
 
-    <!-- 5. BYOB DETAILED NOTICE -->
+    <!-- 6. PARKING SECTION (NUEVO) -->
+    <section id="parking" class="story-panel">
+        <div class="story-text reveal" style="font-size: clamp(1.8rem, 4.5vw, 2.6rem); max-width: 900px;">
+            ...Pero a lo mejor te cunde saber <span class="neon-accent">dónde aparcar</span>.
+        </div>
+        <div class="story-text-sub reveal" style="margin-top: 20px; font-size: clamp(1rem, 2vw, 1.25rem); max-width: 750px;">
+            La gran mayoría no sabéis dónde dejar el coche. Para no bloquear la entrada de los vecinos ni caminos de paso, aparcad todos aquí:
+        </div>
+        <div class="reveal" style="margin-top: 35px;">
+            <a href="https://maps.app.goo.gl/LZVDSkJFwppdsczd8" target="_blank" class="neon-btn-secondary">VER UBICACIÓN DEL PARKING</a>
+        </div>
+    </section>
+
+    <!-- 7. BYOB DETAILED NOTICE -->
     <section class="story-panel" style="background-color: #020202;">
         <div class="byob-container scale-reveal">
             <div class="byob-title">ESTE ES UN EVENTO AUTO-GESTIONADO</div>
@@ -565,7 +659,7 @@
         </div>
     </section>
 
-    <!-- 6. RULES SECTION -->
+    <!-- 8. RULES SECTION -->
     <section class="story-panel" style="background-color: #000000;">
         <div class="rules-wrapper">
             <h2 class="rules-header neon-accent reveal">NORMAS BÁSICAS</h2>
@@ -594,10 +688,16 @@
                 <div class="rule-number">05</div>
                 <div class="rule-text">QUEDA PROHIBIDO LAS MICCIONES DENTRO DEL RECINTO (INCLUYENDO LA ZONA BAÑO).</div>
             </div>
+
+            <!-- NORMA DESTACADA -->
+            <div class="rule-item rule-highlight reveal">
+                <div class="rule-number">06</div>
+                <div class="rule-text">TRATA LA CASA COMO SI FUERA TUYA. CUIDA EL ENTORNO Y RESPETA LAS INSTALACIONES.</div>
+            </div>
         </div>
     </section>
 
-    <!-- 7. CTA / TICKETS BUTTON -->
+    <!-- 9. CTA / TICKETS BUTTON -->
     <section id="cta-section">
         <div class="cta-subtitle reveal glow-white">
             Después de esta presentación no te vas a quedar sin entradas...
@@ -609,8 +709,11 @@
             <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="neon-btn">COMPRAR ENTRADA</a>
         </div>
 
-        <!-- AVISO LEGAL ESQUINA -->
-        <div class="disclaimer-satira">Contenido satírico. Evento privado no comercial.</div>
+        <!-- AVISO LEGAL + FIRMA -->
+        <div class="disclaimer-satira">
+            Contenido satírico. Evento privado no comercial.<br>
+            <span style="color: #ff4500;">//</span> Creado por <strong>pabloinfo1</strong>
+        </div>
     </section>
 
     <!-- JavaScript for Scroll Triggered Animations -->
