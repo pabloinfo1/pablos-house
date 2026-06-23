@@ -66,7 +66,6 @@
             margin-top: 2vh;
         }
 
-        /* CORRECCIÓN IOS 1: Añadido position: relative y z-index 20 + Escudo de sombra negra */
         .hero-top-brand {
             font-family: 'Space Mono', 'Courier New', monospace;
             font-size: clamp(0.75rem, 2vw, 1.1rem);
@@ -81,7 +80,6 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.8);
         }
 
-        /* CORRECCIÓN IOS 2: Jerarquía de capa inferior a la marca superior */
         .hero-main-title {
             display: flex;
             align-items: baseline;
@@ -275,12 +273,12 @@
         .date-box {
             display: inline-block;
             border: 2px solid #ff4500;
-            padding: 30px 50px;
+            padding: 35px 50px;
             border-radius: 8px;
             background: rgba(255, 69, 0, 0.03);
             box-shadow: 0 0 30px rgba(255, 69, 0, 0.15);
             position: relative;
-            max-width: 92vw; /* Evita que la caja toque los bordes del móvil */
+            max-width: 92vw;
         }
 
         .date-label {
@@ -291,7 +289,6 @@
             margin-bottom: 10px;
         }
 
-        /* CORRECCIÓN FECHA MÓVIL: white-space nowrap (fuerza 1 sola línea) + Animación Cyber */
         .date-text-glow {
             font-size: clamp(1.35rem, 5vw, 4.5rem); 
             letter-spacing: 1px;
@@ -305,6 +302,80 @@
             font-weight: 900;
             animation: cursorBlink 1s step-end infinite;
             margin-left: 4px;
+        }
+
+        /* BOTÓN CALENDARIO NATIVO (100% PERSONALIZADO) */
+        .native-cal-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-top: 22px;
+        }
+
+        .cal-btn-terminal {
+            background: transparent;
+            border: none;
+            color: #888888;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            padding: 6px 12px;
+        }
+
+        .cal-btn-terminal:hover, .native-cal-wrapper.open .cal-btn-terminal {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        .cal-menu-terminal {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            background: rgba(10, 10, 10, 0.96);
+            border: 1px solid rgba(255, 69, 0, 0.4);
+            border-radius: 4px;
+            padding: 6px 0;
+            min-width: 220px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.95), 0 0 20px rgba(255, 69, 0, 0.15);
+            z-index: 100;
+            text-align: left;
+        }
+
+        .cal-menu-terminal.active {
+            display: block;
+            animation: dropMenu 0.15s ease-out forwards;
+        }
+
+        @keyframes dropMenu {
+            from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .cal-menu-terminal a {
+            display: block;
+            padding: 12px 20px;
+            color: #cccccc;
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .cal-menu-terminal a:hover {
+            background: rgba(255, 69, 0, 0.12);
+            color: #ffffff;
+            border-left-color: #ff4500;
+        }
+
+        .cal-opt {
+            color: #ff4500;
+            margin-right: 8px;
+            font-weight: 700;
         }
 
         @keyframes terminalPulse {
@@ -429,7 +500,7 @@
             .byob-container { padding: 35px 20px; }
             .byob-title { font-size: 1.5rem; }
             .byob-desc { font-size: 1.05rem; line-height: 1.5; }
-            .date-box { padding: 20px 25px; }
+            .date-box { padding: 25px 20px; }
             .neon-btn-secondary { font-size: 0.95rem; padding: 15px 30px; width: 90%; }
         }
 
@@ -639,13 +710,30 @@
         </div>
     </section>
 
-    <!-- 4. DATE & TIME SECTION (CORREGIDO MÓVIL) -->
+    <!-- 4. DATE & TIME SECTION + DESPLEGABLE NATIVO -->
     <section id="datetime" class="story-panel">
         <div class="date-box scale-reveal">
             <div class="date-label">[ SECUENCIA DE ARRANQUE ]</div>
             <div class="story-text neon-accent date-text-glow">
                 5&nbsp;SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
             </div>
+
+            <!-- DESPLEGABLE NATIVO CERO BLOATWARE -->
+            <div class="native-cal-wrapper">
+                <button class="cal-btn-terminal" type="button">[ + GUARDAR EN CALENDARIO ]</button>
+                
+                <div class="cal-menu-terminal">
+                    <!-- Enlace directo a Google Calendar con los datos parseados -->
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pablo%27s+House%3A+Comeback+Vol.+2&dates=20260905T220000/20260906T080000&ctz=Europe/Madrid&details=%C2%A1El+regreso+que+estabas+esperando%21+Ha+costado%2C+pero+por+fin+abrimos+las+puertas+de+nuevo.%0A%0A%E2%9A%A0%EF%B8%8F+RECORDATORIOS+IMPORTANTES%3A%0A%E2%80%A2+Trae+tu+alcohol%2C+tu+entrada+y%2C+sobre+todo%2C+ganas+de+tajarla.%0A%E2%80%A2+Aseg%C3%BArate+de+haber+le%C3%ADdo+las+normas+del+evento+antes+de+venir.&location=Pablo%27s+House" target="_blank">
+                        <span class="cal-opt">[G]</span> Google Calendar
+                    </a>
+                    <!-- Data URI nativo para descargar el .ics en Apple / Outlook -->
+                    <a href="data:text/calendar;charset=utf-8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//Pablos%20House//Comeback%20Vol%202//ES%0ACALSCALE:GREGORIAN%0ABEGIN:VEVENT%0ASUMMARY:Pablo%27s%20House:%20Comeback%20Vol.%202%0ADTSTART;TZID=Europe/Madrid:20260905T220000%0ADTEND;TZID=Europe/Madrid:20260906T080000%0ALOCATION:Pablo%27s%20House%0ADESCRIPTION:%C2%A1El%20regreso%20que%20estabas%20esperando!%20Ha%20costado,%20pero%20por%20fin%20abrimos%20las%20puertas%20de%20nuevo.%5Cn%5Cn%E2%9A%A0%EF%B8%8F%20RECORDATORIOS%20IMPORTANTES:%5Cn%E2%80%A2%20Trae%20tu%20alcohol,%20tu%20entrada%20y,%20sobre%20todo,%20ganas%20de%20tajarla.%5Cn%E2%80%A2%20Aseg%C3%BArate%20de%20haber%20le%C3%ADdo%20las%20normas%20del%20evento%20antes%20de%20venir.%0ASTATUS:CONFIRMED%0AEND:VEVENT%0AEND:VCALENDAR" download="pablos-house-vol2.ics">
+                        <span class="cal-opt">[A]</span> Apple / iOS
+                    </a>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -748,11 +836,11 @@
         </div>
     </section>
 
-    <!-- JavaScript for Scroll Triggered Animations -->
+    <!-- JavaScript general de la web -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // 1. Scroll Triggered Animations
             const revealElements = document.querySelectorAll('.reveal, .scale-reveal');
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -761,11 +849,29 @@
                         entry.target.classList.remove('active');
                     }
                 });
-            }, {
-                threshold: 0.18
-            });
+            }, { threshold: 0.18 });
 
             revealElements.forEach(el => observer.observe(el));
+
+            // 2. Lógica de despliegue táctil para el botón nativo de calendario
+            const calBtn = document.querySelector('.cal-btn-terminal');
+            const calMenu = document.querySelector('.cal-menu-terminal');
+            const calWrapper = document.querySelector('.native-cal-wrapper');
+
+            if(calBtn && calMenu) {
+                calBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    calMenu.classList.toggle('active');
+                    calWrapper.classList.toggle('open');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.native-cal-wrapper')) {
+                        calMenu.classList.remove('active');
+                        calWrapper.classList.remove('open');
+                    }
+                });
+            }
         });
     </script>
 </body>
