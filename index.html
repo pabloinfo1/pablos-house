@@ -99,7 +99,8 @@
             color: #ff8255;
             text-transform: uppercase;
             opacity: 0;
-            animation: textNeonTurnOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            /* PARPADEO ESTIRADO A 3.8s */
+            animation: textNeonTurnOn 3.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             animation-delay: 0.4s;
         }
 
@@ -111,7 +112,7 @@
             margin-left: 1vw;
             text-transform: uppercase;
             opacity: 0;
-            animation: textNeonTurnOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: textNeonTurnOn 3.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             animation-delay: 0.6s;
         }
 
@@ -120,13 +121,16 @@
             to { opacity: 0.95; filter: blur(0); }
         }
 
+        /* KEYFRAMES RECALCULADOS PARA DISFRUTAR DEL ENCENDIDO ELÉCTRICO */
         @keyframes textNeonTurnOn {
             0% { opacity: 0.05; color: #330f00; text-shadow: none; }
-            12% { opacity: 1; color: #fff; text-shadow: 0 0 20px #ff3b00, 0 0 40px #ff3b00; }
-            16% { opacity: 0.1; color: #1f0900; text-shadow: none; }
-            22% { opacity: 0.8; color: #ff3b00; text-shadow: 0 0 15px #ff3b00; }
-            26% { opacity: 0.2; text-shadow: none; }
-            32%, 100% { 
+            14% { opacity: 1; color: #fff; text-shadow: 0 0 25px #ff3b00, 0 0 50px #ff3b00; }
+            20% { opacity: 0.1; color: #1f0900; text-shadow: none; }
+            28% { opacity: 0.8; color: #ff3b00; text-shadow: 0 0 15px #ff3b00; }
+            34% { opacity: 0.15; text-shadow: none; }
+            42% { opacity: 0.9; color: #ff8255; text-shadow: 0 0 25px #ff3b00; }
+            48% { opacity: 0.2; text-shadow: none; }
+            58%, 100% { 
                 opacity: 1; 
                 color: #ff8255; 
                 text-shadow: 0 0 10px #ff3b00,
@@ -153,19 +157,19 @@
             object-fit: contain;
             filter: contrast(130%) brightness(110%); 
             opacity: 0;
-            animation: wireframePowerOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: wireframePowerOn 3.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             animation-delay: 0.5s;
         }
 
         @keyframes wireframePowerOn {
             0% { filter: contrast(130%) brightness(0.05) grayscale(1); opacity: 0.1; }
             15% { filter: contrast(130%) brightness(0.8); opacity: 0.7; }
-            20% { filter: contrast(130%) brightness(0.1) grayscale(0.8); opacity: 0.2; }
-            25% { filter: contrast(130%) brightness(1); opacity: 0.9; }
-            30% { filter: contrast(130%) brightness(0.2); opacity: 0.4; }
-            35% { filter: contrast(130%) brightness(1.2); opacity: 1; }
-            40% { filter: contrast(130%) brightness(0.5); opacity: 0.6; }
-            45%, 100% { filter: contrast(130%) brightness(1.05); opacity: 1; }
+            22% { filter: contrast(130%) brightness(0.1) grayscale(0.8); opacity: 0.2; }
+            32% { filter: contrast(130%) brightness(1); opacity: 0.9; }
+            38% { filter: contrast(130%) brightness(0.2); opacity: 0.4; }
+            46% { filter: contrast(130%) brightness(1.2); opacity: 1; }
+            52% { filter: contrast(130%) brightness(0.4); opacity: 0.5; }
+            60%, 100% { filter: contrast(130%) brightness(1.05); opacity: 1; }
         }
 
         .scroll-prompt {
@@ -173,7 +177,7 @@
             margin-bottom: 15px;
             opacity: 0;
             animation: fadeInPrompt 1.5s ease-out forwards;
-            animation-delay: 2.8s;
+            animation-delay: 3.8s; /* Retrasado para no pisar el final de las luces */
             z-index: 10;
         }
 
@@ -201,6 +205,54 @@
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-10px); }
             60% { transform: translateY(-5px); }
+        }
+
+        /* ELEMENTO FLOTANTE PERMANENTE DE SCROLL */
+        .scroll-floater {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(10, 10, 10, 0.88);
+            border: 1px solid rgba(255, 69, 0, 0.4);
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.65rem, 1.6vw, 0.78rem);
+            color: #cccccc;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.95), 0 0 15px rgba(255, 69, 0, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+            width: max-content;
+            max-width: 90vw;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .scroll-floater.visible {
+            opacity: 0.9;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .floater-arrow {
+            color: #ff4500;
+            font-weight: 900;
+            animation: floaterArrowPulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes floaterArrowPulse {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
         }
 
         /* Layout Sections */
@@ -281,12 +333,14 @@
             max-width: 92vw;
         }
 
+        /* ETIQUETA SUPERIOR BLINDADA CONTRA SALTOS DE LÍNEA */
         .date-label {
             font-family: 'Space Mono', monospace;
-            font-size: 1rem;
+            font-size: clamp(0.75rem, 3vw, 1rem); 
             letter-spacing: 0.3em;
             color: #888888;
             margin-bottom: 10px;
+            white-space: nowrap; 
         }
 
         .date-text-glow {
@@ -304,7 +358,7 @@
             margin-left: 4px;
         }
 
-        /* BOTÓN CALENDARIO NATIVO (100% PERSONALIZADO) */
+        /* BOTÓN CALENDARIO NATIVO BLINDADO */
         .native-cal-wrapper {
             position: relative;
             display: inline-block;
@@ -316,11 +370,12 @@
             border: none;
             color: #888888;
             font-family: 'Space Mono', monospace;
-            font-size: 0.95rem;
+            font-size: clamp(0.7rem, 2.8vw, 0.95rem); 
             letter-spacing: 0.15em;
             cursor: pointer;
             transition: color 0.3s ease, text-shadow 0.3s ease;
             padding: 6px 12px;
+            white-space: nowrap; 
         }
 
         .cal-btn-terminal:hover, .native-cal-wrapper.open .cal-btn-terminal {
@@ -668,6 +723,12 @@
 </head>
 <body>
 
+    <!-- ELEMENTO FLOTANTE DE SCROLL (INICIALMENTE OCULTO) -->
+    <div id="scroll-floater" class="scroll-floater">
+        <span>Sigue bajando para enterarte de toda la vaina</span>
+        <span class="floater-arrow">↓</span>
+    </div>
+
     <!-- 1. HERO SECTION -->
     <section id="hero">
         <div style="height: 1px;"></div> 
@@ -713,21 +774,19 @@
     <!-- 4. DATE & TIME SECTION + DESPLEGABLE NATIVO -->
     <section id="datetime" class="story-panel">
         <div class="date-box scale-reveal">
-            <div class="date-label">[ SECUENCIA DE ARRANQUE ]</div>
+            <!-- USO DE &nbsp; PARA BLOQUEAR DESTRUCCIÓN DE CORCHETES EN MÓVIL -->
+            <div class="date-label">[&nbsp;SECUENCIA&nbsp;DE&nbsp;ARRANQUE&nbsp;]</div>
             <div class="story-text neon-accent date-text-glow">
                 5&nbsp;SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
             </div>
 
-            <!-- DESPLEGABLE NATIVO CERO BLOATWARE -->
             <div class="native-cal-wrapper">
-                <button class="cal-btn-terminal" type="button">[ + GUARDAR EN CALENDARIO ]</button>
+                <button class="cal-btn-terminal" type="button">[&nbsp;+&nbsp;GUARDAR&nbsp;EN&nbsp;CALENDARIO&nbsp;]</button>
                 
                 <div class="cal-menu-terminal">
-                    <!-- Enlace directo a Google Calendar con los datos parseados -->
                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pablo%27s+House%3A+Comeback+Vol.+2&dates=20260905T220000/20260906T080000&ctz=Europe/Madrid&details=%C2%A1El+regreso+que+estabas+esperando%21+Ha+costado%2C+pero+por+fin+abrimos+las+puertas+de+nuevo.%0A%0A%E2%9A%A0%EF%B8%8F+RECORDATORIOS+IMPORTANTES%3A%0A%E2%80%A2+Trae+tu+alcohol%2C+tu+entrada+y%2C+sobre+todo%2C+ganas+de+tajarla.%0A%E2%80%A2+Aseg%C3%BArate+de+haber+le%C3%ADdo+las+normas+del+evento+antes+de+venir.&location=Pablo%27s+House" target="_blank">
                         <span class="cal-opt">[G]</span> Google Calendar
                     </a>
-                    <!-- Data URI nativo para descargar el .ics en Apple / Outlook -->
                     <a href="data:text/calendar;charset=utf-8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//Pablos%20House//Comeback%20Vol%202//ES%0ACALSCALE:GREGORIAN%0ABEGIN:VEVENT%0ASUMMARY:Pablo%27s%20House:%20Comeback%20Vol.%202%0ADTSTART;TZID=Europe/Madrid:20260905T220000%0ADTEND;TZID=Europe/Madrid:20260906T080000%0ALOCATION:Pablo%27s%20House%0ADESCRIPTION:%C2%A1El%20regreso%20que%20estabas%20esperando!%20Ha%20costado,%20pero%20por%20fin%20abrimos%20las%20puertas%20de%20nuevo.%5Cn%5Cn%E2%9A%A0%EF%B8%8F%20RECORDATORIOS%20IMPORTANTES:%5Cn%E2%80%A2%20Trae%20tu%20alcohol,%20tu%20entrada%20y,%20sobre%20todo,%20ganas%20de%20tajarla.%5Cn%E2%80%A2%20Aseg%C3%BArate%20de%20haber%20le%C3%ADdo%20las%20normas%20del%20evento%20antes%20de%20venir.%0ASTATUS:CONFIRMED%0AEND:VEVENT%0AEND:VCALENDAR" download="pablos-house-vol2.ics">
                         <span class="cal-opt">[A]</span> Apple / iOS
                     </a>
@@ -853,7 +912,7 @@
 
             revealElements.forEach(el => observer.observe(el));
 
-            // 2. Lógica de despliegue táctil para el botón nativo de calendario
+            // 2. Lógica de despliegue para el botón nativo de calendario
             const calBtn = document.querySelector('.cal-btn-terminal');
             const calMenu = document.querySelector('.cal-menu-terminal');
             const calWrapper = document.querySelector('.native-cal-wrapper');
@@ -871,6 +930,27 @@
                         calWrapper.classList.remove('open');
                     }
                 });
+            }
+
+            // 3. Lógica del chivato flotante de scroll
+            const floater = document.getElementById('scroll-floater');
+            const heroSec = document.getElementById('hero');
+            const ctaSec = document.getElementById('cta-section');
+
+            if(floater && heroSec && ctaSec) {
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    const heroH = heroSec.offsetHeight;
+                    const ctaTop = ctaSec.getBoundingClientRect().top;
+                    const winH = window.innerHeight;
+
+                    // Mostrar si el usuario ha bajado un 65% del Hero Y el CTA aún no asoma
+                    if (scrollY > (heroH * 0.65) && ctaTop > (winH * 0.85)) {
+                        floater.classList.add('visible');
+                    } else {
+                        floater.classList.remove('visible');
+                    }
+                }, { passive: true });
             }
         });
     </script>
