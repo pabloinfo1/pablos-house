@@ -66,25 +66,30 @@
             margin-top: 2vh;
         }
 
+        /* CORRECCIÓN IOS 1: Añadido position: relative y z-index 20 + Escudo de sombra negra */
         .hero-top-brand {
             font-family: 'Space Mono', 'Courier New', monospace;
             font-size: clamp(0.75rem, 2vw, 1.1rem);
             letter-spacing: 0.45em;
-            color: #f0f0f0;
+            color: #ffffff; 
             text-transform: uppercase;
             opacity: 0;
             animation: fadeInSimple 2s ease-out forwards;
             animation-delay: 0.2s;
-            z-index: 3;
+            position: relative;
+            z-index: 20;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.8);
         }
 
+        /* CORRECCIÓN IOS 2: Jerarquía de capa inferior a la marca superior */
         .hero-main-title {
             display: flex;
             align-items: baseline;
             justify-content: center;
             margin-top: 0.5vh;
             margin-bottom: -2.5vh;
-            z-index: 3;
+            position: relative;
+            z-index: 10;
         }
 
         .comeback-text {
@@ -140,7 +145,6 @@
             align-items: center;
             position: relative;
             z-index: 1;
-            /* FIX IOS: mix-blend-mode aplicado al contenedor padre, no a la imagen */
             -webkit-mix-blend-mode: screen;
             mix-blend-mode: screen;
         }
@@ -149,7 +153,6 @@
             width: 100%;
             max-height: 58vh;
             object-fit: contain;
-            /* FIX IOS: Eliminado el filter: drop-shadow que rompía Safari al mezclar opacidades */
             filter: contrast(130%) brightness(110%); 
             opacity: 0;
             animation: wireframePowerOn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -266,6 +269,7 @@
         #datetime {
             background-color: #030100;
             border-bottom: 1px solid rgba(255, 69, 0, 0.2);
+            overflow: hidden;
         }
 
         .date-box {
@@ -275,6 +279,8 @@
             border-radius: 8px;
             background: rgba(255, 69, 0, 0.03);
             box-shadow: 0 0 30px rgba(255, 69, 0, 0.15);
+            position: relative;
+            max-width: 92vw; /* Evita que la caja toque los bordes del móvil */
         }
 
         .date-label {
@@ -283,6 +289,32 @@
             letter-spacing: 0.3em;
             color: #888888;
             margin-bottom: 10px;
+        }
+
+        /* CORRECCIÓN FECHA MÓVIL: white-space nowrap (fuerza 1 sola línea) + Animación Cyber */
+        .date-text-glow {
+            font-size: clamp(1.35rem, 5vw, 4.5rem); 
+            letter-spacing: 1px;
+            white-space: nowrap; 
+            animation: terminalPulse 2.5s infinite alternate ease-in-out;
+        }
+
+        .blink-cursor {
+            color: #ff4500;
+            font-family: 'Space Mono', monospace;
+            font-weight: 900;
+            animation: cursorBlink 1s step-end infinite;
+            margin-left: 4px;
+        }
+
+        @keyframes terminalPulse {
+            0% { text-shadow: 0 0 8px rgba(255, 69, 0, 0.6), 0 0 15px rgba(255, 69, 0, 0.3); }
+            100% { text-shadow: 0 0 15px #ff4500, 0 0 30px #ff4500, 0 0 45px rgba(255, 69, 0, 0.6); }
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         /* Location Section */
@@ -397,7 +429,7 @@
             .byob-container { padding: 35px 20px; }
             .byob-title { font-size: 1.5rem; }
             .byob-desc { font-size: 1.05rem; line-height: 1.5; }
-            .date-box { padding: 20px 30px; width: 90%; }
+            .date-box { padding: 20px 25px; }
             .neon-btn-secondary { font-size: 0.95rem; padding: 15px 30px; width: 90%; }
         }
 
@@ -607,12 +639,12 @@
         </div>
     </section>
 
-    <!-- 4. DATE & TIME SECTION -->
+    <!-- 4. DATE & TIME SECTION (CORREGIDO MÓVIL) -->
     <section id="datetime" class="story-panel">
         <div class="date-box scale-reveal">
             <div class="date-label">[ SECUENCIA DE ARRANQUE ]</div>
-            <div class="story-text neon-accent" style="font-size: clamp(2.2rem, 6.5vw, 4.5rem); letter-spacing: 2px;">
-                5 SEPTIEMBRE // 22:00
+            <div class="story-text neon-accent date-text-glow">
+                5&nbsp;SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
             </div>
         </div>
     </section>
