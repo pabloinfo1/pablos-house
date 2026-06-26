@@ -42,6 +42,55 @@
                          0 0 45px rgba(255, 69, 0, 0.3);
         }
 
+        /* CABECERA FLOTANTE PERMANENTE */
+        .sticky-header-brand {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.17, 0.85, 0.43, 1);
+            pointer-events: none;
+        }
+
+        .sticky-header-brand.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sticky-brand-pablo {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.7rem, 2.5vw, 0.95rem);
+            letter-spacing: 0.1em;
+            color: #ffffff;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        .sticky-brand-comeback {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            letter-spacing: 1px;
+            color: #ff8255;
+            text-transform: uppercase;
+            animation: terminalPulse 2.5s infinite alternate ease-in-out;
+        }
+
+        .sticky-brand-vol {
+            font-size: 0.45em;
+            vertical-align: super;
+            color: #ff4500;
+            margin-left: 2px;
+        }
+
         /* Hero Section */
         #hero {
             min-height: 100vh;
@@ -63,113 +112,24 @@
             align-items: center;
             width: 100%;
             max-width: 1100px;
-            margin-top: 2vh;
         }
 
-        .hero-top-brand {
-            font-family: 'Space Mono', 'Courier New', monospace;
-            font-size: clamp(0.75rem, 2vw, 1.1rem);
-            letter-spacing: 0.45em;
-            color: #ffffff; 
-            text-transform: uppercase;
-            opacity: 0;
-            animation: fadeInSimple 2s ease-out forwards;
-            animation-delay: 0.2s;
-            position: relative;
-            z-index: 20;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.8);
-        }
-
-        .hero-main-title {
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            margin-top: 0.5vh;
-            margin-bottom: -2.5vh;
-            position: relative;
-            z-index: 10;
-        }
-
-        .comeback-text {
-            font-family: 'Anton', 'Impact', sans-serif;
-            font-size: clamp(3.8rem, 14.5vw, 10.5rem);
-            font-weight: 900;
-            letter-spacing: 0.02em;
-            line-height: 0.9;
-            color: #ff8255;
-            text-transform: uppercase;
-            opacity: 0;
-            /* PARPADEO ESTIRADO A 3.8s */
-            animation: textNeonTurnOn 3.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.4s;
-        }
-
-        .vol-text {
-            font-family: 'Anton', 'Impact', sans-serif;
-            font-size: clamp(1.3rem, 4.8vw, 3.4rem);
-            font-weight: 900;
-            color: #ff8255;
-            margin-left: 1vw;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: textNeonTurnOn 3.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.6s;
-        }
-
-        @keyframes fadeInSimple {
-            from { opacity: 0; filter: blur(3px); }
-            to { opacity: 0.95; filter: blur(0); }
-        }
-
-        /* KEYFRAMES RECALCULADOS PARA DISFRUTAR DEL ENCENDIDO ELÉCTRICO */
-        @keyframes textNeonTurnOn {
-            0% { opacity: 0.05; color: #330f00; text-shadow: none; }
-            14% { opacity: 1; color: #fff; text-shadow: 0 0 25px #ff3b00, 0 0 50px #ff3b00; }
-            20% { opacity: 0.1; color: #1f0900; text-shadow: none; }
-            28% { opacity: 0.8; color: #ff3b00; text-shadow: 0 0 15px #ff3b00; }
-            34% { opacity: 0.15; text-shadow: none; }
-            42% { opacity: 0.9; color: #ff8255; text-shadow: 0 0 25px #ff3b00; }
-            48% { opacity: 0.2; text-shadow: none; }
-            58%, 100% { 
-                opacity: 1; 
-                color: #ff8255; 
-                text-shadow: 0 0 10px #ff3b00,
-                             0 0 25px #ff3b00,
-                             0 0 50px #ff3b00,
-                             0 0 85px rgba(255, 59, 0, 0.8);
-            }
-        }
-
-        .hero-graphic-container {
+        /* REPRODUCTOR DE VÍDEO INTRO INTEGRADO */
+        .hero-video-container {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            z-index: 1;
-            -webkit-mix-blend-mode: screen;
-            mix-blend-mode: screen;
+            z-index: 10;
         }
 
-        .hero-wireframe {
+        .hero-video-player {
             width: 100%;
-            max-height: 58vh;
+            max-height: 72vh;
             object-fit: contain;
-            filter: contrast(130%) brightness(110%); 
-            opacity: 0;
-            animation: wireframePowerOn 3.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.5s;
-        }
-
-        @keyframes wireframePowerOn {
-            0% { filter: contrast(130%) brightness(0.05) grayscale(1); opacity: 0.1; }
-            15% { filter: contrast(130%) brightness(0.8); opacity: 0.7; }
-            22% { filter: contrast(130%) brightness(0.1) grayscale(0.8); opacity: 0.2; }
-            32% { filter: contrast(130%) brightness(1); opacity: 0.9; }
-            38% { filter: contrast(130%) brightness(0.2); opacity: 0.4; }
-            46% { filter: contrast(130%) brightness(1.2); opacity: 1; }
-            52% { filter: contrast(130%) brightness(0.4); opacity: 0.5; }
-            60%, 100% { filter: contrast(130%) brightness(1.05); opacity: 1; }
+            pointer-events: none;
+            filter: contrast(115%) brightness(105%);
         }
 
         .scroll-prompt {
@@ -177,7 +137,7 @@
             margin-bottom: 15px;
             opacity: 0;
             animation: fadeInPrompt 1.5s ease-out forwards;
-            animation-delay: 3.8s; /* Retrasado para no pisar el final de las luces */
+            animation-delay: 1.5s;
             z-index: 10;
         }
 
@@ -333,7 +293,6 @@
             max-width: 92vw;
         }
 
-        /* ETIQUETA SUPERIOR BLINDADA CONTRA SALTOS DE LÍNEA */
         .date-label {
             font-family: 'Space Mono', monospace;
             font-size: clamp(0.75rem, 3vw, 1rem); 
@@ -621,15 +580,27 @@
             color: #ffffff;
             font-weight: 900;
         }
+        
+        /* ADVERTENCIA FINAL DE NORMAS */
+        .rules-warning {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.35);
+            text-align: center;
+            margin-top: 35px;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
         @media (max-width: 768px) {
             .rules-header { font-size: 1.8rem; margin-bottom: 25px; }
             .rule-item { padding: 15px; margin-bottom: 15px; }
             .rule-number { font-size: 1.2rem; margin-right: 15px; min-width: 25px; }
             .rule-text { font-size: 0.95rem; }
+            .rules-warning { font-size: 0.55rem; padding: 0 10px; }
         }
 
-        /* CTA / Tickets Button Section */
+        /* CTA / WIDGET XCEED SECTION */
         #cta-section {
             background: radial-gradient(circle at center, rgba(255, 69, 0, 0.15) 0%, #000000 80%);
             text-align: center;
@@ -649,49 +620,42 @@
         .cta-hook {
             font-size: 2.5rem;
             font-weight: 900;
-            margin-bottom: 50px;
+            margin-bottom: 35px;
             text-transform: uppercase;
             letter-spacing: -1px;
         }
 
-        .neon-btn {
-            display: inline-block;
-            font-size: 1.6rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #ffffff;
+        /* CONTENEDOR CIBERNÉTICO PARA INTEGRAR EL WIDGET DE XCEED */
+        .xceed-wrapper {
+            max-width: 780px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(10, 10, 10, 0.75);
+            border: 1px solid rgba(255, 69, 0, 0.4);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 35px rgba(255, 69, 0, 0.15);
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #xceed-widget {
+            width: 100%;
+        }
+
+        .fallback-ticket-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: #777777;
             text-decoration: none;
-            padding: 24px 65px;
-            background: rgba(255, 69, 0, 0.1);
-            border: 2px solid #ff4500;
-            border-radius: 4px;
-            box-shadow: 0 0 25px rgba(255, 69, 0, 0.4),
-                        inset 0 0 15px rgba(255, 69, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.17, 0.85, 0.43, 1);
-            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
         }
 
-        .neon-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: 0.5s;
-        }
-
-        .neon-btn:hover {
-            background: #ff4500;
-            color: #000000;
-            box-shadow: 0 0 50px rgba(255, 69, 0, 0.9);
-            transform: scale(1.05);
-        }
-
-        .neon-btn:hover::before {
-            left: 100%;
+        .fallback-ticket-link:hover {
+            color: #ff4500;
         }
 
         .disclaimer-satira {
@@ -709,8 +673,8 @@
 
         @media (max-width: 768px) {
             .cta-subtitle { font-size: 1.2rem; }
-            .cta-hook { font-size: 1.8rem; margin-bottom: 35px; }
-            .neon-btn { font-size: 1.25rem; padding: 20px 45px; width: 90%; max-width: 350px; }
+            .cta-hook { font-size: 1.8rem; margin-bottom: 25px; }
+            .xceed-wrapper { padding: 10px; min-height: 200px; }
             .disclaimer-satira { font-size: 0.55rem; bottom: 10px; right: 10px; }
         }
 
@@ -723,7 +687,14 @@
 </head>
 <body>
 
-    <!-- ELEMENTO FLOTANTE DE SCROLL (INICIALMENTE OCULTO) -->
+    <!-- CABECERA FLOTANTE PERMANENTE -->
+    <header id="sticky-header" class="sticky-header-brand">
+        <span class="sticky-brand-pablo">PABLO'S HOUSE</span>
+        <span class="sticky-brand-comeback">COMEBACK<sup class="sticky-brand-vol">VOL. 2</sup></span>
+        <span class="blink-cursor">_</span>
+    </header>
+
+    <!-- ELEMENTO FLOTANTE DE SCROLL -->
     <div id="scroll-floater" class="scroll-floater">
         <span>Sigue bajando para enterarte de toda la vaina</span>
         <span class="floater-arrow">↓</span>
@@ -734,17 +705,12 @@
         <div style="height: 1px;"></div> 
         
         <div class="hero-content-stack">
-            <div class="hero-top-brand">
-                <span>PABLO'S HOUSE</span>
-            </div>
-
-            <div class="hero-main-title">
-                <span class="comeback-text">COMEBACK</span>
-                <span class="vol-text">VOL 2</span>
-            </div>
-
-            <div class="hero-graphic-container">
-                <img src="Logo.png" alt="Pablo's House Comeback Vol 2" class="hero-wireframe" onerror="this.src='https://via.placeholder.com/900x500/000000/ff4500?text=PABLO%27S+HOUSE%3A+COMEBACK';">
+            <!-- REPRODUCTOR INTRO EN BUCLE CUSTOMIZADO -->
+            <div class="hero-video-container">
+                <video id="hero-intro-video" class="hero-video-player" autoplay muted playsinline disablePictureInPicture>
+                    <source src="LogoAnimado.mp4" type="video/mp4">
+                    Tu navegador no soporta el reproductor de vídeo nativo.
+                </video>
             </div>
         </div>
 
@@ -755,7 +721,7 @@
     </section>
 
     <!-- 2. STORY PANEL 1: CIERRE DE VERANO -->
-    <section class="story-panel">
+    <section id="story-start" class="story-panel">
         <div class="story-text reveal">
             Por fin ha llegado la segunda edición de la fiesta que <span class="neon-accent">cierra el verano</span>.
         </div>
@@ -774,7 +740,6 @@
     <!-- 4. DATE & TIME SECTION + DESPLEGABLE NATIVO -->
     <section id="datetime" class="story-panel">
         <div class="date-box scale-reveal">
-            <!-- USO DE &nbsp; PARA BLOQUEAR DESTRUCCIÓN DE CORCHETES EN MÓVIL -->
             <div class="date-label">[&nbsp;SECUENCIA&nbsp;DE&nbsp;ARRANQUE&nbsp;]</div>
             <div class="story-text neon-accent date-text-glow">
                 5&nbsp;SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
@@ -873,10 +838,15 @@
                 <div class="rule-number">06</div>
                 <div class="rule-text">TRATA LA CASA COMO SI FUERA TUYA. CUIDA EL ENTORNO Y RESPETA LAS INSTALACIONES.</div>
             </div>
+            
+            <!-- AVISO DE PALIZA -->
+            <div class="rules-warning reveal">
+                Quebrantar cualquiera de estas normas puede suponer la expulsión del evento (con probabilidad de sufrir una paliza).
+            </div>
         </div>
     </section>
 
-    <!-- 9. CTA / TICKETS BUTTON -->
+    <!-- 9. CTA / INTEGRACIÓN DEL WIDGET DE XCEED -->
     <section id="cta-section">
         <div class="cta-subtitle reveal glow-white">
             Después de esta presentación no te vas a quedar sin entradas...
@@ -884,8 +854,17 @@
         <div class="cta-hook neon-accent reveal">
             ¿A qué esperas?
         </div>
-        <div class="reveal" style="margin-top: 20px;">
-            <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="neon-btn">COMPRAR ENTRADA</a>
+
+        <!-- CONTENEDOR DEL WIDGET XCEED -->
+        <div class="xceed-wrapper reveal">
+            <div id="xceed-widget"></div>
+        </div>
+
+        <!-- ENLACE SALVAVIDAS ANTIBLOQUEOS -->
+        <div class="reveal" style="margin-top: 18px;">
+            <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="fallback-ticket-link">
+                [ ¿No te carga el panel de entradas? Pulsa aquí para abrir la tienda nativa ]
+            </a>
         </div>
 
         <!-- AVISO LEGAL + FIRMA -->
@@ -932,27 +911,53 @@
                 });
             }
 
-            // 3. Lógica del chivato flotante de scroll
+            // 3. Control personalizado del bucle de vídeo (9.98s -> 8.34s)
+            const videoEl = document.getElementById('hero-intro-video');
+            if (videoEl) {
+                function checkVideoLoop() {
+                    if (videoEl.currentTime >= 9.95) {
+                        videoEl.currentTime = 8.34;
+                        videoEl.play();
+                    }
+                    requestAnimationFrame(checkVideoLoop);
+                }
+                requestAnimationFrame(checkVideoLoop);
+            }
+
+            // 4. Control de aparición de cabecera fija y chivato flotante
+            const stickyHeader = document.getElementById('sticky-header');
             const floater = document.getElementById('scroll-floater');
             const heroSec = document.getElementById('hero');
             const ctaSec = document.getElementById('cta-section');
 
-            if(floater && heroSec && ctaSec) {
+            if(heroSec && ctaSec) {
                 window.addEventListener('scroll', () => {
                     const scrollY = window.scrollY;
                     const heroH = heroSec.offsetHeight;
                     const ctaTop = ctaSec.getBoundingClientRect().top;
                     const winH = window.innerHeight;
 
-                    // Mostrar si el usuario ha bajado un 65% del Hero Y el CTA aún no asoma
-                    if (scrollY > (heroH * 0.65) && ctaTop > (winH * 0.85)) {
-                        floater.classList.add('visible');
-                    } else {
-                        floater.classList.remove('visible');
+                    if (stickyHeader) {
+                        if (scrollY > (heroH * 0.85)) {
+                            stickyHeader.classList.add('visible');
+                        } else {
+                            stickyHeader.classList.remove('visible');
+                        }
+                    }
+
+                    if (floater) {
+                        if (scrollY > (heroH * 0.65) && ctaTop > (winH * 0.85)) {
+                            floater.classList.add('visible');
+                        } else {
+                            floater.classList.remove('visible');
+                        }
                     }
                 }, { passive: true });
             }
         });
     </script>
+
+    <!-- CARGADOR DEL WIDGET DE XCEED -->
+    <script src="https://widget.xceed.me/v2/loader.js"></script>
 </body>
 </html>
