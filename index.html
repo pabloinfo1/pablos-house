@@ -600,7 +600,7 @@
             .rules-warning { font-size: 0.55rem; padding: 0 10px; }
         }
 
-        /* CTA / WIDGET XCEED SECTION */
+        /* CTA / Tickets Button Section */
         #cta-section {
             background: radial-gradient(circle at center, rgba(255, 69, 0, 0.15) 0%, #000000 80%);
             text-align: center;
@@ -620,42 +620,49 @@
         .cta-hook {
             font-size: 2.5rem;
             font-weight: 900;
-            margin-bottom: 35px;
+            margin-bottom: 50px;
             text-transform: uppercase;
             letter-spacing: -1px;
         }
 
-        /* CONTENEDOR CIBERNÉTICO PARA INTEGRAR EL WIDGET DE XCEED */
-        .xceed-wrapper {
-            max-width: 780px;
-            width: 100%;
-            margin: 0 auto;
-            background: rgba(10, 10, 10, 0.75);
-            border: 1px solid rgba(255, 69, 0, 0.4);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 0 35px rgba(255, 69, 0, 0.15);
-            min-height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #xceed-widget {
-            width: 100%;
-        }
-
-        .fallback-ticket-link {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            color: #777777;
+        .neon-btn {
+            display: inline-block;
+            font-size: 1.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #ffffff;
             text-decoration: none;
-            letter-spacing: 0.5px;
-            transition: color 0.3s ease;
+            padding: 24px 65px;
+            background: rgba(255, 69, 0, 0.1);
+            border: 2px solid #ff4500;
+            border-radius: 4px;
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.4),
+                        inset 0 0 15px rgba(255, 69, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.17, 0.85, 0.43, 1);
+            cursor: pointer;
         }
 
-        .fallback-ticket-link:hover {
-            color: #ff4500;
+        .neon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .neon-btn:hover {
+            background: #ff4500;
+            color: #000000;
+            box-shadow: 0 0 50px rgba(255, 69, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        .neon-btn:hover::before {
+            left: 100%;
         }
 
         .disclaimer-satira {
@@ -673,8 +680,8 @@
 
         @media (max-width: 768px) {
             .cta-subtitle { font-size: 1.2rem; }
-            .cta-hook { font-size: 1.8rem; margin-bottom: 25px; }
-            .xceed-wrapper { padding: 10px; min-height: 200px; }
+            .cta-hook { font-size: 1.8rem; margin-bottom: 35px; }
+            .neon-btn { font-size: 1.25rem; padding: 20px 45px; width: 90%; max-width: 350px; }
             .disclaimer-satira { font-size: 0.55rem; bottom: 10px; right: 10px; }
         }
 
@@ -687,25 +694,21 @@
 </head>
 <body>
 
-    <!-- CABECERA FLOTANTE PERMANENTE -->
     <header id="sticky-header" class="sticky-header-brand">
         <span class="sticky-brand-pablo">PABLO'S HOUSE</span>
         <span class="sticky-brand-comeback">COMEBACK<sup class="sticky-brand-vol">VOL. 2</sup></span>
         <span class="blink-cursor">_</span>
     </header>
 
-    <!-- ELEMENTO FLOTANTE DE SCROLL -->
     <div id="scroll-floater" class="scroll-floater">
         <span>Sigue bajando para enterarte de toda la vaina</span>
         <span class="floater-arrow">↓</span>
     </div>
 
-    <!-- 1. HERO SECTION -->
     <section id="hero">
         <div style="height: 1px;"></div> 
         
         <div class="hero-content-stack">
-            <!-- REPRODUCTOR INTRO EN BUCLE CUSTOMIZADO -->
             <div class="hero-video-container">
                 <video id="hero-intro-video" class="hero-video-player" autoplay muted playsinline disablePictureInPicture>
                     <source src="LogoAnimado.mp4" type="video/mp4">
@@ -720,14 +723,12 @@
         </div>
     </section>
 
-    <!-- 2. STORY PANEL 1: CIERRE DE VERANO -->
     <section id="story-start" class="story-panel">
         <div class="story-text reveal">
             Por fin ha llegado la segunda edición de la fiesta que <span class="neon-accent">cierra el verano</span>.
         </div>
     </section>
 
-    <!-- 3. STORY PANEL 2: CELEBRARLO COMO MERECEMOS -->
     <section class="story-panel">
         <div class="story-text reveal" style="max-width: 1050px;">
             Por fin una fiesta en condiciones para <span class="neon-accent">celebrarlo como nos merecemos</span>.
@@ -737,16 +738,15 @@
         </div>
     </section>
 
-    <!-- 4. DATE & TIME SECTION + DESPLEGABLE NATIVO -->
     <section id="datetime" class="story-panel">
         <div class="date-box scale-reveal">
-            <div class="date-label">[&nbsp;SECUENCIA&nbsp;DE&nbsp;ARRANQUE&nbsp;]</div>
+            <div class="date-label">[ SECUENCIA DE ARRANQUE ]</div>
             <div class="story-text neon-accent date-text-glow">
-                5&nbsp;SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
+                5 SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
             </div>
 
             <div class="native-cal-wrapper">
-                <button class="cal-btn-terminal" type="button">[&nbsp;+&nbsp;GUARDAR&nbsp;EN&nbsp;CALENDARIO&nbsp;]</button>
+                <button class="cal-btn-terminal" type="button">[ + GUARDAR EN CALENDARIO ]</button>
                 
                 <div class="cal-menu-terminal">
                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pablo%27s+House%3A+Comeback+Vol.+2&dates=20260905T220000/20260906T080000&ctz=Europe/Madrid&details=%C2%A1El+regreso+que+estabas+esperando%21+Ha+costado%2C+pero+por+fin+abrimos+las+puertas+de+nuevo.%0A%0A%E2%9A%A0%EF%B8%8F+RECORDATORIOS+IMPORTANTES%3A%0A%E2%80%A2+Trae+tu+alcohol%2C+tu+entrada+y%2C+sobre+todo%2C+ganas+de+tajarla.%0A%E2%80%A2+Aseg%C3%BArate+de+haber+le%C3%ADdo+las+normas+del+evento+antes+de+venir.&location=Pablo%27s+House" target="_blank">
@@ -761,7 +761,6 @@
         </div>
     </section>
 
-    <!-- 5. LOCATION PANEL -->
     <section id="location" class="story-panel">
         <div class="map-bg"></div>
         <div class="location-content reveal">
@@ -774,7 +773,6 @@
         </div>
     </section>
 
-    <!-- 6. PARKING SECTION -->
     <section id="parking" class="story-panel">
         <div class="story-text reveal" style="font-size: clamp(1.8rem, 4.5vw, 2.6rem); max-width: 900px;">
             ...Pero a lo mejor te cunde saber <span class="neon-accent">dónde aparcar</span>.
@@ -787,7 +785,6 @@
         </div>
     </section>
 
-    <!-- 7. BYOB DETAILED NOTICE -->
     <section class="story-panel" style="background-color: #020202;">
         <div class="byob-container scale-reveal">
             <div class="byob-title">ESTE ES UN EVENTO AUTO-GESTIONADO</div>
@@ -803,7 +800,6 @@
         </div>
     </section>
 
-    <!-- 8. RULES SECTION -->
     <section class="story-panel" style="background-color: #000000;">
         <div class="rules-wrapper">
             <h2 class="rules-header neon-accent reveal">NORMAS BÁSICAS</h2>
@@ -833,20 +829,17 @@
                 <div class="rule-text">QUEDA PROHIBIDO LAS MICCIONES DENTRO DEL RECINTO (INCLUYENDO LA ZONA BAÑO).</div>
             </div>
 
-            <!-- NORMA DESTACADA -->
             <div class="rule-item rule-highlight reveal">
                 <div class="rule-number">06</div>
                 <div class="rule-text">TRATA LA CASA COMO SI FUERA TUYA. CUIDA EL ENTORNO Y RESPETA LAS INSTALACIONES.</div>
             </div>
             
-            <!-- AVISO DE PALIZA -->
             <div class="rules-warning reveal">
                 Quebrantar cualquiera de estas normas puede suponer la expulsión del evento (con probabilidad de sufrir una paliza).
             </div>
         </div>
     </section>
 
-    <!-- 9. CTA / INTEGRACIÓN DEL WIDGET DE XCEED -->
     <section id="cta-section">
         <div class="cta-subtitle reveal glow-white">
             Después de esta presentación no te vas a quedar sin entradas...
@@ -854,31 +847,16 @@
         <div class="cta-hook neon-accent reveal">
             ¿A qué esperas?
         </div>
-
-        <!-- CONTENEDOR DEL WIDGET XCEED -->
-        <div class="xceed-wrapper reveal" style="background: #0a0a0a; border: 1px solid #ff4500; padding: 10px; border-radius: 8px;">
-            <div id="xceed-widget" 
-                 data-event-id="235245" 
-                 data-channel="pablo"
-                 style="filter: invert(0.92) hue-rotate(165deg); background: transparent;">
-            </div>
+        <div class="reveal" style="margin-top: 20px;">
+            <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="neon-btn">COMPRAR ENTRADA</a>
         </div>
 
-        <!-- ENLACE SALVAVIDAS ANTIBLOQUEOS -->
-        <div class="reveal" style="margin-top: 18px;">
-            <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="fallback-ticket-link">
-                [ ¿No te carga el panel de entradas? Pulsa aquí para abrir la tienda nativa ]
-            </a>
-        </div>
-
-        <!-- AVISO LEGAL + FIRMA -->
         <div class="disclaimer-satira">
             Contenido satírico. Evento privado no comercial.<br>
             <span style="color: #ff4500;">//</span> Creado por <strong>pabloinfo1</strong>
         </div>
     </section>
 
-    <!-- JavaScript general de la web -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Scroll Triggered Animations
@@ -915,11 +893,11 @@
                 });
             }
 
-            // 3. Control personalizado del bucle de vídeo (9.98s -> 8.34s)
+            // 3. Control personalizado del bucle de vídeo con requestAnimationFrame para cortes invisibles
             const videoEl = document.getElementById('hero-intro-video');
             if (videoEl) {
                 function checkVideoLoop() {
-                    if (videoEl.currentTime >= 9.95) {
+                    if (videoEl.currentTime >= 9.96) {
                         videoEl.currentTime = 8.34;
                         videoEl.play();
                     }
@@ -928,7 +906,7 @@
                 requestAnimationFrame(checkVideoLoop);
             }
 
-            // 4. Control de aparición de cabecera fija y chivato flotante
+            // 4. Control de aparición de la cabecera fija y chivato flotante
             const stickyHeader = document.getElementById('sticky-header');
             const floater = document.getElementById('scroll-floater');
             const heroSec = document.getElementById('hero');
@@ -941,6 +919,7 @@
                     const ctaTop = ctaSec.getBoundingClientRect().top;
                     const winH = window.innerHeight;
 
+                    // Mostrar cabecera permanente en cuanto se supera la pantalla inicial del vídeo
                     if (stickyHeader) {
                         if (scrollY > (heroH * 0.85)) {
                             stickyHeader.classList.add('visible');
@@ -949,6 +928,7 @@
                         }
                     }
 
+                    // Mostrar chivato de scroll bajo condiciones de lectura intermedia
                     if (floater) {
                         if (scrollY > (heroH * 0.65) && ctaTop > (winH * 0.85)) {
                             floater.classList.add('visible');
@@ -960,8 +940,5 @@
             }
         });
     </script>
-
-    <!-- CARGADOR DEL WIDGET DE XCEED -->
-    <script src="https://widget.xceed.me/v2/loader.js"></script>
 </body>
 </html>
