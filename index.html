@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pablo's House: Comeback Vol. 2</title>
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="LogoUbi.png">
+
+    <!-- META ETIQUETAS PARA COMPARTIR EN WHATSAPP / INSTAGRAM -->
+    <meta property="og:title" content="PABLO'S HOUSE: COMEBACK VOL. 2">
+    <meta property="og:description" content="¿Estás leyendo esto en vez de abrir el enlace? Yo lo abriría, te aseguro que no te vas a arrepentir...">
+    <meta property="og:image" content="Logo.png">
+    <meta property="og:type" content="website">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Space+Mono:wght@400;700&display=swap');
 
@@ -42,19 +52,18 @@
                          0 0 45px rgba(255, 69, 0, 0.3);
         }
 
-        /* CABECERA FLOTANTE PERMANENTE */
+        /* CABECERA FLOTANTE PERMANENTE CON GRID PARA CENTRADO ESTRICTO */
         .sticky-header-brand {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             padding: 15px 20px;
-            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0) 100%);
             z-index: 1000;
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: baseline;
-            gap: 12px;
             opacity: 0;
             transform: translateY(-100%);
             transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.17, 0.85, 0.43, 1);
@@ -68,27 +77,36 @@
 
         .sticky-brand-pablo {
             font-family: 'Space Mono', monospace;
-            font-size: clamp(0.7rem, 2.5vw, 0.95rem);
+            font-size: clamp(0.65rem, 2.2vw, 0.95rem);
             letter-spacing: 0.1em;
             color: #ffffff;
             opacity: 0.8;
             text-transform: uppercase;
+            justify-self: end;
+            padding-right: 12px;
         }
 
         .sticky-brand-comeback {
             font-family: 'Anton', sans-serif;
-            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            font-size: clamp(1.2rem, 4vw, 1.7rem);
             letter-spacing: 1px;
             color: #ff8255;
             text-transform: uppercase;
+            justify-self: center;
             animation: terminalPulse 2.5s infinite alternate ease-in-out;
         }
 
+        .sticky-right-container {
+            justify-self: start;
+            padding-left: 4px;
+        }
+
         .sticky-brand-vol {
-            font-size: 0.45em;
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(0.55rem, 1.8vw, 0.8rem);
             vertical-align: super;
             color: #ff4500;
-            margin-left: 2px;
+            letter-spacing: 0.5px;
         }
 
         /* Hero Section */
@@ -114,7 +132,6 @@
             max-width: 1100px;
         }
 
-        /* REPRODUCTOR DE VÍDEO INTRO INTEGRADO */
         .hero-video-container {
             width: 100%;
             display: flex;
@@ -694,17 +711,22 @@
 </head>
 <body>
 
+    <!-- CABECERA FLOTANTE (SIN BARRA BAJA PARPARDEANTE) -->
     <header id="sticky-header" class="sticky-header-brand">
         <span class="sticky-brand-pablo">PABLO'S HOUSE</span>
-        <span class="sticky-brand-comeback">COMEBACK<sup class="sticky-brand-vol">VOL. 2</sup></span>
-        <span class="blink-cursor">_</span>
+        <span class="sticky-brand-comeback">COMEBACK</span>
+        <div class="sticky-right-container">
+            <sup class="sticky-brand-vol">&nbsp;VOL. 2</sup>
+        </div>
     </header>
 
+    <!-- ELEMENTO FLOTANTE DE SCROLL -->
     <div id="scroll-floater" class="scroll-floater">
         <span>Sigue bajando para enterarte de toda la vaina</span>
         <span class="floater-arrow">↓</span>
     </div>
 
+    <!-- 1. HERO SECTION -->
     <section id="hero">
         <div style="height: 1px;"></div> 
         
@@ -723,30 +745,33 @@
         </div>
     </section>
 
+    <!-- 2. STORY PANEL 1: CIERRE DE VERANO -->
     <section id="story-start" class="story-panel">
         <div class="story-text reveal">
             Por fin ha llegado la segunda edición de la fiesta que <span class="neon-accent">cierra el verano</span>.
         </div>
     </section>
 
+    <!-- 3. STORY PANEL 2: CELEBRARLO COMO MERECEMOS (ELIMINADO REPETICIÓN "POR FIN") -->
     <section class="story-panel">
         <div class="story-text reveal" style="max-width: 1050px;">
-            Por fin una fiesta en condiciones para <span class="neon-accent">celebrarlo como nos merecemos</span>.
+            Una fiesta en condiciones para <span class="neon-accent">celebrarlo como nos merecemos</span>.
         </div>
         <div class="story-text-sub reveal">
             Cinco años de espera, logística imposible y un regreso triunfal. Esta noche pasará a la historia.
         </div>
     </section>
 
+    <!-- 4. DATE & TIME SECTION + DESPLEGABLE NATIVO -->
     <section id="datetime" class="story-panel">
         <div class="date-box scale-reveal">
-            <div class="date-label">[ SECUENCIA DE ARRANQUE ]</div>
+            <div class="date-label">[&nbsp;SECUENCIA&nbsp;DE&nbsp;ARRANQUE&nbsp;]</div>
             <div class="story-text neon-accent date-text-glow">
-                5 SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
+                5&nbsp;SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
             </div>
 
             <div class="native-cal-wrapper">
-                <button class="cal-btn-terminal" type="button">[ + GUARDAR EN CALENDARIO ]</button>
+                <button class="cal-btn-terminal" type="button">[&nbsp;+&nbsp;GUARDAR&nbsp;EN&nbsp;CALENDARIO&nbsp;]</button>
                 
                 <div class="cal-menu-terminal">
                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pablo%27s+House%3A+Comeback+Vol.+2&dates=20260905T220000/20260906T080000&ctz=Europe/Madrid&details=%C2%A1El+regreso+que+estabas+esperando%21+Ha+costado%2C+pero+por+fin+abrimos+las+puertas+de+nuevo.%0A%0A%E2%9A%A0%EF%B8%8F+RECORDATORIOS+IMPORTANTES%3A%0A%E2%80%A2+Trae+tu+alcohol%2C+tu+entrada+y%2C+sobre+todo%2C+ganas+de+tajarla.%0A%E2%80%A2+Aseg%C3%BArate+de+haber+le%C3%ADdo+las+normas+del+evento+antes+de+venir.&location=Pablo%27s+House" target="_blank">
@@ -761,6 +786,7 @@
         </div>
     </section>
 
+    <!-- 5. LOCATION PANEL -->
     <section id="location" class="story-panel">
         <div class="map-bg"></div>
         <div class="location-content reveal">
@@ -773,6 +799,7 @@
         </div>
     </section>
 
+    <!-- 6. PARKING SECTION -->
     <section id="parking" class="story-panel">
         <div class="story-text reveal" style="font-size: clamp(1.8rem, 4.5vw, 2.6rem); max-width: 900px;">
             ...Pero a lo mejor te cunde saber <span class="neon-accent">dónde aparcar</span>.
@@ -785,6 +812,7 @@
         </div>
     </section>
 
+    <!-- 7. BYOB DETAILED NOTICE -->
     <section class="story-panel" style="background-color: #020202;">
         <div class="byob-container scale-reveal">
             <div class="byob-title">ESTE ES UN EVENTO AUTO-GESTIONADO</div>
@@ -800,6 +828,7 @@
         </div>
     </section>
 
+    <!-- 8. RULES SECTION -->
     <section class="story-panel" style="background-color: #000000;">
         <div class="rules-wrapper">
             <h2 class="rules-header neon-accent reveal">NORMAS BÁSICAS</h2>
@@ -824,9 +853,10 @@
                 <div class="rule-text">SE LE DEBERÁ VENERAR A LA REINA DAILA.</div>
             </div>
             
+            <!-- CORREGIDA REDACCIÓN NORMA 05 -->
             <div class="rule-item reveal">
                 <div class="rule-number">05</div>
-                <div class="rule-text">QUEDA PROHIBIDO LAS MICCIONES DENTRO DEL RECINTO (INCLUYENDO LA ZONA BAÑO).</div>
+                <div class="rule-text">QUEDAN PROHIBIDAS LAS MICCIONES DENTRO DEL RECINTO (INCLUYENDO LA ZONA BAÑO).</div>
             </div>
 
             <div class="rule-item rule-highlight reveal">
@@ -840,6 +870,7 @@
         </div>
     </section>
 
+    <!-- 9. CTA / TICKETS BUTTON -->
     <section id="cta-section">
         <div class="cta-subtitle reveal glow-white">
             Después de esta presentación no te vas a quedar sin entradas...
@@ -893,7 +924,7 @@
                 });
             }
 
-            // 3. Control personalizado del bucle de vídeo con requestAnimationFrame para cortes invisibles
+            // 3. Control personalizado del bucle de vídeo con requestAnimationFrame
             const videoEl = document.getElementById('hero-intro-video');
             if (videoEl) {
                 function checkVideoLoop() {
@@ -928,7 +959,7 @@
                         }
                     }
 
-                    // Mostrar chivato de scroll bajo condiciones de lectura intermedia
+                    // Mostrar chivato de scroll
                     if (floater) {
                         if (scrollY > (heroH * 0.65) && ctaTop > (winH * 0.85)) {
                             floater.classList.add('visible');
