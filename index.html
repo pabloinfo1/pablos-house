@@ -850,9 +850,6 @@
 
         <div class="scroll-prompt">
             <p>Empieza a bajar para descubrir lo que te espera</p>
-            <div class="rules-warning" style="margin-top: 10px; margin-bottom: 20px;">
-                Al hacer scroll aceptas el uso de cookies para estadísticas (Google Analytics).
-            </div>
             <div class="arrow-down">↓</div>
         </div>
     </section>
@@ -1310,31 +1307,6 @@ Pablo's House
 
                 animateParticles();
             }
-
-            // 6. Carga diferida de Google Analytics bajo demanda (Al interactuar por primera vez)
-            let analyticsLoaded = false;
-            function loadGoogleAnalytics() {
-                if (analyticsLoaded) return;
-                analyticsLoaded = true;
-
-                // Crear e inyectar el script principal
-                const script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-Z5XB883KRF';
-                document.head.appendChild(script);
-
-                // Configuración de gtag
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                window.gtag = gtag; // Hacemos global la función gtag
-                gtag('js', new Date());
-                gtag('config', 'G-Z5XB883KRF');
-            }
-
-            // Asignamos el Event Listener para que cargue solo al hacer el primer Scroll, click, o tocar la pantalla (Móvil).
-            window.addEventListener('scroll', loadGoogleAnalytics, { once: true, passive: true });
-            window.addEventListener('click', loadGoogleAnalytics, { once: true, passive: true });
-            window.addEventListener('touchstart', loadGoogleAnalytics, { once: true, passive: true });
 
         });
     </script>
