@@ -154,7 +154,7 @@
             margin-bottom: 15px;
             opacity: 0;
             animation: fadeInPrompt 1.5s ease-out forwards;
-            animation-delay: 1.5s;
+            animation-delay: 7s;
             z-index: 10;
         }
 
@@ -682,16 +682,19 @@
             left: 100%;
         }
 
-        .disclaimer-satira {
+        .disclaimer-footer {
             position: absolute;
             bottom: 15px;
+            left: 15px;
             right: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
             font-family: 'Space Mono', monospace;
             font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.3);
             letter-spacing: 0.5px;
             pointer-events: none;
-            text-align: right;
             line-height: 1.4;
         }
 
@@ -699,7 +702,7 @@
             .cta-subtitle { font-size: 1.2rem; }
             .cta-hook { font-size: 1.8rem; margin-bottom: 35px; }
             .neon-btn { font-size: 1.25rem; padding: 20px 45px; width: 90%; max-width: 350px; }
-            .disclaimer-satira { font-size: 0.55rem; bottom: 10px; right: 10px; }
+            .disclaimer-footer { font-size: 0.55rem; bottom: 10px; left: 10px; right: 10px; }
         }
 
         /* Custom Scrollbar */
@@ -707,6 +710,97 @@
         ::-webkit-scrollbar-track { background: #000000; }
         ::-webkit-scrollbar-thumb { background: #222222; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #ff4500; }
+    
+        /* Side Vertical Marquees */
+        .side-marquee {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+        }
+
+        .side-marquee.left { left: 2vw; }
+        .side-marquee.right { right: 2vw; }
+
+        .marquee-track {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .side-marquee.left .marquee-track {
+            animation: moveDown 25s linear infinite;
+        }
+
+        .side-marquee.right .marquee-track {
+            animation: moveUp 25s linear infinite;
+        }
+
+        .marquee-item {
+            writing-mode: vertical-rl;
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 69, 0, 0.22);
+            text-shadow: 0 0 15px rgba(255, 69, 0, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 60px;
+        }
+
+        .side-marquee.left .marquee-item {
+            transform: rotate(180deg);
+        }
+
+        @keyframes moveUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        @keyframes moveDown {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+        }
+    
+        /* Canvas Explosion Overlay */
+        #explosion-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    
+        /* CAOS VISUAL - ROTURA DEL SISTEMA */
+        @keyframes shakeScreen {
+            0% { transform: translate(2px, 1px) rotate(0deg); filter: hue-rotate(0deg); }
+            20% { transform: translate(-5px, 0px) rotate(1deg); filter: hue-rotate(45deg); }
+            40% { transform: translate(2px, -2px) rotate(1deg); filter: hue-rotate(-45deg); }
+            60% { transform: translate(-5px, 2px) rotate(0deg); filter: hue-rotate(90deg); }
+            80% { transform: translate(-2px, -2px) rotate(2deg); filter: hue-rotate(-90deg); }
+            100% { transform: translate(2px, -3px) rotate(-1deg); filter: hue-rotate(0deg); }
+        }
+
+        .element-falling {
+            animation: elementFall var(--fall-time) cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards !important;
+            pointer-events: none !important;
+            position: relative !important;
+            z-index: 9999 !important;
+        }
+
+        @keyframes elementFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            15% { transform: translateY(-35px) rotate(calc(var(--fall-rot) * 0.3)); opacity: 1; }
+            100% { transform: translateY(150vh) rotate(var(--fall-rot)); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -752,12 +846,49 @@
         </div>
     </section>
 
-    <!-- 3. STORY PANEL 2: CELEBRARLO COMO MERECEMOS (ELIMINADO REPETICIÓN "POR FIN") -->
-    <section class="story-panel">
-        <div class="story-text reveal" style="max-width: 1050px;">
+    <!-- 3. STORY PANEL 2: CELEBRARLO COMO MERECEMOS -->
+    <section class="story-panel" style="position: relative; overflow: hidden;">
+        
+        <!-- LEFT MARQUEE (BOTELLÓN) -->
+        <div class="side-marquee left">
+            <div class="marquee-track">
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+            </div>
+        </div>
+
+        <!-- RIGHT MARQUEE (PREVIA) -->
+        <div class="side-marquee right">
+            <div class="marquee-track">
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+            </div>
+        </div>
+
+        <div class="story-text reveal" style="max-width: 1050px; position: relative; z-index: 2;">
             Una fiesta en condiciones para <span class="neon-accent">celebrarlo como nos merecemos</span>.
         </div>
-        <div class="story-text-sub reveal">
+        <div class="story-text-sub reveal" style="position: relative; z-index: 2;">
             Cinco años de espera, logística imposible y un regreso triunfal. Esta noche pasará a la historia.
         </div>
     </section>
@@ -882,11 +1013,22 @@
             <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="neon-btn">COMPRAR ENTRADA</a>
         </div>
 
-        <div class="disclaimer-satira">
-            Contenido satírico. Evento privado no comercial.<br>
-            <span style="color: #ff4500;">//</span> Creado por <strong>pabloinfo1</strong>
+        <div class="rules-warning reveal" style="margin-top: 25px; position: relative; z-index: 2;">
+            Recibirás la confirmación de asistencia a través de Instagram. Si no hay follow, no hay paraíso.
+        </div>
+
+        <div class="disclaimer-footer">
+            <div class="disclaimer-left">
+                <span style="color: #ff4500;">//</span> Creado por <strong>pabloinfo1</strong>
+            </div>
+            <div class="disclaimer-right">
+                Contenido satírico. Evento privado no comercial.
+            </div>
         </div>
     </section>
+
+    <!-- CANVAS DE EXPLOSIÓN -->
+    <canvas id="explosion-canvas"></canvas>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -969,6 +1111,133 @@
                     }
                 }, { passive: true });
             }
+            // 5. Animación de explosión / confeti neón al pulsar comprar entrada
+            const buyBtn = document.querySelector('.neon-btn');
+            const canvas = document.getElementById('explosion-canvas');
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            if (buyBtn) {
+                buyBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetUrl = buyBtn.getAttribute('href');
+                    
+                    // Disparar explosión desde la posición del botón
+                    const rect = buyBtn.getBoundingClientRect();
+                    const originX = rect.left + rect.width / 2;
+                    const originY = rect.top + rect.height / 2;
+
+                    createExplosion(originX, originY);
+
+                    // 1. Efecto terremoto agresivo y glitch en toda la página
+                    document.body.style.animation = "shakeScreen 0.25s ease-in-out infinite alternate";
+                    document.body.style.backgroundColor = "#110000";
+                    document.body.style.overflow = "hidden"; // Evitar scroll manual mientras se cae todo
+                    
+                    // Cambiar el texto del botón al instante
+                    buyBtn.innerHTML = "¡SISTEMA CORRUPTO!";
+                    buyBtn.style.backgroundColor = "#ff0000";
+                    buyBtn.style.color = "#ffffff";
+                    buyBtn.style.borderColor = "#ffffff";
+                    buyBtn.style.transform = "scale(1.2)";
+
+                    // 2. Seleccionar todos los bloques y textos importantes de la web para que se caigan
+                    const elementsToFall = Array.from(document.querySelectorAll('.story-text, .story-text-sub, .rule-item, .date-box, .neon-btn-secondary, .byob-container, .cta-hook, .cta-subtitle, .disclaimer-footer, .marquee-item, video, .native-cal-wrapper, .sticky-brand-comeback, .sticky-brand-pablo, .scroll-prompt p, .arrow-down, .rules-warning'));
+                    
+                    // Añadimos elementos fijos para que el colapso sea total
+                    const floater = document.getElementById('scroll-floater');
+                    if(floater) elementsToFall.push(floater);
+                    elementsToFall.push(buyBtn);
+
+                    // 3. Aplicar física de caída desordenada a cada elemento
+                    elementsToFall.forEach((el) => {
+                        const rot = (Math.random() * 160 - 80) + 'deg'; // Rotación extrema aleatoria
+                        const time = (Math.random() * 1.5 + 1.2) + 's'; // Tiempo de caída
+                        const delay = Math.random() * 700; // Retraso aleatorio hasta 700ms para efecto cascada
+                        
+                        el.style.setProperty('--fall-rot', rot);
+                        el.style.setProperty('--fall-time', time);
+                        
+                        setTimeout(() => {
+                            // Asegurar que si el elemento es inline (ej. span), actúe como bloque para rotar
+                            const style = window.getComputedStyle(el);
+                            if(style.display === 'inline') el.style.display = 'inline-block';
+                            
+                            el.classList.add('element-falling');
+                        }, delay);
+                    });
+
+                    // 4. Abrir en pestaña nueva tras el caos (esperamos 2.2 segundos para ver cómo cae todo)
+                    setTimeout(() => {
+                        window.open(targetUrl, '_blank');
+                        
+                        // Recargar la página actual por si vuelven a esa pestaña, que esté normal
+                        setTimeout(() => { location.reload(); }, 600);
+                    }, 2200);
+                });
+            }
+
+            function createExplosion(x, y) {
+                const particles = [];
+                const colors = ['#ff4500', '#ff8255', '#ffffff', '#ffaa00', '#ff2200'];
+                const particleCount = 400;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 30 + 8;
+                    particles.push({
+                        x: x,
+                        y: y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        size: Math.random() * 12 + 3,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        alpha: 1,
+                        decay: Math.random() * 0.02 + 0.015,
+                        gravity: 0.3
+                    });
+                }
+
+                function animateParticles() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    let active = false;
+
+                    particles.forEach(p => {
+                        if (p.alpha > 0) {
+                            active = true;
+                            p.x += p.vx;
+                            p.y += p.vy;
+                            p.vy += p.gravity;
+                            p.alpha -= p.decay;
+
+                            ctx.save();
+                            ctx.globalAlpha = Math.max(p.alpha, 0);
+                            ctx.fillStyle = p.color;
+                            ctx.shadowBlur = 15;
+                            ctx.shadowColor = p.color;
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.restore();
+                        }
+                    });
+
+                    if (active) {
+                        requestAnimationFrame(animateParticles);
+                    } else {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    }
+                }
+
+                animateParticles();
+            }
+
         });
     </script>
 </body>
