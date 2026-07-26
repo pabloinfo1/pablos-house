@@ -617,12 +617,27 @@
             .rules-warning { font-size: 0.55rem; padding: 0 10px; }
         }
 
+        /* Easter egg DAILA cursor */
+        #daila-btn {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        #daila-btn:hover {
+            color: #ff4500;
+        }
+
         /* CTA / Tickets Button Section */
         #cta-section {
             background: radial-gradient(circle at center, rgba(255, 69, 0, 0.15) 0%, #000000 80%);
             text-align: center;
             padding: 100px 20px;
             position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Necesario para que el marque no desborde la web horizontalmente */
         }
 
         .cta-subtitle {
@@ -979,12 +994,12 @@
                 <div class="rule-text">MANTENER LAS BOTELLAS DE VIDRIO ALEJADAS DE LA ZONA DE PISCINA.</div>
             </div>
             
+            <!-- NORMA DAILA ACTUALIZADA CON EL BOTÓN OCULTO -->
             <div class="rule-item reveal">
                 <div class="rule-number">04</div>
-                <div class="rule-text">SE LE DEBERÁ VENERAR A LA REINA DAILA.</div>
+                <div class="rule-text">SE LE DEBERÁ VENERAR A LA REINA <span id="daila-btn">DAILA</span>.</div>
             </div>
             
-            <!-- CORREGIDA REDACCIÓN NORMA 05 -->
             <div class="rule-item reveal">
                 <div class="rule-number">05</div>
                 <div class="rule-text">QUEDAN PROHIBIDAS LAS MICCIONES DENTRO DEL RECINTO (INCLUYENDO LA ZONA BAÑO).</div>
@@ -1003,13 +1018,50 @@
 
     <!-- 9. CTA / TICKETS BUTTON -->
     <section id="cta-section">
-        <div class="cta-subtitle reveal glow-white">
+
+        <!-- LEFT MARQUEE (BOTELLÓN) AÑADIDO AL FINAL -->
+        <div class="side-marquee left">
+            <div class="marquee-track">
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+                <span class="marquee-item">#BOTELLÓN</span>
+            </div>
+        </div>
+
+        <!-- RIGHT MARQUEE (PREVIA) AÑADIDO AL FINAL -->
+        <div class="side-marquee right">
+            <div class="marquee-track">
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+                <span class="marquee-item">#PREVIA</span>
+            </div>
+        </div>
+
+        <div class="cta-subtitle reveal glow-white" style="position: relative; z-index: 2;">
             Después de esta presentación no te vas a quedar sin entradas...
         </div>
-        <div class="cta-hook neon-accent reveal">
+        <div class="cta-hook neon-accent reveal" style="position: relative; z-index: 2;">
             ¿A qué esperas?
         </div>
-        <div class="reveal" style="margin-top: 20px;">
+        <div class="reveal" style="margin-top: 20px; position: relative; z-index: 2;">
             <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="neon-btn">COMPRAR ENTRADA</a>
         </div>
 
@@ -1017,7 +1069,7 @@
             Recibirás la confirmación de asistencia a través de Instagram. Si no hay follow, no hay paraíso.
         </div>
 
-        <div class="disclaimer-footer">
+        <div class="disclaimer-footer" style="position: absolute; z-index: 2;">
             <div class="disclaimer-left">
                 <span style="color: #ff4500;">//</span> Creado por <strong>pabloinfo1</strong>
             </div>
@@ -1031,7 +1083,28 @@
     <canvas id="explosion-canvas"></canvas>
 
     <script>
+        // 0. Easter Egg: Mensaje Gigante en la Consola para los curiosos
+        console.log(`%c
+         _____  _______   __
+        |  __ \\|  ____\\ \\ / /
+        | |__) | |__   \\ V / 
+        |  _  /|  __|   > <  
+        | | \\ \\| |____ / . \\ 
+        |_|  \\_\\______/_/ \\_\\
+        
+        REY SI EN VEZ DE REVISAR EL CÓDIGO DE LA WEB TE DEDICAS A BEBER? 
+        ES ILEGAL SER FELIZ POR LO QUE VEO
+        `, 'color: #ff4500; font-family: monospace; font-size: 14px; font-weight: bold; text-shadow: 1px 1px 0px #000;');
+
         document.addEventListener('DOMContentLoaded', () => {
+            // 0.5. Easter Egg: Botón invisible "Daila"
+            const dailaBtn = document.getElementById('daila-btn');
+            if (dailaBtn) {
+                dailaBtn.addEventListener('click', () => {
+                    alert("Daila seguro que es menos pesada que tu ex. Dale el amor que se merece.");
+                });
+            }
+
             // 1. Scroll Triggered Animations
             const revealElements = document.querySelectorAll('.reveal, .scale-reveal');
             const observer = new IntersectionObserver((entries) => {
@@ -1111,6 +1184,7 @@
                     }
                 }, { passive: true });
             }
+            
             // 5. Animación de explosión / confeti neón al pulsar comprar entrada
             const buyBtn = document.querySelector('.neon-btn');
             const canvas = document.getElementById('explosion-canvas');
@@ -1141,11 +1215,12 @@
                     document.body.style.overflow = "hidden"; // Evitar scroll manual mientras se cae todo
                     
                     // Cambiar el texto del botón al instante
-                    buyBtn.innerHTML = "¡SISTEMA CORRUPTO!";
+                    buyBtn.innerHTML = "Redirigiendo a la compra de entradas";
+                    buyBtn.style.fontSize = "clamp(0.9rem, 3vw, 1.2rem)";
                     buyBtn.style.backgroundColor = "#ff0000";
                     buyBtn.style.color = "#ffffff";
                     buyBtn.style.borderColor = "#ffffff";
-                    buyBtn.style.transform = "scale(1.2)";
+                    buyBtn.style.transform = "scale(1.1)";
 
                     // 2. Seleccionar todos los bloques y textos importantes de la web para que se caigan
                     const elementsToFall = Array.from(document.querySelectorAll('.story-text, .story-text-sub, .rule-item, .date-box, .neon-btn-secondary, .byob-container, .cta-hook, .cta-subtitle, .disclaimer-footer, .marquee-item, video, .native-cal-wrapper, .sticky-brand-comeback, .sticky-brand-pablo, .scroll-prompt p, .arrow-down, .rules-warning'));
@@ -1173,13 +1248,13 @@
                         }, delay);
                     });
 
-                    // 4. Abrir en pestaña nueva tras el caos (esperamos 2.2 segundos para ver cómo cae todo)
+                    // 4. Abrir en pestaña nueva tras el caos (esperamos 1.5 segundos para ver cómo cae todo)
                     setTimeout(() => {
                         window.open(targetUrl, '_blank');
                         
                         // Recargar la página actual por si vuelven a esa pestaña, que esté normal
                         setTimeout(() => { location.reload(); }, 600);
-                    }, 2200);
+                    }, 1500);
                 });
             }
 
