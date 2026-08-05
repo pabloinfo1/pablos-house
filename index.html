@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff4500">
     <title>Pablo's House: Comeback Vol. 2</title>
     
     <!-- FAVICON -->
@@ -147,6 +148,38 @@
             object-fit: contain;
             pointer-events: none;
             filter: contrast(115%) brightness(105%);
+        }
+        
+        /* Mensaje de error/carga del vídeo */
+        .video-error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.7rem, 2vw, 1rem);
+            color: #ff4500;
+            text-align: center;
+            letter-spacing: 1px;
+            z-index: 15;
+            width: 85%;
+            max-width: 600px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+            border: 1px dashed rgba(255, 69, 0, 0.4);
+            padding: 20px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.9);
+        }
+
+        .video-error-message.visible {
+            opacity: 1;
         }
 
         .scroll-prompt {
@@ -460,6 +493,7 @@
             border-radius: 4px;
             box-shadow: 0 0 15px rgba(255, 69, 0, 0.1);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .neon-btn-secondary:hover {
@@ -713,13 +747,6 @@
             line-height: 1.4;
         }
 
-        @media (max-width: 768px) {
-            .cta-subtitle { font-size: 1.2rem; }
-            .cta-hook { font-size: 1.8rem; margin-bottom: 35px; }
-            .neon-btn { font-size: 1.25rem; padding: 20px 45px; width: 90%; max-width: 350px; }
-            .disclaimer-footer { font-size: 0.55rem; bottom: 10px; left: 10px; right: 10px; }
-        }
-
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000000; }
@@ -816,11 +843,201 @@
             15% { transform: translateY(-35px) rotate(calc(var(--fall-rot) * 0.3)); opacity: 1; }
             100% { transform: translateY(150vh) rotate(var(--fall-rot)); opacity: 0; }
         }
+
+        /* ----------------NUEVAS CLASES PARA EL IDLE MODAL Y EL JUEGO---------------- */
+
+        /* INACTIVITY MODAL */
+        .idle-modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .idle-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .idle-modal-box {
+            background: #080808;
+            border: 2px solid #ff4500;
+            padding: 45px 30px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(255, 69, 0, 0.25), inset 0 0 15px rgba(255, 69, 0, 0.1);
+            position: relative;
+        }
+
+        .idle-modal-box h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .idle-modal-box p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        .idle-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* GAME CONTAINER */
+        .game-fullscreen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #000000;
+            z-index: 15000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .game-fullscreen.active {
+            display: block;
+        }
+
+        #game-canvas-play {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        #btn-exit-game {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            z-index: 15010;
+            font-size: 1rem;
+            background: rgba(0,0,0,0.8);
+            color: #ff4500;
+            border: 1px solid #ff4500;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 10px 15px;
+        }
+
+        #btn-exit-game:hover {
+            background: #ff4500;
+            color: #000;
+        }
+
+        #game-score {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            z-index: 15010;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff4500;
+        }
+
+        #game-over-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 15020;
+            background: rgba(10, 10, 10, 0.95);
+            padding: 40px;
+            border: 2px dashed #ff4500;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0,0,0,1);
+            width: 90%;
+            max-width: 500px;
+            display: none;
+        }
+
+        #game-over-screen.active {
+            display: block;
+        }
+
+        #game-over-screen h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        #final-score {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        #final-message {
+            font-size: 1rem;
+            color: #cccccc;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .mobile-controls-hint {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            pointer-events: none;
+            z-index: 15010;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- CABECERA FLOTANTE (SIN BARRA BAJA PARPARDEANTE) -->
+    <!-- MODAL DE INACTIVIDAD -->
+    <div id="idle-modal" class="idle-modal-overlay">
+        <div class="idle-modal-box">
+            <h2 class="neon-accent">¿EYY TE HA DADO UN COMA ETÍLICO O ES QUE NO SABES LEER?</h2>
+            <p>Si te aburres tanto mirando a la nada, puedes jugar a este fantástico juego. Demuestra que controlas la moto con unas copas de más mientras esquivas gatos indeseables y árboles que parten vértebras.</p>
+            <div class="idle-buttons">
+                <button id="btn-play-game" class="neon-btn-secondary" style="padding: 15px 30px;">JUGAR</button>
+                <button id="btn-continue-reading" class="neon-btn-secondary" style="padding: 15px 30px; border-color: #444; color: #ccc;">SEGUIR LEYENDO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENEDOR DEL JUEGO -->
+    <div id="game-container" class="game-fullscreen">
+        <button id="btn-exit-game" class="cal-btn-terminal">[ SALIR ]</button>
+        <div id="game-score">CUBATAS: 0</div>
+        
+        <canvas id="game-canvas-play"></canvas>
+        <div class="mobile-controls-hint">Concéntrate al máximo y evita la baja laboral a toda costa</div>
+
+        <div id="game-over-screen">
+            <h2 class="neon-accent">GAME OVER: A DORMIR LA MONA</h2>
+            <p id="final-score">Cubatas: 0</p>
+            <p id="final-message"></p>
+            <button id="btn-restart-game" class="neon-btn-secondary">OTRA COPA Y REINICIAR</button>
+        </div>
+    </div>
+
+    <!-- CABECERA FLOTANTE -->
     <header id="sticky-header" class="sticky-header-brand">
         <span class="sticky-brand-pablo">PABLO'S HOUSE</span>
         <span class="sticky-brand-comeback">COMEBACK</span>
@@ -841,6 +1058,10 @@
         
         <div class="hero-content-stack">
             <div class="hero-video-container">
+                <div id="video-error-msg" class="video-error-message">
+                    [ ERROR: TU INTERNET VA MÁS LENTO QUE TÚ UN DOMINGO DE RESACA. CARGANDO INTRO, DAME UN SEC... ]<span class="blink-cursor">_</span>
+                </div>
+                
                 <video id="hero-intro-video" class="hero-video-player" autoplay muted playsinline disablePictureInPicture>
                     <source src="LogoAnimado.mp4" type="video/mp4">
                     Tu navegador no soporta el reproductor de vídeo nativo.
@@ -908,7 +1129,7 @@
         </div>
     </section>
 
-    <!-- 4. DATE & TIME SECTION + DESPLEGABLE NATIVO -->
+    <!-- 4. DATE & TIME SECTION -->
     <section id="datetime" class="story-panel">
         <div class="date-box scale-reveal">
             <div class="date-label">[&nbsp;SECUENCIA&nbsp;DE&nbsp;ARRANQUE&nbsp;]</div>
@@ -969,7 +1190,7 @@
                 Es <span class="byob-highlight">obligatorio</span> que cada asistente se encargue de traer todo lo necesario para su propio botellón: <span class="glow-white">alcohol, refrescos, mezcla, vasos e hielo</span>. No se facilitará material ni bebida en las barras.
             </div>
             <div class="byob-footer">
-                *Nota: A menos que hayas contactado por privado y adquirido el complemento de barra pre-pagado en tu entrada. Si no es tu caso, ven preparado.
+                *Nota: Si quieres que Pablo se encargue de gestionar tu bebida, contacta con él por privado. De lo contrario, ven preparado.
             </div>
         </div>
     </section>
@@ -1018,8 +1239,7 @@
 
     <!-- 9. CTA / TICKETS BUTTON -->
     <section id="cta-section">
-
-        <!-- LEFT MARQUEE (BOTELLÓN) AÑADIDO AL FINAL -->
+        <!-- LEFT MARQUEE -->
         <div class="side-marquee left">
             <div class="marquee-track">
                 <span class="marquee-item">#BOTELLÓN</span>
@@ -1037,7 +1257,7 @@
             </div>
         </div>
 
-        <!-- RIGHT MARQUEE (PREVIA) AÑADIDO AL FINAL -->
+        <!-- RIGHT MARQUEE -->
         <div class="side-marquee right">
             <div class="marquee-track">
                 <span class="marquee-item">#PREVIA</span>
@@ -1071,7 +1291,7 @@
 
         <div class="disclaimer-footer" style="position: absolute; z-index: 2;">
             <div class="disclaimer-left">
-                <span style="color: #ff4500;">//</span> Creado por <strong>pabloinfo1</strong>
+                <span style="color: #ff4500;">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
             </div>
             <div class="disclaimer-right">
                 Contenido satírico. Evento privado no comercial.
@@ -1083,7 +1303,6 @@
     <canvas id="explosion-canvas"></canvas>
 
     <script>
-        // 0. Easter Egg: Mensaje Gigante en la Consola para los curiosos
         console.log(`%c
 Pablo's House
         
@@ -1092,7 +1311,431 @@ Pablo's House
         `, 'color: #ff4500; font-family: monospace; font-size: 14px; font-weight: bold; text-shadow: 1px 1px 0px #000;');
 
         document.addEventListener('DOMContentLoaded', () => {
-            // 0.5. Easter Egg: Botón invisible "Daila"
+
+            // -------------------------------------------------------------
+            // LÓGICA DE INACTIVIDAD (IDLE TIMER)
+            // -------------------------------------------------------------
+            let idleTime = 0;
+            let idleInterval;
+            const idleThreshold = 15; // 15 segundos
+            let gameIsRunning = false;
+
+            const idleModal = document.getElementById('idle-modal');
+            const btnContinue = document.getElementById('btn-continue-reading');
+            const btnPlay = document.getElementById('btn-play-game');
+            const gameContainer = document.getElementById('game-container');
+
+            function resetIdleTime() {
+                idleTime = 0;
+            }
+
+            function startIdleTimer() {
+                clearInterval(idleInterval);
+                idleInterval = setInterval(() => {
+                    // Validar si la ventana tiene el foco y la pestaña está en primer plano
+                    if(document.hasFocus() && document.visibilityState === 'visible' && !gameIsRunning && !idleModal.classList.contains('active')) {
+                        idleTime++;
+                        if (idleTime >= idleThreshold) {
+                            showIdleModal();
+                        }
+                    }
+                }, 1000);
+            }
+
+            // Escuchar eventos de interacción básicos
+            ['mousemove', 'mousedown', 'keypress', 'scroll', 'touchstart'].forEach(evt => {
+                document.addEventListener(evt, resetIdleTime, { passive: true });
+            });
+
+            // Si se pierde el foco (p. ej. cambian a otra pestaña o ventana) se reinicia el tiempo
+            window.addEventListener('blur', resetIdleTime);
+            document.addEventListener('visibilitychange', () => {
+                if(document.hidden) {
+                    resetIdleTime();
+                }
+            });
+
+            startIdleTimer();
+
+            function showIdleModal() {
+                idleModal.classList.add('active');
+            }
+
+            btnContinue.addEventListener('click', () => {
+                idleModal.classList.remove('active');
+                resetIdleTime();
+            });
+
+            btnPlay.addEventListener('click', () => {
+                idleModal.classList.remove('active');
+                startGame();
+            });
+
+
+            // -------------------------------------------------------------
+            // LÓGICA DEL MINIJUEGO (MOTO ARCADE NEÓN)
+            // -------------------------------------------------------------
+            const gCanvas = document.getElementById('game-canvas-play');
+            const gCtx = gCanvas.getContext('2d');
+            const gameOverScreen = document.getElementById('game-over-screen');
+            const scoreDisplay = document.getElementById('game-score');
+            const finalScoreDisplay = document.getElementById('final-score');
+            const finalMessageDisplay = document.getElementById('final-message');
+            const btnRestart = document.getElementById('btn-restart-game');
+            const btnExit = document.getElementById('btn-exit-game');
+            
+            let gameReq;
+            let player, enemies, score, frameCount, roadLines;
+            let keys = { left: false, right: false };
+            let touchLeft = false, touchRight = false;
+            let gameSpeedBase = 5;
+
+            // Manejo de ventana del juego
+            function resizeGame() {
+                gCanvas.width = window.innerWidth;
+                gCanvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeGame);
+
+            // Controles de teclado
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'a') keys.left = true;
+                if (e.key === 'ArrowRight' || e.key === 'd') keys.right = true;
+            });
+            window.addEventListener('keyup', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'a') keys.left = false;
+                if (e.key === 'ArrowRight' || e.key === 'd') keys.right = false;
+            });
+
+            // Controles Táctiles
+            gCanvas.addEventListener('touchstart', (e) => {
+                const x = e.touches[0].clientX;
+                if (x < window.innerWidth / 2) touchLeft = true;
+                else touchRight = true;
+            }, {passive: false});
+            gCanvas.addEventListener('touchend', (e) => {
+                touchLeft = false;
+                touchRight = false;
+            });
+
+            function initGame() {
+                resizeGame();
+                player = {
+                    x: gCanvas.width / 2 - 20,
+                    y: gCanvas.height - 100,
+                    w: 40,
+                    h: 60,
+                    speed: 7
+                };
+                enemies = [];
+                roadLines = [];
+                score = 0;
+                frameCount = 0;
+                gameSpeedBase = 6;
+                gameOverScreen.classList.remove('active');
+                
+                scoreDisplay.innerText = "CUBATAS: 0";
+                
+                // Generar lineas iniciales
+                for(let i=0; i<gCanvas.height; i+=100) {
+                    roadLines.push(i);
+                }
+            }
+
+            function startGame() {
+                gameIsRunning = true;
+                gameContainer.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Evitar scroll
+                initGame();
+                gameLoop();
+            }
+
+            function stopGame() {
+                gameIsRunning = false;
+                gameContainer.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Recuperar scroll
+                cancelAnimationFrame(gameReq);
+                resetIdleTime();
+            }
+
+            btnExit.addEventListener('click', stopGame);
+            btnRestart.addEventListener('click', () => {
+                initGame();
+                gameLoop();
+            });
+
+            function drawPlayer() {
+                gCtx.save();
+                gCtx.translate(player.x + player.w/2, player.y + player.h/2);
+                
+                // Efecto de giro según tecla
+                let tilt = 0;
+                if(keys.left || touchLeft) tilt = -0.25;
+                if(keys.right || touchRight) tilt = 0.25;
+                gCtx.rotate(tilt);
+
+                // Rueda delantera
+                gCtx.fillStyle = '#222222';
+                gCtx.shadowBlur = 0;
+                gCtx.fillRect(-4, -player.h/2 - 6, 8, 16);
+                
+                // Rueda trasera
+                gCtx.fillRect(-5, player.h/2 - 10, 10, 18);
+
+                // Cuerpo principal de la moto (Forma aerodinámica / Hexágono alargado)
+                gCtx.beginPath();
+                gCtx.moveTo(0, -player.h/2 + 2); 
+                gCtx.lineTo(12, -player.h/4); 
+                gCtx.lineTo(14, player.h/2 - 5); 
+                gCtx.lineTo(-14, player.h/2 - 5); 
+                gCtx.lineTo(-12, -player.h/4);
+                gCtx.closePath();
+                
+                gCtx.fillStyle = '#050505';
+                gCtx.fill();
+                gCtx.lineWidth = 2.5;
+                gCtx.strokeStyle = '#ffffff';
+                gCtx.shadowBlur = 15;
+                gCtx.shadowColor = '#ffffff';
+                gCtx.stroke();
+                
+                // Manillar
+                gCtx.beginPath();
+                gCtx.moveTo(-16, -player.h/4 - 2);
+                gCtx.lineTo(16, -player.h/4 - 2);
+                gCtx.strokeStyle = '#ff4500';
+                gCtx.shadowColor = '#ff4500';
+                gCtx.shadowBlur = 15;
+                gCtx.lineWidth = 3;
+                gCtx.lineCap = 'round';
+                gCtx.stroke();
+                
+                // Luz trasera de freno/motor
+                gCtx.beginPath();
+                gCtx.arc(0, player.h/2, 5, 0, Math.PI*2);
+                gCtx.fillStyle = '#ff4500';
+                gCtx.shadowBlur = 20;
+                gCtx.shadowColor = '#ff4500';
+                gCtx.fill();
+                
+                gCtx.restore();
+            }
+
+            function drawEnemy(enemy) {
+                gCtx.save();
+                gCtx.translate(enemy.x, enemy.y);
+                
+                if (enemy.type === 'tree') {
+                    // Árbol Neón (Tronco con estructura en capas de pino real)
+                    gCtx.shadowBlur = 15;
+                    gCtx.shadowColor = '#ff4500';
+                    gCtx.fillStyle = '#110000';
+                    gCtx.strokeStyle = '#ff4500';
+                    gCtx.lineWidth = 2.5;
+                    gCtx.lineJoin = 'round';
+                    
+                    // Tronco
+                    gCtx.beginPath();
+                    gCtx.rect(enemy.w/2 - 5, enemy.h - 12, 10, 12);
+                    gCtx.fill();
+                    gCtx.stroke();
+                    
+                    // Capas del pino (3 niveles superpuestos con picos)
+                    const layers = 3;
+                    for(let i = 0; i < layers; i++) {
+                        gCtx.beginPath();
+                        let topY = i * 14;
+                        let botY = 28 + i * 11;
+                        let halfW = 12 + i * 6; 
+                        gCtx.moveTo(enemy.w/2, topY); // Pico superior de la capa
+                        gCtx.lineTo(enemy.w/2 + halfW, botY); // Esquina inferior derecha
+                        gCtx.lineTo(enemy.w/2 - halfW, botY); // Esquina inferior izquierda
+                        gCtx.closePath();
+                        gCtx.fill();
+                        gCtx.stroke();
+                    }
+                } else {
+                    // Gato Neón (Silueta de cabeza de gato, orejas, bigotes y ojos brillantes)
+                    gCtx.shadowBlur = 15;
+                    gCtx.shadowColor = '#a832a8';
+                    gCtx.fillStyle = '#1a001a';
+                    gCtx.strokeStyle = '#a832a8';
+                    gCtx.lineWidth = 2.5;
+                    gCtx.lineJoin = 'round';
+                    
+                    // Contorno de la cabeza y orejas
+                    gCtx.beginPath();
+                    gCtx.moveTo(enemy.w/2, enemy.h); // Barbilla
+                    gCtx.lineTo(enemy.w, enemy.h/2 + 3); // Mejilla derecha
+                    gCtx.lineTo(enemy.w - 5, 0); // Punta oreja derecha
+                    gCtx.lineTo(enemy.w/2 + 4, 10); // Base oreja derecha
+                    gCtx.lineTo(enemy.w/2 - 4, 10); // Base oreja izquierda
+                    gCtx.lineTo(5, 0); // Punta oreja izquierda
+                    gCtx.lineTo(0, enemy.h/2 + 3); // Mejilla izquierda
+                    gCtx.closePath();
+                    gCtx.fill();
+                    gCtx.stroke();
+                    
+                    // Bigotes 
+                    gCtx.beginPath();
+                    // Lado derecho
+                    gCtx.moveTo(enemy.w, enemy.h/2 - 2); gCtx.lineTo(enemy.w + 12, enemy.h/2 - 8);
+                    gCtx.moveTo(enemy.w, enemy.h/2 + 4); gCtx.lineTo(enemy.w + 12, enemy.h/2 + 6);
+                    // Lado izquierdo
+                    gCtx.moveTo(0, enemy.h/2 - 2); gCtx.lineTo(-12, enemy.h/2 - 8);
+                    gCtx.moveTo(0, enemy.h/2 + 4); gCtx.lineTo(-12, enemy.h/2 + 6);
+                    gCtx.lineWidth = 1.5;
+                    gCtx.stroke();
+                    
+                    // Ojos felinos (Verticales y muy brillantes)
+                    gCtx.fillStyle = '#ff00ff';
+                    gCtx.shadowColor = '#ff00ff';
+                    gCtx.shadowBlur = 25;
+                    
+                    // Ojo izquierdo
+                    gCtx.beginPath();
+                    gCtx.ellipse(enemy.w/2 - 7, enemy.h/2, 2.5, 6, 0, 0, Math.PI*2);
+                    gCtx.fill();
+                    
+                    // Ojo derecho
+                    gCtx.beginPath();
+                    gCtx.ellipse(enemy.w/2 + 7, enemy.h/2, 2.5, 6, 0, 0, Math.PI*2);
+                    gCtx.fill();
+                }
+                gCtx.restore();
+            }
+
+            function drawRoad() {
+                // Suelo oscuro
+                gCtx.fillStyle = '#050505';
+                gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+                
+                // Lineas de carretera
+                gCtx.strokeStyle = 'rgba(255, 69, 0, 0.3)';
+                gCtx.lineWidth = 4;
+                gCtx.setLineDash([40, 60]);
+                
+                // Mover líneas
+                for(let i=0; i<roadLines.length; i++) {
+                    roadLines[i] += gameSpeedBase;
+                    if(roadLines[i] > gCanvas.height) roadLines[i] -= gCanvas.height;
+                    
+                    // Carril Central
+                    gCtx.beginPath();
+                    gCtx.moveTo(gCanvas.width/2, roadLines[i] - 100);
+                    gCtx.lineTo(gCanvas.width/2, roadLines[i]);
+                    gCtx.stroke();
+                }
+                gCtx.setLineDash([]);
+                
+                // Bordes
+                gCtx.beginPath();
+                gCtx.moveTo(gCanvas.width*0.1, 0); gCtx.lineTo(gCanvas.width*0.1, gCanvas.height);
+                gCtx.moveTo(gCanvas.width*0.9, 0); gCtx.lineTo(gCanvas.width*0.9, gCanvas.height);
+                gCtx.strokeStyle = 'rgba(255, 69, 0, 0.8)';
+                gCtx.shadowBlur = 10;
+                gCtx.shadowColor = '#ff4500';
+                gCtx.stroke();
+                gCtx.shadowBlur = 0; // reset
+            }
+
+            function handleCollisions() {
+                for (let enemy of enemies) {
+                    if (
+                        player.x < enemy.x + enemy.w &&
+                        player.x + player.w > enemy.x &&
+                        player.y < enemy.y + enemy.h &&
+                        player.y + player.h > enemy.y
+                    ) {
+                        return true; // Chocó
+                    }
+                }
+                return false;
+            }
+
+            function gameLoop() {
+                if (!gameIsRunning) return;
+                
+                // Limpiar
+                gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+                
+                // Incrementar dificultad
+                frameCount++;
+                if (frameCount % 300 === 0) gameSpeedBase += 0.5;
+
+                // Mover jugador
+                if ((keys.left || touchLeft) && player.x > gCanvas.width*0.1) player.x -= player.speed;
+                if ((keys.right || touchRight) && player.x + player.w < gCanvas.width*0.9) player.x += player.speed;
+
+                // Spawn Enemigos (más rápido a medida que sube el score)
+                // Utilizamos una formula parecida limitando el progreso (score antes era +10 ahora +1, escalamos base 10 el cálculo)
+                let spawnRate = Math.max(30, 90 - Math.floor((score * 10) / 100));
+                if (frameCount % spawnRate === 0) {
+                    const isCat = Math.random() > 0.7;
+                    const w = isCat ? 35 : 45;
+                    const h = isCat ? 35 : 60;
+                    const minX = gCanvas.width * 0.1;
+                    const maxX = (gCanvas.width * 0.9) - w;
+                    
+                    enemies.push({
+                        x: Math.random() * (maxX - minX) + minX,
+                        y: -100,
+                        w: w,
+                        h: h,
+                        type: isCat ? 'cat' : 'tree',
+                        speed: gameSpeedBase * (isCat ? 1.2 : 1),
+                        startX: 0, // Para oscilación del gato
+                        timeOffset: Math.random() * 100
+                    });
+                    enemies[enemies.length-1].startX = enemies[enemies.length-1].x;
+                }
+
+                // Dibujar
+                drawRoad();
+                
+                // Actualizar Enemigos
+                for (let i = enemies.length - 1; i >= 0; i--) {
+                    let e = enemies[i];
+                    e.y += e.speed;
+                    
+                    // Movimiento serpenteante para gatos
+                    if (e.type === 'cat') {
+                        e.x = e.startX + Math.sin(frameCount * 0.05 + e.timeOffset) * 40;
+                    }
+
+                    drawEnemy(e);
+
+                    if (e.y > gCanvas.height) {
+                        enemies.splice(i, 1);
+                        score += 1;
+                        scoreDisplay.innerText = "CUBATAS: " + score;
+                    }
+                }
+
+                drawPlayer();
+
+                if (handleCollisions()) {
+                    // Fin del juego
+                    gameOverScreen.classList.add('active');
+                    finalScoreDisplay.innerText = "Cubatas: " + score;
+                    
+                    if (score > 30) {
+                        finalMessageDisplay.innerText = "¡Tremendo jugador! Captura para Pablo de lo que eres capaz antes de llegar al botellón.";
+                    } else {
+                        finalMessageDisplay.innerText = "Bastante paquetoide. Te quedaste sin dientes.";
+                    }
+
+                    return; // Detiene el loop
+                }
+
+                gameReq = requestAnimationFrame(gameLoop);
+            }
+
+
+            // -------------------------------------------------------------
+            // RESTO DE SCRIPTS EXISTENTES
+            // -------------------------------------------------------------
+            
             const dailaBtn = document.getElementById('daila-btn');
             if (dailaBtn) {
                 dailaBtn.addEventListener('click', () => {
@@ -1100,7 +1743,6 @@ Pablo's House
                 });
             }
 
-            // 1. Scroll Triggered Animations
             const revealElements = document.querySelectorAll('.reveal, .scale-reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1111,10 +1753,8 @@ Pablo's House
                     }
                 });
             }, { threshold: 0.18 });
-
             revealElements.forEach(el => observer.observe(el));
 
-            // 2. Lógica de despliegue para el botón nativo de calendario
             const calBtn = document.querySelector('.cal-btn-terminal');
             const calMenu = document.querySelector('.cal-menu-terminal');
             const calWrapper = document.querySelector('.native-cal-wrapper');
@@ -1125,7 +1765,6 @@ Pablo's House
                     calMenu.classList.toggle('active');
                     calWrapper.classList.toggle('open');
                 });
-
                 document.addEventListener('click', (e) => {
                     if (!e.target.closest('.native-cal-wrapper')) {
                         calMenu.classList.remove('active');
@@ -1134,7 +1773,6 @@ Pablo's House
                 });
             }
 
-            // 3. Control personalizado del bucle de vídeo con requestAnimationFrame
             const videoEl = document.getElementById('hero-intro-video');
             if (videoEl) {
                 function checkVideoLoop() {
@@ -1147,7 +1785,27 @@ Pablo's House
                 requestAnimationFrame(checkVideoLoop);
             }
 
-            // 4. Control de aparición de la cabecera fija y chivato flotante
+            const errorMsg = document.getElementById('video-error-msg');
+            if (videoEl && errorMsg) {
+                let loadingTimeout = setTimeout(() => {
+                    if (videoEl.readyState < 3) { 
+                        errorMsg.classList.add('visible');
+                    }
+                }, 1500);
+
+                videoEl.addEventListener('playing', () => {
+                    clearTimeout(loadingTimeout);
+                    errorMsg.classList.remove('visible');
+                });
+                videoEl.addEventListener('waiting', () => {
+                    errorMsg.classList.add('visible');
+                });
+                videoEl.addEventListener('error', () => {
+                    clearTimeout(loadingTimeout);
+                    errorMsg.classList.add('visible');
+                });
+            }
+
             const stickyHeader = document.getElementById('sticky-header');
             const floater = document.getElementById('scroll-floater');
             const heroSec = document.getElementById('hero');
@@ -1160,7 +1818,6 @@ Pablo's House
                     const ctaTop = ctaSec.getBoundingClientRect().top;
                     const winH = window.innerHeight;
 
-                    // Mostrar cabecera permanente en cuanto se supera la pantalla inicial del vídeo
                     if (stickyHeader) {
                         if (scrollY > (heroH * 0.85)) {
                             stickyHeader.classList.add('visible');
@@ -1169,7 +1826,6 @@ Pablo's House
                         }
                     }
 
-                    // Mostrar chivato de scroll
                     if (floater) {
                         if (scrollY > (heroH * 0.65) && ctaTop > (winH * 0.85)) {
                             floater.classList.add('visible');
@@ -1180,36 +1836,31 @@ Pablo's House
                 }, { passive: true });
             }
             
-            // 5. Animación de explosión / confeti neón al pulsar comprar entrada
             const buyBtn = document.querySelector('.neon-btn');
             const canvas = document.getElementById('explosion-canvas');
             const ctx = canvas.getContext('2d');
 
-            function resizeCanvas() {
+            function resizeExplosionCanvas() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
+            resizeExplosionCanvas();
+            window.addEventListener('resize', resizeExplosionCanvas);
 
             if (buyBtn) {
                 buyBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetUrl = buyBtn.getAttribute('href');
-                    
-                    // Disparar explosión desde la posición del botón
                     const rect = buyBtn.getBoundingClientRect();
                     const originX = rect.left + rect.width / 2;
                     const originY = rect.top + rect.height / 2;
 
                     createExplosion(originX, originY);
 
-                    // 1. Efecto terremoto agresivo y glitch en toda la página
                     document.body.style.animation = "shakeScreen 0.25s ease-in-out infinite alternate";
                     document.body.style.backgroundColor = "#110000";
-                    document.body.style.overflow = "hidden"; // Evitar scroll manual mientras se cae todo
+                    document.body.style.overflow = "hidden"; 
                     
-                    // Cambiar el texto del botón al instante
                     buyBtn.innerHTML = "Redirigiendo a la compra de entradas";
                     buyBtn.style.fontSize = "clamp(0.9rem, 3vw, 1.2rem)";
                     buyBtn.style.backgroundColor = "#ff0000";
@@ -1217,37 +1868,28 @@ Pablo's House
                     buyBtn.style.borderColor = "#ffffff";
                     buyBtn.style.transform = "scale(1.1)";
 
-                    // 2. Seleccionar todos los bloques y textos importantes de la web para que se caigan
                     const elementsToFall = Array.from(document.querySelectorAll('.story-text, .story-text-sub, .rule-item, .date-box, .neon-btn-secondary, .byob-container, .cta-hook, .cta-subtitle, .disclaimer-footer, .marquee-item, video, .native-cal-wrapper, .sticky-brand-comeback, .sticky-brand-pablo, .scroll-prompt p, .arrow-down, .rules-warning'));
                     
-                    // Añadimos elementos fijos para que el colapso sea total
-                    const floater = document.getElementById('scroll-floater');
                     if(floater) elementsToFall.push(floater);
                     elementsToFall.push(buyBtn);
 
-                    // 3. Aplicar física de caída desordenada a cada elemento
                     elementsToFall.forEach((el) => {
-                        const rot = (Math.random() * 160 - 80) + 'deg'; // Rotación extrema aleatoria
-                        const time = (Math.random() * 1.5 + 1.2) + 's'; // Tiempo de caída
-                        const delay = Math.random() * 700; // Retraso aleatorio hasta 700ms para efecto cascada
+                        const rot = (Math.random() * 160 - 80) + 'deg'; 
+                        const time = (Math.random() * 1.5 + 1.2) + 's'; 
+                        const delay = Math.random() * 700; 
                         
                         el.style.setProperty('--fall-rot', rot);
                         el.style.setProperty('--fall-time', time);
                         
                         setTimeout(() => {
-                            // Asegurar que si el elemento es inline (ej. span), actúe como bloque para rotar
                             const style = window.getComputedStyle(el);
                             if(style.display === 'inline') el.style.display = 'inline-block';
-                            
                             el.classList.add('element-falling');
                         }, delay);
                     });
 
-                    // 4. Abrir en pestaña nueva tras el caos (esperamos 1.5 segundos para ver cómo cae todo)
                     setTimeout(() => {
                         window.open(targetUrl, '_blank');
-                        
-                        // Recargar la página actual por si vuelven a esa pestaña, que esté normal
                         setTimeout(() => { location.reload(); }, 600);
                     }, 1500);
                 });
@@ -1304,7 +1946,6 @@ Pablo's House
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
                     }
                 }
-
                 animateParticles();
             }
 
