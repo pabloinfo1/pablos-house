@@ -15,6 +15,16 @@
     <meta property="og:image" content="Logo.png">
     <meta property="og:type" content="website">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5XB883KRF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z5XB883KRF');
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Space+Mono:wght@400;700&display=swap');
 
@@ -1073,6 +1083,9 @@
             <p>Empieza a bajar para descubrir lo que te espera</p>
             <div class="arrow-down">↓</div>
         </div>
+        
+        <!-- AVISO GOOGLE ANALYTICS INTEGRADO -->
+        <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 9px; color: rgba(255, 255, 255, 0.04); white-space: nowrap; margin-bottom: 2px; z-index: 1; pointer-events: none; letter-spacing: 0;">Usamos Google Analytics para medir el hype. Al bajar, aceptas.</div>
     </section>
 
     <!-- 2. STORY PANEL 1: CIERRE DE VERANO -->
@@ -1293,8 +1306,10 @@
             <div class="disclaimer-left">
                 <span style="color: #ff4500;">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
             </div>
-            <div class="disclaimer-right">
-                Contenido satírico. Evento privado no comercial.
+            <!-- ALERTA DE PRIVACIDAD INTEGRADA EN EL FOOTER -->
+            <div class="disclaimer-right" style="text-align: right;">
+                Contenido satírico. Evento privado no comercial. <br>
+                <span onclick="alert('Esta web es un sitio privado y no comercial para la organización de Pablo\'s House.\n\nNo te pongas pesado con tu privacidad, que aquí lo verdaderamente importante es beber y venir preparado para la fiesta. Únicamente usamos Google Analytics para saber cuánta gente entra a la web y ver si el servidor aganta. Tranquilo, que te vamos a hacer bastante menos control del que te hace tu pareja. No vendemos tus datos a nadie ni nos importa lo que hagas con tu vida.\n\nSi aun así te entra la paranoia y quieres borrar cualquier registro de tu paso por la web, déjate de burocracias y contacta directamente con Pablo por privado.');" style="text-decoration: underline; cursor: pointer; pointer-events: auto;">Privacidad y Analíticas</span>
             </div>
         </div>
     </section>
