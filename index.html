@@ -708,6 +708,20 @@
             letter-spacing: -1px;
         }
 
+        /* Animación de parpadeo (relleno) del botón principal */
+        @keyframes pulseBtnFill {
+            0% {
+                background: rgba(var(--main-color-rgb), 0.1);
+                box-shadow: 0 0 25px rgba(var(--main-color-rgb), 0.4),
+                            inset 0 0 15px rgba(var(--main-color-rgb), 0.2);
+            }
+            100% {
+                background: rgba(var(--main-color-rgb), 0.5);
+                box-shadow: 0 0 45px rgba(var(--main-color-rgb), 0.9),
+                            inset 0 0 35px rgba(var(--main-color-rgb), 0.6);
+            }
+        }
+
         .neon-btn {
             display: inline-block;
             font-size: 1.6rem;
@@ -726,6 +740,9 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.17, 0.85, 0.43, 1);
             cursor: pointer;
+            
+            /* Efecto añadido de parpadeo que llena el cuadrado */
+            animation: pulseBtnFill 1.5s infinite alternate ease-in-out;
         }
 
         .neon-btn::before {
@@ -738,6 +755,7 @@
         }
 
         .neon-btn:hover {
+            animation: none; /* Quitamos el parpadeo cuando lo va a pulsar */
             background: var(--main-color);
             color: #000000;
             box-shadow: 0 0 50px rgba(var(--main-color-rgb), 0.9);
@@ -861,7 +879,7 @@
             100% { transform: translateY(150vh) rotate(var(--fall-rot)); opacity: 0; }
         }
 
-        /* ----------------NUEVAS CLASES PARA EL IDLE MODAL Y EL JUEGO---------------- */
+        /* ----------------NUEVAS CLASES PARA EL IDLE MODAL Y EL JUEGO---------------- // Siii se que el juego va atado a los fps, pero es un guiño a los antiguos GTAs*/
 
         /* INACTIVITY MODAL */
         .idle-modal-overlay {
@@ -897,8 +915,12 @@
             position: relative;
         }
 
+        /* FUENTE CORREGIDA: Hereda el mismo estilo exacto de los textos gruesos naranjas principales para evitar renderizado borroso en iOS Safari */
         .idle-modal-box h2 {
-            font-family: 'Anton', sans-serif;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
             font-size: 2.2rem;
             margin-bottom: 20px;
             line-height: 1.1;
@@ -991,9 +1013,13 @@
             display: block;
         }
 
+        /* FUENTE CORREGIDA: Idéntico estilo para este header en el game over */
         #game-over-screen h2 {
-            font-family: 'Anton', sans-serif;
-            font-size: 3rem;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            font-size: 2.6rem;
             margin-bottom: 15px;
         }
 
@@ -1076,7 +1102,7 @@
         <div class="hero-content-stack">
             <div class="hero-video-container">
                 <div id="video-error-msg" class="video-error-message">
-                    [ ERROR: TU INTERNET VA MÁS LENTO QUE TÚ UN DOMINGO DE RESACA. CARGANDO INTRO, DAME UN SEC... ]<span class="blink-cursor">_</span>
+                    [ TU INTERNET VA MÁS LENTO QUE TÚ UN DOMINGO DE RESACA. CARGANDO INTRO, DAME UN SEC... ]<span class="blink-cursor">_</span>
                 </div>
                 
                 <!-- Video principal de introducción -->
