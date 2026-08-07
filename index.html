@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#ff4500">
     <meta name="description" content="Pablo's House: Comeback Vol. 2. Evento totalmente privado y no abierto al público. Acceso exclusivo previa confirmación. Si no tienes entrada, ni lo intentes.">
     <title>Pablo's House: Comeback Vol. 2</title>
@@ -850,8 +850,9 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
+            height: 100dvh; /* FIX de altura para viewport dinámico en iOS/Android */
             pointer-events: none;
             z-index: 9999;
         }
@@ -885,7 +886,9 @@
         .idle-modal-overlay {
             position: fixed;
             top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            width: 100%; 
+            height: 100%;
+            height: 100dvh; /* FIX para respetar barras de navegación móviles */
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -945,11 +948,14 @@
         .game-fullscreen {
             position: fixed;
             top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            width: 100%; 
+            height: 100%;
+            height: 100dvh; /* FIX VITAL: Se adapta dinámicamente si la barra de la url está visible u oculta en Safari/Chrome iOS */
             background: #000000;
             z-index: 15000;
             display: none;
             overflow: hidden;
+            touch-action: none; /* FIX: Evita que al arrastrar la moto el navegador intente hacer scroll o recargar la página en móviles */
         }
 
         .game-fullscreen.active {
@@ -1447,10 +1453,18 @@ Pablo's House
             let touchLeft = false, touchRight = false;
             let gameSpeedBase = 5;
 
-            // Manejo de ventana del juego
+            // Manejo de ventana del juego FIX
             function resizeGame() {
-                gCanvas.width = window.innerWidth;
-                gCanvas.height = window.innerHeight;
+                // Obtenemos el ancho exacto del contenedor visible en lugar del global de la ventana
+                gCanvas.width = gameContainer.clientWidth || window.innerWidth;
+                gCanvas.height = gameContainer.clientHeight || window.innerHeight;
+                
+                // FIX: Si el canvas se redimensiona en medio de la partida (ej. se oculta la url bar en Safari),
+                // actualizamos la posición del jugador para que no se hunda o desaparezca
+                if (player) {
+                    player.y = gCanvas.height - 100;
+                    if(player.x > gCanvas.width) player.x = gCanvas.width / 2;
+                }
             }
             window.addEventListener('resize', resizeGame);
 
