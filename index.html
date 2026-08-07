@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ff4500">
+    <meta name="description" content="Pablo's House: Comeback Vol. 2. Evento totalmente privado y no abierto al público. Acceso exclusivo previa confirmación. Si no tienes entrada, ni lo intentes.">
     <title>Pablo's House: Comeback Vol. 2</title>
     
     <!-- FAVICON -->
@@ -27,6 +28,11 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Space+Mono:wght@400;700&display=swap');
+
+        :root {
+            --main-color: #ff4500;
+            --main-color-rgb: 255, 69, 0;
+        }
 
         * {
             margin: 0;
@@ -57,10 +63,10 @@
         }
 
         .neon-accent {
-            color: #ff4500; 
-            text-shadow: 0 0 10px rgba(255, 69, 0, 0.8),
-                         0 0 25px rgba(255, 69, 0, 0.6),
-                         0 0 45px rgba(255, 69, 0, 0.3);
+            color: var(--main-color); 
+            text-shadow: 0 0 10px rgba(var(--main-color-rgb), 0.8),
+                         0 0 25px rgba(var(--main-color-rgb), 0.6),
+                         0 0 45px rgba(var(--main-color-rgb), 0.3);
         }
 
         /* CABECERA FLOTANTE PERMANENTE CON GRID PARA CENTRADO ESTRICTO */
@@ -116,7 +122,7 @@
             font-family: 'Anton', sans-serif;
             font-size: clamp(0.55rem, 1.8vw, 0.8rem);
             vertical-align: super;
-            color: #ff4500;
+            color: var(--main-color);
             letter-spacing: 0.5px;
         }
 
@@ -130,7 +136,7 @@
             padding: 40px 20px 20px 20px;
             position: relative;
             background-color: #000000;
-            background-image: radial-gradient(circle at 50% 55%, rgba(255, 69, 0, 0.12) 0%, transparent 75%);
+            background-image: radial-gradient(circle at 50% 55%, rgba(var(--main-color-rgb), 0.12) 0%, transparent 75%);
         }
 
         .hero-content-stack {
@@ -168,7 +174,7 @@
             transform: translate(-50%, -50%);
             font-family: 'Space Mono', monospace;
             font-size: clamp(0.7rem, 2vw, 1rem);
-            color: #ff4500;
+            color: var(--main-color);
             text-align: center;
             letter-spacing: 1px;
             z-index: 15;
@@ -178,8 +184,8 @@
             pointer-events: none;
             transition: opacity 0.4s ease;
             line-height: 1.6;
-            text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
-            border: 1px dashed rgba(255, 69, 0, 0.4);
+            text-shadow: 0 0 10px rgba(var(--main-color-rgb), 0.5);
+            border: 1px dashed rgba(var(--main-color-rgb), 0.4);
             padding: 20px;
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(4px);
@@ -194,6 +200,7 @@
 
         .scroll-prompt {
             text-align: center;
+            margin-top: 30px;
             margin-bottom: 15px;
             opacity: 0;
             animation: fadeInPrompt 1.5s ease-out forwards;
@@ -212,7 +219,7 @@
 
         .arrow-down {
             font-size: 1.5rem;
-            color: #ff4500;
+            color: var(--main-color);
             animation: bounce 2s infinite;
         }
 
@@ -234,7 +241,7 @@
             left: 50%;
             transform: translateX(-50%) translateY(20px);
             background: rgba(10, 10, 10, 0.88);
-            border: 1px solid rgba(255, 69, 0, 0.4);
+            border: 1px solid rgba(var(--main-color-rgb), 0.4);
             padding: 10px 22px;
             border-radius: 50px;
             font-family: 'Space Mono', monospace;
@@ -246,7 +253,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.95), 0 0 15px rgba(255, 69, 0, 0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.95), 0 0 15px rgba(var(--main-color-rgb), 0.15);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             z-index: 999;
@@ -265,7 +272,7 @@
         }
 
         .floater-arrow {
-            color: #ff4500;
+            color: var(--main-color);
             font-weight: 900;
             animation: floaterArrowPulse 1.5s infinite ease-in-out;
         }
@@ -338,17 +345,17 @@
         /* Date & Time Section */
         #datetime {
             background-color: #030100;
-            border-bottom: 1px solid rgba(255, 69, 0, 0.2);
+            border-bottom: 1px solid rgba(var(--main-color-rgb), 0.2);
             overflow: hidden;
         }
 
         .date-box {
             display: inline-block;
-            border: 2px solid #ff4500;
+            border: 2px solid var(--main-color);
             padding: 35px 50px;
             border-radius: 8px;
-            background: rgba(255, 69, 0, 0.03);
-            box-shadow: 0 0 30px rgba(255, 69, 0, 0.15);
+            background: rgba(var(--main-color-rgb), 0.03);
+            box-shadow: 0 0 30px rgba(var(--main-color-rgb), 0.15);
             position: relative;
             max-width: 92vw;
         }
@@ -370,7 +377,7 @@
         }
 
         .blink-cursor {
-            color: #ff4500;
+            color: var(--main-color);
             font-family: 'Space Mono', monospace;
             font-weight: 900;
             animation: cursorBlink 1s step-end infinite;
@@ -410,11 +417,11 @@
             transform: translateX(-50%);
             margin-top: 8px;
             background: rgba(10, 10, 10, 0.96);
-            border: 1px solid rgba(255, 69, 0, 0.4);
+            border: 1px solid rgba(var(--main-color-rgb), 0.4);
             border-radius: 4px;
             padding: 6px 0;
             min-width: 220px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.95), 0 0 20px rgba(255, 69, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.95), 0 0 20px rgba(var(--main-color-rgb), 0.15);
             z-index: 100;
             text-align: left;
         }
@@ -441,20 +448,20 @@
         }
 
         .cal-menu-terminal a:hover {
-            background: rgba(255, 69, 0, 0.12);
+            background: rgba(var(--main-color-rgb), 0.12);
             color: #ffffff;
-            border-left-color: #ff4500;
+            border-left-color: var(--main-color);
         }
 
         .cal-opt {
-            color: #ff4500;
+            color: var(--main-color);
             margin-right: 8px;
             font-weight: 700;
         }
 
         @keyframes terminalPulse {
-            0% { text-shadow: 0 0 8px rgba(255, 69, 0, 0.6), 0 0 15px rgba(255, 69, 0, 0.3); }
-            100% { text-shadow: 0 0 15px #ff4500, 0 0 30px #ff4500, 0 0 45px rgba(255, 69, 0, 0.6); }
+            0% { text-shadow: 0 0 8px rgba(var(--main-color-rgb), 0.6), 0 0 15px rgba(var(--main-color-rgb), 0.3); }
+            100% { text-shadow: 0 0 15px var(--main-color), 0 0 30px var(--main-color), 0 0 45px rgba(var(--main-color-rgb), 0.6); }
         }
 
         @keyframes cursorBlink {
@@ -464,7 +471,7 @@
 
         /* Location Section */
         #location {
-            background: radial-gradient(circle at center, rgba(255, 69, 0, 0.12) 0%, #000000 85%);
+            background: radial-gradient(circle at center, rgba(var(--main-color-rgb), 0.12) 0%, #000000 85%);
             overflow: hidden;
         }
 
@@ -486,7 +493,7 @@
         /* Parking Section */
         #parking {
             background-color: #010101;
-            border-bottom: 1px solid rgba(255, 69, 0, 0.15);
+            border-bottom: 1px solid rgba(var(--main-color-rgb), 0.15);
         }
 
         .neon-btn-secondary {
@@ -495,22 +502,22 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: #ff4500;
+            color: var(--main-color);
             text-decoration: none;
             padding: 18px 45px;
-            background: rgba(255, 69, 0, 0.03);
-            border: 2px dashed #ff4500;
+            background: rgba(var(--main-color-rgb), 0.03);
+            border: 2px dashed var(--main-color);
             border-radius: 4px;
-            box-shadow: 0 0 15px rgba(255, 69, 0, 0.1);
+            box-shadow: 0 0 15px rgba(var(--main-color-rgb), 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .neon-btn-secondary:hover {
-            background: rgba(255, 69, 0, 0.15);
+            background: rgba(var(--main-color-rgb), 0.15);
             color: #ffffff;
             border-style: solid;
-            box-shadow: 0 0 30px rgba(255, 69, 0, 0.5);
+            box-shadow: 0 0 30px rgba(var(--main-color-rgb), 0.5);
             transform: translateY(-2px);
         }
 
@@ -518,11 +525,11 @@
         .byob-container {
             max-width: 850px;
             width: 100%;
-            border: 2px solid #ff4500;
+            border: 2px solid var(--main-color);
             padding: 50px 40px;
-            background: linear-gradient(135deg, rgba(255, 69, 0, 0.05) 0%, rgba(0,0,0,0.8) 100%);
-            box-shadow: 0 0 35px rgba(255, 69, 0, 0.15),
-                        inset 0 0 15px rgba(255, 69, 0, 0.05);
+            background: linear-gradient(135deg, rgba(var(--main-color-rgb), 0.05) 0%, rgba(0,0,0,0.8) 100%);
+            box-shadow: 0 0 35px rgba(var(--main-color-rgb), 0.15),
+                        inset 0 0 15px rgba(var(--main-color-rgb), 0.05);
             border-radius: 12px;
             text-align: left;
             position: relative;
@@ -533,7 +540,7 @@
             position: absolute;
             top: -14px;
             left: 35px;
-            background: #ff4500;
+            background: var(--main-color);
             color: #000000;
             font-weight: 900;
             font-size: 0.85rem;
@@ -559,7 +566,7 @@
         }
 
         .byob-highlight {
-            color: #ff4500;
+            color: var(--main-color);
             font-weight: 700;
         }
 
@@ -607,13 +614,13 @@
 
         .rule-item:hover {
             transform: translateX(10px);
-            border-color: #ff4500;
+            border-color: var(--main-color);
         }
 
         .rule-number {
             font-size: 1.4rem;
             font-weight: 900;
-            color: #ff4500;
+            color: var(--main-color);
             margin-right: 20px;
             min-width: 35px;
         }
@@ -627,14 +634,14 @@
 
         /* NORMA DESTACADA (06) */
         .rule-highlight {
-            background: linear-gradient(135deg, rgba(255, 69, 0, 0.15) 0%, rgba(20, 20, 20, 0.9) 100%);
-            border: 2px solid #ff4500;
-            box-shadow: 0 0 25px rgba(255, 69, 0, 0.25);
+            background: linear-gradient(135deg, rgba(var(--main-color-rgb), 0.15) 0%, rgba(20, 20, 20, 0.9) 100%);
+            border: 2px solid var(--main-color);
+            box-shadow: 0 0 25px rgba(var(--main-color-rgb), 0.25);
         }
 
         .rule-highlight .rule-number {
             color: #ffffff;
-            text-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500;
+            text-shadow: 0 0 10px var(--main-color), 0 0 20px var(--main-color);
         }
 
         .rule-highlight .rule-text {
@@ -667,12 +674,12 @@
             transition: color 0.2s ease;
         }
         #daila-btn:hover {
-            color: #ff4500;
+            color: var(--main-color);
         }
 
         /* CTA / Tickets Button Section */
         #cta-section {
-            background: radial-gradient(circle at center, rgba(255, 69, 0, 0.15) 0%, #000000 80%);
+            background: radial-gradient(circle at center, rgba(var(--main-color-rgb), 0.15) 0%, #000000 80%);
             text-align: center;
             padding: 100px 20px;
             position: relative;
@@ -710,11 +717,11 @@
             color: #ffffff;
             text-decoration: none;
             padding: 24px 65px;
-            background: rgba(255, 69, 0, 0.1);
-            border: 2px solid #ff4500;
+            background: rgba(var(--main-color-rgb), 0.1);
+            border: 2px solid var(--main-color);
             border-radius: 4px;
-            box-shadow: 0 0 25px rgba(255, 69, 0, 0.4),
-                        inset 0 0 15px rgba(255, 69, 0, 0.2);
+            box-shadow: 0 0 25px rgba(var(--main-color-rgb), 0.4),
+                        inset 0 0 15px rgba(var(--main-color-rgb), 0.2);
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.17, 0.85, 0.43, 1);
@@ -731,9 +738,9 @@
         }
 
         .neon-btn:hover {
-            background: #ff4500;
+            background: var(--main-color);
             color: #000000;
-            box-shadow: 0 0 50px rgba(255, 69, 0, 0.9);
+            box-shadow: 0 0 50px rgba(var(--main-color-rgb), 0.9);
             transform: scale(1.05);
         }
 
@@ -761,7 +768,7 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000000; }
         ::-webkit-scrollbar-thumb { background: #222222; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff4500; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--main-color); }
     
         /* Side Vertical Marquees */
         .side-marquee {
@@ -799,8 +806,8 @@
             font-family: 'Anton', sans-serif;
             font-size: clamp(3rem, 7vw, 6rem);
             color: transparent;
-            -webkit-text-stroke: 1.5px rgba(255, 69, 0, 0.22);
-            text-shadow: 0 0 15px rgba(255, 69, 0, 0.1);
+            -webkit-text-stroke: 1.5px rgba(var(--main-color-rgb), 0.22);
+            text-shadow: 0 0 15px rgba(var(--main-color-rgb), 0.1);
             text-transform: uppercase;
             letter-spacing: 6px;
             margin-bottom: 60px;
@@ -880,13 +887,13 @@
 
         .idle-modal-box {
             background: #080808;
-            border: 2px solid #ff4500;
+            border: 2px solid var(--main-color);
             padding: 45px 30px;
             max-width: 600px;
             width: 90%;
             text-align: center;
             border-radius: 8px;
-            box-shadow: 0 0 40px rgba(255, 69, 0, 0.25), inset 0 0 15px rgba(255, 69, 0, 0.1);
+            box-shadow: 0 0 40px rgba(var(--main-color-rgb), 0.25), inset 0 0 15px rgba(var(--main-color-rgb), 0.1);
             position: relative;
         }
 
@@ -940,15 +947,15 @@
             z-index: 15010;
             font-size: 1rem;
             background: rgba(0,0,0,0.8);
-            color: #ff4500;
-            border: 1px solid #ff4500;
+            color: var(--main-color);
+            border: 1px solid var(--main-color);
             border-radius: 4px;
             cursor: pointer;
             padding: 10px 15px;
         }
 
         #btn-exit-game:hover {
-            background: #ff4500;
+            background: var(--main-color);
             color: #000;
         }
 
@@ -960,7 +967,7 @@
             font-family: 'Space Mono', monospace;
             font-size: 1.5rem;
             color: #ffffff;
-            text-shadow: 0 0 10px #ff4500;
+            text-shadow: 0 0 10px var(--main-color);
         }
 
         #game-over-screen {
@@ -972,7 +979,7 @@
             z-index: 15020;
             background: rgba(10, 10, 10, 0.95);
             padding: 40px;
-            border: 2px dashed #ff4500;
+            border: 2px dashed var(--main-color);
             border-radius: 10px;
             box-shadow: 0 0 50px rgba(0,0,0,1);
             width: 90%;
@@ -1072,18 +1079,25 @@
                     [ ERROR: TU INTERNET VA MÁS LENTO QUE TÚ UN DOMINGO DE RESACA. CARGANDO INTRO, DAME UN SEC... ]<span class="blink-cursor">_</span>
                 </div>
                 
-                <video id="hero-intro-video" class="hero-video-player" autoplay muted playsinline disablePictureInPicture>
-                    <source src="LogoAnimado.mp4" type="video/mp4">
+                <!-- Video principal de introducción -->
+                <video id="hero-intro-video-main" class="hero-video-player" autoplay muted playsinline disablePictureInPicture preload="auto">
+                    <source src="LogoAnimadoPrincipal.mp4" type="video/mp4">
                     Tu navegador no soporta el reproductor de vídeo nativo.
                 </video>
+                
+                <!-- Video en bucle (oculto inicialmente) -->
+                <video id="hero-intro-video-loop" class="hero-video-player" muted playsinline disablePictureInPicture loop preload="auto" style="display: none;">
+                    <source src="LogoAnimadoBucle.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- SCROLL PROMPT MOVido DENTRO DEL CONTENEDOR PRINCIPAL PARA NO QUEDAR PEGADO ABAJO -->
+            <div class="scroll-prompt">
+                <p>Empieza a bajar para descubrir lo que te espera</p>
+                <div class="arrow-down">↓</div>
             </div>
         </div>
 
-        <div class="scroll-prompt">
-            <p>Empieza a bajar para descubrir lo que te espera</p>
-            <div class="arrow-down">↓</div>
-        </div>
-        
         <!-- AVISO GOOGLE ANALYTICS INTEGRADO -->
         <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 11px; color: rgba(255, 255, 255, 0.1); white-space: nowrap; margin-bottom: 12px; z-index: 1; pointer-events: none; letter-spacing: 0.5px;">Usamos Google Analytics para medir el hype. Al bajar, las aceptas.</div>
     </section>
@@ -1304,7 +1318,7 @@
 
         <div class="disclaimer-footer" style="position: absolute; z-index: 2;">
             <div class="disclaimer-left">
-                <span style="color: #ff4500;">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
+                <span style="color: var(--main-color);">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
             </div>
             <!-- ALERTA DE PRIVACIDAD INTEGRADA EN EL FOOTER -->
             <div class="disclaimer-right" style="text-align: right;">
@@ -1318,12 +1332,14 @@
     <canvas id="explosion-canvas"></canvas>
 
     <script>
+        const MAIN_COLOR = '#ff4500'; // Constante para Canvas donde la variable CSS nativa no se lee directamente
+        
         console.log(`%c
 Pablo's House
         
         REY SI EN VEZ DE REVISAR EL CÓDIGO DE LA WEB TE DEDICAS A BEBER? 
         ES ILEGAL SER FELIZ POR LO QUE VEO
-        `, 'color: #ff4500; font-family: monospace; font-size: 14px; font-weight: bold; text-shadow: 1px 1px 0px #000;');
+        `, `color: ${MAIN_COLOR}; font-family: monospace; font-size: 14px; font-weight: bold; text-shadow: 1px 1px 0px #000;`);
 
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -1332,7 +1348,7 @@ Pablo's House
             // -------------------------------------------------------------
             let idleTime = 0;
             let idleInterval;
-            const idleThreshold = 15; // 15 segundos
+            const idleThreshold = 20; // 20 segundos
             let gameIsRunning = false;
 
             const idleModal = document.getElementById('idle-modal');
@@ -1518,8 +1534,8 @@ Pablo's House
                 gCtx.beginPath();
                 gCtx.moveTo(-16, -player.h/4 - 2);
                 gCtx.lineTo(16, -player.h/4 - 2);
-                gCtx.strokeStyle = '#ff4500';
-                gCtx.shadowColor = '#ff4500';
+                gCtx.strokeStyle = MAIN_COLOR;
+                gCtx.shadowColor = MAIN_COLOR;
                 gCtx.shadowBlur = 15;
                 gCtx.lineWidth = 3;
                 gCtx.lineCap = 'round';
@@ -1528,9 +1544,9 @@ Pablo's House
                 // Luz trasera de freno/motor
                 gCtx.beginPath();
                 gCtx.arc(0, player.h/2, 5, 0, Math.PI*2);
-                gCtx.fillStyle = '#ff4500';
+                gCtx.fillStyle = MAIN_COLOR;
                 gCtx.shadowBlur = 20;
-                gCtx.shadowColor = '#ff4500';
+                gCtx.shadowColor = MAIN_COLOR;
                 gCtx.fill();
                 
                 gCtx.restore();
@@ -1543,9 +1559,9 @@ Pablo's House
                 if (enemy.type === 'tree') {
                     // Árbol Neón (Tronco con estructura en capas de pino real)
                     gCtx.shadowBlur = 15;
-                    gCtx.shadowColor = '#ff4500';
+                    gCtx.shadowColor = MAIN_COLOR;
                     gCtx.fillStyle = '#110000';
-                    gCtx.strokeStyle = '#ff4500';
+                    gCtx.strokeStyle = MAIN_COLOR;
                     gCtx.lineWidth = 2.5;
                     gCtx.lineJoin = 'round';
                     
@@ -1649,7 +1665,7 @@ Pablo's House
                 gCtx.moveTo(gCanvas.width*0.9, 0); gCtx.lineTo(gCanvas.width*0.9, gCanvas.height);
                 gCtx.strokeStyle = 'rgba(255, 69, 0, 0.8)';
                 gCtx.shadowBlur = 10;
-                gCtx.shadowColor = '#ff4500';
+                gCtx.shadowColor = MAIN_COLOR;
                 gCtx.stroke();
                 gCtx.shadowBlur = 0; // reset
             }
@@ -1770,55 +1786,72 @@ Pablo's House
             }, { threshold: 0.18 });
             revealElements.forEach(el => observer.observe(el));
 
-            const calBtn = document.querySelector('.cal-btn-terminal');
-            const calMenu = document.querySelector('.cal-menu-terminal');
+            // CORRECCIÓN: Seleccionamos específicamente el botón del calendario para que no colisione con el del juego
             const calWrapper = document.querySelector('.native-cal-wrapper');
-
-            if(calBtn && calMenu) {
-                calBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    calMenu.classList.toggle('active');
-                    calWrapper.classList.toggle('open');
-                });
-                document.addEventListener('click', (e) => {
-                    if (!e.target.closest('.native-cal-wrapper')) {
-                        calMenu.classList.remove('active');
-                        calWrapper.classList.remove('open');
-                    }
-                });
-            }
-
-            const videoEl = document.getElementById('hero-intro-video');
-            if (videoEl) {
-                function checkVideoLoop() {
-                    if (videoEl.currentTime >= 9.96) {
-                        videoEl.currentTime = 8.34;
-                        videoEl.play();
-                    }
-                    requestAnimationFrame(checkVideoLoop);
+            if (calWrapper) {
+                const calBtn = calWrapper.querySelector('.cal-btn-terminal');
+                const calMenu = calWrapper.querySelector('.cal-menu-terminal');
+                
+                if(calBtn && calMenu) {
+                    calBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        calMenu.classList.toggle('active');
+                        calWrapper.classList.toggle('open');
+                    });
+                    document.addEventListener('click', (e) => {
+                        if (!e.target.closest('.native-cal-wrapper')) {
+                            calMenu.classList.remove('active');
+                            calWrapper.classList.remove('open');
+                        }
+                    });
                 }
-                requestAnimationFrame(checkVideoLoop);
             }
 
+            // Lógica de transición de vídeos y mensaje de error
+            const videoMain = document.getElementById('hero-intro-video-main');
+            const videoLoop = document.getElementById('hero-intro-video-loop');
             const errorMsg = document.getElementById('video-error-msg');
-            if (videoEl && errorMsg) {
+
+            if (videoMain && videoLoop) {
+                // Transición del video principal al bucle
+                videoMain.addEventListener('ended', () => {
+                    videoMain.style.display = 'none';
+                    videoLoop.style.display = 'block';
+                    videoLoop.play();
+                });
+            }
+
+            if (videoMain && errorMsg) {
                 let loadingTimeout = setTimeout(() => {
-                    if (videoEl.readyState < 3) { 
+                    if (videoMain.readyState < 3) { 
                         errorMsg.classList.add('visible');
                     }
                 }, 1500);
 
-                videoEl.addEventListener('playing', () => {
+                videoMain.addEventListener('playing', () => {
                     clearTimeout(loadingTimeout);
                     errorMsg.classList.remove('visible');
                 });
-                videoEl.addEventListener('waiting', () => {
+                videoMain.addEventListener('waiting', () => {
                     errorMsg.classList.add('visible');
                 });
-                videoEl.addEventListener('error', () => {
+                videoMain.addEventListener('error', () => {
                     clearTimeout(loadingTimeout);
                     errorMsg.classList.add('visible');
                 });
+                
+                // Mensaje de error / estado de espera también para el video bucle si hiciera falta
+                if (videoLoop) {
+                    videoLoop.addEventListener('playing', () => {
+                        errorMsg.classList.remove('visible');
+                    });
+                    videoLoop.addEventListener('waiting', () => {
+                        errorMsg.classList.add('visible');
+                    });
+                    videoLoop.addEventListener('error', () => {
+                        errorMsg.classList.add('visible');
+                    });
+                }
             }
 
             const stickyHeader = document.getElementById('sticky-header');
@@ -1903,16 +1936,23 @@ Pablo's House
                         }, delay);
                     });
 
+                    // CORRECCIÓN: Lógica adaptada para Safari (evitando el bloqueo del popup)
                     setTimeout(() => {
-                        window.open(targetUrl, '_blank');
-                        setTimeout(() => { location.reload(); }, 600);
+                        let newWin = window.open(targetUrl, '_blank');
+                        
+                        // Si el navegador bloquea la nueva pestaña (Safari o extensiones), usamos la actual
+                        if(!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+                            window.location.href = targetUrl;
+                        } else {
+                            setTimeout(() => { location.reload(); }, 600);
+                        }
                     }, 1500);
                 });
             }
 
             function createExplosion(x, y) {
                 const particles = [];
-                const colors = ['#ff4500', '#ff8255', '#ffffff', '#ffaa00', '#ff2200'];
+                const colors = [MAIN_COLOR, '#ff8255', '#ffffff', '#ffaa00', '#ff2200'];
                 const particleCount = 400;
 
                 for (let i = 0; i < particleCount; i++) {
