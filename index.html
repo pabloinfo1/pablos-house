@@ -1142,7 +1142,7 @@
     </section>
 
     <!-- 3. STORY PANEL 2: CELEBRARLO COMO MERECEMOS -->
-    <section class="story-panel" style="position: relative; overflow: hidden;">
+    <section id="story-botellon" class="story-panel" style="position: relative; overflow: hidden;">
         
         <!-- LEFT MARQUEE (BOTELLÓN) -->
         <div class="side-marquee left">
@@ -1200,10 +1200,10 @@
                 <button class="cal-btn-terminal" type="button">[&nbsp;+&nbsp;GUARDAR&nbsp;EN&nbsp;CALENDARIO&nbsp;]</button>
                 
                 <div class="cal-menu-terminal">
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pablo%27s+House%3A+Comeback+Vol.+2&dates=20260905T220000/20260906T080000&ctz=Europe/Madrid&details=%C2%A1El+regreso+que+estabas+esperando%21+Ha+costado%2C+pero+por+fin+abrimos+las+puertas+de+nuevo.%0A%0A%E2%9A%A0%EF%B8%8F+RECORDATORIOS+IMPORTANTES%3A%0A%E2%80%A2+Trae+tu+alcohol%2C+tu+entrada+y%2C+sobre+todo%2C+ganas+de+tajarla.%0A%E2%80%A2+Aseg%C3%BArate+de+haber+le%C3%ADdo+las+normas+del+evento+antes+de+venir.&location=Pablo%27s+House" target="_blank">
+                    <a id="btn-cal-google" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pablo%27s+House%3A+Comeback+Vol.+2&dates=20260905T220000/20260906T080000&ctz=Europe/Madrid&details=%C2%A1El+regreso+que+estabas+esperando%21+Ha+costado%2C+pero+por+fin+abrimos+las+puertas+de+nuevo.%0A%0A%E2%9A%A0%EF%B8%8F+RECORDATORIOS+IMPORTANTES%3A%0A%E2%80%A2+Trae+tu+alcohol%2C+tu+entrada+y%2C+sobre+todo%2C+ganas+de+tajarla.%0A%E2%80%A2+Aseg%C3%BArate+de+haber+le%C3%ADdo+las+normas+del+evento+antes+de+venir.&location=Pablo%27s+House" target="_blank">
                         <span class="cal-opt">[G]</span> Google Calendar
                     </a>
-                    <a href="data:text/calendar;charset=utf-8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//Pablos%20House//Comeback%20Vol%202//ES%0ACALSCALE:GREGORIAN%0ABEGIN:VEVENT%0ASUMMARY:Pablo%27s%20House:%20Comeback%20Vol.%202%0ADTSTART;TZID=Europe/Madrid:20260905T220000%0ADTEND;TZID=Europe/Madrid:20260906T080000%0ALOCATION:Pablo%27s%20House%0ADESCRIPTION:%C2%A1El%20regreso%20que%20estabas%20esperando!%20Ha%20costado,%20pero%20por%20fin%20abrimos%20las%20puertas%20de%20nuevo.%5Cn%5Cn%E2%9A%A0%EF%B8%8F%20RECORDATORIOS%20IMPORTANTES:%5Cn%E2%80%A2%20Trae%20tu%20alcohol,%20tu%20entrada%20y,%20sobre%20todo,%20ganas%20de%20tajarla.%5Cn%E2%80%A2%20Aseg%C3%BArate%20de%20haber%20le%C3%ADdo%20las%20normas%20del%20evento%20antes%20de%20venir.%0ASTATUS:CONFIRMED%0AEND:VEVENT%0AEND:VCALENDAR" download="pablos-house-vol2.ics">
+                    <a id="btn-cal-apple" href="data:text/calendar;charset=utf-8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//Pablos%20House//Comeback%20Vol%202//ES%0ACALSCALE:GREGORIAN%0ABEGIN:VEVENT%0ASUMMARY:Pablo%27s%20House:%20Comeback%20Vol.%202%0ADTSTART;TZID=Europe/Madrid:20260905T220000%0ADTEND;TZID=Europe/Madrid:20260906T080000%0ALOCATION:Pablo%27s%20House%0ADESCRIPTION:%C2%A1El%20regreso%20que%20estabas%20esperando!%20Ha%20costado,%20pero%20por%20fin%20abrimos%20las%20puertas%20de%20nuevo.%5Cn%5Cn%E2%9A%A0%EF%B8%8F%20RECORDATORIOS%20IMPORTANTES:%5Cn%E2%80%A2%20Trae%20tu%20alcohol,%20tu%20entrada%20y,%20sobre%20todo,%20ganas%20de%20tajarla.%5Cn%E2%80%A2%20Aseg%C3%BArate%20de%20haber%20le%C3%ADdo%20las%20normas%20del%20evento%20antes%20de%20venir.%0ASTATUS:CONFIRMED%0AEND:VEVENT%0AEND:VCALENDAR" download="pablos-house-vol2.ics">
                         <span class="cal-opt">[A]</span> Apple / iOS
                     </a>
                 </div>
@@ -1234,12 +1234,12 @@
             La gran mayoría no sabéis dónde dejar el coche. Para no bloquear la entrada de los vecinos ni caminos de paso, aparcad todos aquí:
         </div>
         <div class="reveal" style="margin-top: 35px;">
-            <a href="https://maps.app.goo.gl/LZVDSkJFwppdsczd8" target="_blank" class="neon-btn-secondary">VER UBICACIÓN DEL PARKING</a>
+            <a id="btn-parking-map" href="https://maps.app.goo.gl/LZVDSkJFwppdsczd8" target="_blank" class="neon-btn-secondary">VER UBICACIÓN DEL PARKING</a>
         </div>
     </section>
 
     <!-- 7. BYOB DETAILED NOTICE -->
-    <section class="story-panel" style="background-color: #020202;">
+    <section id="byob-section" class="story-panel" style="background-color: #020202;">
         <div class="byob-container scale-reveal">
             <div class="byob-title">ESTE ES UN EVENTO AUTO-GESTIONADO</div>
             <div class="byob-desc">
@@ -1255,7 +1255,7 @@
     </section>
 
     <!-- 8. RULES SECTION -->
-    <section class="story-panel" style="background-color: #000000;">
+    <section id="rules-section" class="story-panel" style="background-color: #000000;">
         <div class="rules-wrapper">
             <h2 class="rules-header neon-accent reveal">NORMAS BÁSICAS</h2>
             
@@ -1355,7 +1355,7 @@
             <!-- ALERTA DE PRIVACIDAD INTEGRADA EN EL FOOTER -->
             <div class="disclaimer-right" style="text-align: right;">
                 Contenido satírico. Evento privado no comercial. <span style="margin: 0 5px;">-</span> 
-                <span onclick="alert('Esta web es un sitio privado y no comercial para la organización de Pablo\'s House.\n\nNo te pongas pesado con tu privacidad, que aquí lo verdaderamente importante es beber y venir preparado para la fiesta. Únicamente usamos Google Analytics para saber cuánta gente entra a la web y ver si el servidor aganta. Tranquilo, que te vamos a hacer bastante menos control del que te hace tu pareja. No vendemos tus datos a nadie ni nos importa lo que hagas con tu vida.\n\nSi aun así te entra la paranoia y quieres borrar cualquier registro de tu paso por la web, déjate de burocracias y contacta directamente con Pablo por privado.');" style="text-decoration: underline; cursor: pointer; pointer-events: auto;">Privacidad y Analíticas</span>
+                <span onclick="gtag('event', 'click_privacy_alert'); alert('Esta web es un sitio privado y no comercial para la organización de Pablo\'s House.\n\nNo te pongas pesado con tu privacidad, que aquí lo verdaderamente importante es beber y venir preparado para la fiesta. Únicamente usamos Google Analytics para saber cuánta gente entra a la web y ver si el servidor aganta. Tranquilo, que te vamos a hacer bastante menos control del que te hace tu pareja. No vendemos tus datos a nadie ni nos importa lo que hagas con tu vida.\n\nSi aun así te entra la paranoia y quieres borrar cualquier registro de tu paso por la web, déjate de burocracias y contacta directamente con Pablo por privado.');" style="text-decoration: underline; cursor: pointer; pointer-events: auto;">Privacidad y Analíticas</span>
             </div>
         </div>
     </section>
@@ -1374,6 +1374,32 @@ Pablo's House
         `, `color: ${MAIN_COLOR}; font-family: monospace; font-size: 14px; font-weight: bold; text-shadow: 1px 1px 0px #000;`);
 
         document.addEventListener('DOMContentLoaded', () => {
+
+            // -------------------------------------------------------------
+            // TRACKING: Control de Tiempo y Scroll por Secciones
+            // -------------------------------------------------------------
+            const sectionObserverTracking = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const sectionId = entry.target.id || 'seccion_desconocida';
+                    if (entry.isIntersecting) {
+                        // Guardamos el momento en el que el usuario entró a la sección
+                        entry.target.dataset.entryTime = Date.now();
+                        gtag('event', 'section_view', { section: sectionId });
+                    } else {
+                        // Calculamos cuánto tiempo estuvo visible al salir
+                        if (entry.target.dataset.entryTime) {
+                            const timeSpent = Math.round((Date.now() - entry.target.dataset.entryTime) / 1000);
+                            gtag('event', 'section_time_spent', { 
+                                section: sectionId, 
+                                time_spent_seconds: timeSpent 
+                            });
+                            delete entry.target.dataset.entryTime;
+                        }
+                    }
+                });
+            }, { threshold: 0.3 }); // 30% de visibilidad para contar como "vista"
+            
+            document.querySelectorAll('section').forEach(sec => sectionObserverTracking.observe(sec));
 
             // -------------------------------------------------------------
             // LÓGICA DE INACTIVIDAD (IDLE TIMER)
@@ -1422,15 +1448,18 @@ Pablo's House
 
             function showIdleModal() {
                 idleModal.classList.add('active');
+                gtag('event', 'idle_modal_shown'); // Evento analítico: Muestra de modal inactividad
             }
 
             btnContinue.addEventListener('click', () => {
                 idleModal.classList.remove('active');
+                gtag('event', 'idle_modal_decision', { choice: 'continue_reading' }); // Evento analítico: Decisión
                 resetIdleTime();
             });
 
             btnPlay.addEventListener('click', () => {
                 idleModal.classList.remove('active');
+                gtag('event', 'idle_modal_decision', { choice: 'play_game' }); // Evento analítico: Decisión
                 startGame();
             });
 
@@ -1517,6 +1546,9 @@ Pablo's House
                 gameIsRunning = true;
                 gameContainer.classList.add('active');
                 document.body.style.overflow = 'hidden'; // Evitar scroll
+                
+                gtag('event', 'game_start'); // Evento analítico: Inicio del minijuego
+                
                 initGame();
                 gameLoop();
             }
@@ -1526,11 +1558,14 @@ Pablo's House
                 gameContainer.classList.remove('active');
                 document.body.style.overflow = 'auto'; // Recuperar scroll
                 cancelAnimationFrame(gameReq);
+                
+                gtag('event', 'game_exit'); // Evento analítico: Abandono voluntario del minijuego
                 resetIdleTime();
             }
 
             btnExit.addEventListener('click', stopGame);
             btnRestart.addEventListener('click', () => {
+                gtag('event', 'game_restart'); // Evento analítico: Reinicio del minijuego
                 initGame();
                 gameLoop();
             });
@@ -1796,6 +1831,8 @@ Pablo's House
                         finalMessageDisplay.innerText = "Bastante paquetoide. Te quedaste sin dientes.";
                     }
 
+                    gtag('event', 'game_over', { score: score }); // Evento analítico: Fin de la partida y recuento
+
                     return; // Detiene el loop
                 }
 
@@ -1804,12 +1841,18 @@ Pablo's House
 
 
             // -------------------------------------------------------------
-            // RESTO DE SCRIPTS EXISTENTES
+            // RESTO DE SCRIPTS EXISTENTES Y TRACKING ADICIONAL
             // -------------------------------------------------------------
             
+            // Tracking Eventos de Calendario y Parking
+            document.getElementById('btn-cal-google')?.addEventListener('click', () => gtag('event', 'add_to_calendar', { platform: 'google' }));
+            document.getElementById('btn-cal-apple')?.addEventListener('click', () => gtag('event', 'add_to_calendar', { platform: 'apple' }));
+            document.getElementById('btn-parking-map')?.addEventListener('click', () => gtag('event', 'click_parking_map'));
+
             const dailaBtn = document.getElementById('daila-btn');
             if (dailaBtn) {
                 dailaBtn.addEventListener('click', () => {
+                    gtag('event', 'click_easter_egg_daila'); // Evento analítico: Clic en easter egg
                     alert("Un poco pesada pero buena gente. Dale el amor que se merece.");
                 });
             }
@@ -1851,10 +1894,24 @@ Pablo's House
             const videoMain = document.getElementById('hero-intro-video-main');
             const videoLoop = document.getElementById('hero-intro-video-loop');
             const errorMsg = document.getElementById('video-error-msg');
+            
+            let introCompleted = false;
+            let introSkippedTracked = false;
+            let errorTracked = false;
+
+            function trackVideoError() {
+                if (!errorTracked) {
+                    gtag('event', 'video_error_shown');
+                    errorTracked = true;
+                }
+            }
 
             if (videoMain && videoLoop) {
                 // Transición del video principal al bucle
                 videoMain.addEventListener('ended', () => {
+                    introCompleted = true;
+                    gtag('event', 'intro_video_completed'); // Evento analítico: Vió el video entero
+
                     videoMain.style.display = 'none';
                     videoLoop.style.display = 'block';
                     videoLoop.play();
@@ -1865,6 +1922,7 @@ Pablo's House
                 let loadingTimeout = setTimeout(() => {
                     if (videoMain.readyState < 3) { 
                         errorMsg.classList.add('visible');
+                        trackVideoError(); // Trackeamos el error de carga lenta
                     }
                 }, 1500);
 
@@ -1874,10 +1932,12 @@ Pablo's House
                 });
                 videoMain.addEventListener('waiting', () => {
                     errorMsg.classList.add('visible');
+                    trackVideoError(); // Trackeamos el error de carga lenta
                 });
                 videoMain.addEventListener('error', () => {
                     clearTimeout(loadingTimeout);
                     errorMsg.classList.add('visible');
+                    trackVideoError(); // Trackeamos el error de carga lenta
                 });
                 
                 // Mensaje de error / estado de espera también para el video bucle si hiciera falta
@@ -1887,9 +1947,11 @@ Pablo's House
                     });
                     videoLoop.addEventListener('waiting', () => {
                         errorMsg.classList.add('visible');
+                        trackVideoError();
                     });
                     videoLoop.addEventListener('error', () => {
                         errorMsg.classList.add('visible');
+                        trackVideoError();
                     });
                 }
             }
@@ -1905,6 +1967,12 @@ Pablo's House
                     const heroH = heroSec.offsetHeight;
                     const ctaTop = ctaSec.getBoundingClientRect().top;
                     const winH = window.innerHeight;
+
+                    // Si el usuario scrollea sin haber terminado la intro
+                    if (scrollY > (winH * 0.2) && !introCompleted && !introSkippedTracked) {
+                        gtag('event', 'intro_video_skipped'); // Evento analítico: Saltaron la intro haciendo scroll
+                        introSkippedTracked = true;
+                    }
 
                     if (stickyHeader) {
                         if (scrollY > (heroH * 0.85)) {
@@ -1938,6 +2006,9 @@ Pablo's House
             if (buyBtn) {
                 buyBtn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    
+                    gtag('event', 'click_buy_ticket'); // Evento analítico: Intención de compra CTAs
+                    
                     const targetUrl = buyBtn.getAttribute('href');
                     const rect = buyBtn.getBoundingClientRect();
                     const originX = rect.left + rect.width / 2;
