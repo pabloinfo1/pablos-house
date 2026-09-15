@@ -273,7 +273,7 @@
             max-width: 400px;
             padding: 22px;
             font-family: 'Anton', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: #ffffff;
@@ -286,6 +286,7 @@
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
             transition: transform 0.1s ease, background 0.2s ease;
         }
 
@@ -397,8 +398,8 @@
         <canvas id="cubata-canvas-play"></canvas>
 
         <div class="pour-control-area">
-            <button id="btn-pour-hold" class="btn-pour-hold" type="button">MANTÉN PARA LLENAR</button>
-            <div class="pour-hint">Suelta justo en la zona neon sin derramar ni una gota</div>
+            <button id="btn-pour-hold" class="btn-pour-hold" type="button">LLENAR</button>
+            <div class="pour-hint">Mantén pulsado para llenar y suelta en la zona neón</div>
         </div>
 
         <div id="game-over-screen">
@@ -441,30 +442,33 @@
             let score = 0;
             let highScore = 0;
             let isPouring = false;
-            let liquidLevel = 0; // 0 to 115%
+            let liquidLevel = 0;
             let gameRunning = false;
-            let roundState = 'READY'; // 'READY', 'POURING', 'EVALUATING', 'SUCCESS', 'GAMEOVER'
+            let roundState = 'READY';
             let animReqId = null;
 
-            // Ice cubes floating position
             let iceCubes = [
                 { xRel: -0.25, yOffset: 0, size: 28, rot: 0.2 },
                 { xRel: 0.15, yOffset: -10, size: 34, rot: -0.3 },
                 { xRel: 0.0, yOffset: 12, size: 24, rot: 0.5 }
             ];
 
-            // Splash particles for overflow
             let particles = [];
             let bubbles = [];
 
             function resizeCanvas() {
                 if (!canvas || !gameModal) return;
-                canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
-                canvas.height = canvas.parentElement.clientHeight || (window.innerHeight - 150);
+                const rect = canvas.getBoundingClientRect();
+                const w = Math.floor(rect.width || canvas.clientWidth || window.innerWidth);
+                const h = Math.floor(rect.height || canvas.clientHeight || (window.innerHeight - 200));
+                if (w > 0 && h > 0) {
+                    canvas.width = w;
+                    canvas.height = h;
+                }
             }
             window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('orientationchange', () => setTimeout(resizeCanvas, 200));
 
-            // Difficulty calculations based on score
             function getDifficulty() {
                 const fillSpeed = 0.45 + (score * 0.08) + (Math.sin(score * 0.7) * 0.03);
                 const minTarget = Math.min(93, 75 + Math.floor(score * 1.2));
@@ -481,9 +485,12 @@
                 }
                 score = 0;
                 highScore = parseInt(localStorage.getItem('ph_cubata_highscore') || '0', 10);
-                startRound();
-                gameRunning = true;
-                loop();
+                setTimeout(() => {
+                    resizeCanvas();
+                    startRound();
+                    gameRunning = true;
+                    loop();
+                }, 50);
             }
 
             function closeGame() {
@@ -513,8 +520,7 @@
                 resizeCanvas();
             }
 
-            function startPouring(e) {
-                if (e && e.preventDefault) e.preventDefault();
+            function startPouring() {
                 if (roundState === 'READY' || roundState === 'POURING') {
                     isPouring = true;
                     roundState = 'POURING';
@@ -522,8 +528,7 @@
                 }
             }
 
-            function stopPouring(e) {
-                if (e && e.preventDefault) e.preventDefault();
+            function stopPouring() {
                 if (roundState === 'POURING') {
                     isPouring = false;
                     btnPour.classList.remove('pouring');
@@ -536,10 +541,8 @@
                 const { minTarget, maxTarget } = getDifficulty();
 
                 if (liquidLevel > 100) {
-                    // Overfilled & spilled!
                     triggerOverflowAnimation();
                 } else if (liquidLevel >= minTarget && liquidLevel <= maxTarget) {
-                    // Success!
                     roundState = 'SUCCESS';
                     score++;
                     if (score > highScore) {
@@ -555,7 +558,6 @@
                         if (gameRunning) startRound();
                     }, 900);
                 } else {
-                    // Underfilled (Medio vacío)
                     triggerGameOver('RATA / MEDIO VACÍO', `Has llenado el vaso solo un ${Math.floor(liquidLevel)}%. En Pablo's House no servimos cubatas de rata.`);
                 }
             }
@@ -824,32 +826,37 @@
                 animReqId = requestAnimationFrame(loop);
             }
 
-            // EVENTOS DE CONTROL PARA BOTÓN HYPE Y JUEGO
+            // CONTROLES
             if (btnHype) btnHype.addEventListener('click', openGame);
             if (btnExit) btnExit.addEventListener('click', closeGame);
             if (btnRestart) btnRestart.addEventListener('click', restartGame);
 
-            // Controles de llenado táctiles y ratón mediante Pointer Events
+            // Controles táctiles compatibles con iOS y Android
             if (btnPour) {
                 btnPour.addEventListener('contextmenu', (e) => e.preventDefault());
 
-                btnPour.addEventListener('pointerdown', (e) => {
-                    e.preventDefault();
-                    try { btnPour.setPointerCapture(e.pointerId); } catch(err) {}
+                const handleStart = (e) => {
+                    if (e && e.cancelable) e.preventDefault();
                     startPouring();
-                });
+                };
 
-                btnPour.addEventListener('pointerup', (e) => {
-                    e.preventDefault();
-                    try { if (btnPour.hasPointerCapture(e.pointerId)) btnPour.releasePointerCapture(e.pointerId); } catch(err) {}
+                const handleEnd = (e) => {
+                    if (e && e.cancelable) e.preventDefault();
                     stopPouring();
-                });
+                };
 
-                btnPour.addEventListener('pointercancel', (e) => {
-                    e.preventDefault();
-                    try { if (btnPour.hasPointerCapture(e.pointerId)) btnPour.releasePointerCapture(e.pointerId); } catch(err) {}
-                    stopPouring();
-                });
+                // Pointer Events (Chrome, Firefox, Edge, Android, Safari iOS 13+)
+                btnPour.addEventListener('pointerdown', handleStart, { passive: false });
+                btnPour.addEventListener('pointerup', handleEnd, { passive: false });
+                btnPour.addEventListener('pointercancel', handleEnd, { passive: false });
+                btnPour.addEventListener('pointerleave', () => {
+                    if (isPouring) stopPouring();
+                }, { passive: false });
+
+                // Touch Events de respaldo (Safari iOS legacy)
+                btnPour.addEventListener('touchstart', handleStart, { passive: false });
+                btnPour.addEventListener('touchend', handleEnd, { passive: false });
+                btnPour.addEventListener('touchcancel', handleEnd, { passive: false });
             }
 
             window.addEventListener('keydown', (e) => {
