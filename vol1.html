@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#ff4500">
+    <meta name="theme-color" content="#b2f4f3">
     <meta name="description" content="Pablo's House - Vol. 1 (THE OG)">
     <title>Pablo's House: Vol. 1 - THE OG</title>
     
@@ -54,10 +54,10 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background-image: radial-gradient(circle at 50% 50%, rgba(var(--main-color-rgb), 0.15) 0%, transparent 75%);
+            background-image: radial-gradient(circle at 50% 50%, rgba(var(--og-color-rgb), 0.15) 0%, transparent 75%);
         }
 
-        /* CABECERA FLOTANTE CON GRID (IDÉNTICA A VOL 2) */
+        /* CABECERA FLOTANTE CON GRID (ESTRUCTURA VOL 2) */
         .sticky-header-brand {
             position: fixed;
             top: 0;
@@ -84,14 +84,15 @@
             padding-right: 12px;
         }
 
+        /* ENCABEZADO "THE OG" CON MISMO COLOR QUE EL TEXTO PRINCIPAL (#FFFFFF) */
         .sticky-brand-comeback {
             font-family: 'Anton', sans-serif;
             font-size: clamp(1.2rem, 4vw, 1.7rem);
             letter-spacing: 1px;
-            color: #ff8255;
+            color: #ffffff;
             text-transform: uppercase;
             justify-self: center;
-            animation: terminalPulse 2.5s infinite alternate ease-in-out;
+            animation: terminalPulseOG 2.5s infinite alternate ease-in-out;
         }
 
         .sticky-right-container {
@@ -103,7 +104,7 @@
             font-family: 'Anton', sans-serif;
             font-size: clamp(0.55rem, 1.8vw, 0.8rem);
             vertical-align: super;
-            color: var(--main-color);
+            color: var(--og-color);
             letter-spacing: 0.5px;
         }
 
@@ -138,9 +139,9 @@
         }
 
         .vol-btn:hover, .vol-btn.active {
-            border-color: var(--main-color);
+            border-color: var(--og-color);
             transform: scale(1.12);
-            box-shadow: 0 0 18px rgba(var(--main-color-rgb), 0.8);
+            box-shadow: 0 0 18px rgba(var(--og-color-rgb), 0.8);
         }
 
         /* Efectos Neón y Tipografía */
@@ -180,9 +181,30 @@
             animation: cursorBlink 1s step-end infinite;
         }
 
-        @keyframes terminalPulse {
-            0% { text-shadow: 0 0 8px rgba(var(--main-color-rgb), 0.6), 0 0 15px rgba(var(--main-color-rgb), 0.3); }
-            100% { text-shadow: 0 0 15px var(--main-color), 0 0 30px var(--main-color), 0 0 45px rgba(var(--main-color-rgb), 0.6); }
+        /* BOTÓN CON ESTÉTICA VOL 1 Y COLOR CORRESPONDIENTE (--og-color) */
+        .neon-btn-secondary-og {
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--og-color);
+            text-decoration: none;
+            padding: 18px 45px;
+            background: rgba(var(--og-color-rgb), 0.03);
+            border: 2px dashed var(--og-color);
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(var(--og-color-rgb), 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .neon-btn-secondary-og:hover {
+            background: rgba(var(--og-color-rgb), 0.15);
+            color: #ffffff;
+            border-style: solid;
+            box-shadow: 0 0 30px rgba(var(--og-color-rgb), 0.5);
+            transform: translateY(-2px);
         }
 
         @keyframes terminalPulseOG {
@@ -195,7 +217,7 @@
             50% { opacity: 0; }
         }
 
-        /* Pie de página (Igual que Vol. 2) */
+        /* Pie de página */
         .disclaimer-footer {
             position: absolute;
             bottom: 15px;
@@ -210,6 +232,10 @@
             letter-spacing: 0.5px;
             pointer-events: none;
             line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .neon-btn-secondary-og { font-size: 0.95rem; padding: 15px 30px; width: 90%; }
         }
     </style>
 </head>
@@ -234,18 +260,25 @@
         </a>
     </nav>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main style="text-align: center;">
+    <!-- CONTENIDO PRINCIPAL CENTRADO (ESTRUCTURA IDÉNTICA A VOL 2) -->
+    <main style="text-align: center; padding: 20px;">
         <div class="sub-tag">[ 28/08/2021 ]</div>
         <h1 class="hero-title neon-accent-og">
             THE OG<span class="blink-cursor-og">_</span>
         </h1>
+
+        <!-- BOTÓN CON ESTÉTICA VOL 1 QUE REDIRIGE A PRUEBA.COM EN NUEVA PESTAÑA -->
+        <div style="margin-top: 35px;">
+            <a href="https://www.instagram.com/stories/highlights/18104825972018320/" target="_blank" rel="noopener noreferrer" class="neon-btn-secondary-og">
+                VOLVER AL PASADO
+            </a>
+        </div>
     </main>
 
-    <!-- PIE DE PÁGINA COMPLETO DE VOL 2 -->
+    <!-- PIE DE PÁGINA COMPLETO -->
     <footer class="disclaimer-footer">
         <div class="disclaimer-left">
-            <span style="color: var(--main-color);">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
+            <span style="color: var(--og-color);">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
         </div>
         <!-- ALERTA DE PRIVACIDAD INTEGRADA EN EL FOOTER -->
         <div class="disclaimer-right" style="text-align: right;">

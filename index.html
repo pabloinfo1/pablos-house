@@ -146,6 +146,33 @@
             50% { opacity: 0; }
         }
 
+        /* Botón estilo Vol. 2 */
+        .neon-btn-secondary {
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--main-color);
+            text-decoration: none;
+            padding: 18px 45px;
+            background: rgba(var(--main-color-rgb), 0.03);
+            border: 2px dashed var(--main-color);
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(var(--main-color-rgb), 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: 35px;
+        }
+
+        .neon-btn-secondary:hover {
+            background: rgba(var(--main-color-rgb), 0.15);
+            color: #ffffff;
+            border-style: solid;
+            box-shadow: 0 0 30px rgba(var(--main-color-rgb), 0.5);
+            transform: translateY(-2px);
+        }
+
         /* Pie de página */
         .disclaimer-footer {
             position: absolute;
@@ -161,6 +188,168 @@
             letter-spacing: 0.5px;
             pointer-events: none;
             line-height: 1.4;
+        }
+
+        /* CONTENEDOR JUEGO CUBATA VOL. 3 */
+        .game-fullscreen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            height: 100dvh;
+            background: rgba(0, 0, 0, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 15000;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .game-fullscreen.active { display: flex; }
+
+        .game-header {
+            width: 100%;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 15010;
+        }
+
+        .game-score-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1rem, 3.5vw, 1.4rem);
+            color: #ffffff;
+            text-shadow: 0 0 10px var(--main-color);
+            background: rgba(var(--main-color-rgb), 0.1);
+            border: 1px solid var(--main-color);
+            padding: 8px 18px;
+            border-radius: 4px;
+        }
+
+        .btn-exit-game {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.8);
+            color: var(--main-color);
+            border: 1px solid var(--main-color);
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 8px 16px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-exit-game:hover {
+            background: var(--main-color);
+            color: #000000;
+        }
+
+        #cubata-canvas-play {
+            width: 100%;
+            flex: 1;
+            display: block;
+            touch-action: none;
+        }
+
+        .pour-control-area {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 15010;
+        }
+
+        .btn-pour-hold {
+            width: 90%;
+            max-width: 400px;
+            padding: 22px;
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(var(--main-color-rgb), 0.4) 0%, rgba(var(--main-color-rgb), 0.1) 100%);
+            border: 2px solid var(--main-color);
+            border-radius: 8px;
+            box-shadow: 0 0 25px rgba(var(--main-color-rgb), 0.4);
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: transform 0.1s ease, background 0.2s ease;
+        }
+
+        .btn-pour-hold:active, .btn-pour-hold.pouring {
+            transform: scale(0.97);
+            background: var(--main-color);
+            color: #000000;
+            box-shadow: 0 0 45px rgba(var(--main-color-rgb), 0.9);
+        }
+
+        .pour-hint {
+            margin-top: 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Pantalla Game Over Minijuego */
+        #game-over-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 15020;
+            background: rgba(10, 10, 10, 0.96);
+            padding: 40px 30px;
+            border: 2px dashed var(--main-color);
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(0,0,0,1), 0 0 30px rgba(var(--main-color-rgb), 0.3);
+            width: 90%;
+            max-width: 480px;
+            display: none;
+        }
+
+        #game-over-screen.active { display: block; }
+
+        #game-over-screen h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        #final-score {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            font-family: 'Space Mono', monospace;
+            color: var(--main-color);
+        }
+
+        #high-score-text {
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+            font-family: 'Space Mono', monospace;
+            color: #888888;
+        }
+
+        #final-message {
+            font-size: 1.05rem;
+            color: #cccccc;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -179,12 +368,42 @@
     </nav>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main>
+    <main style="text-align: center;">
         <h1 class="hero-title">
             <span class="glow-white">NO HAY DOS</span><br>
             <span class="neon-accent">SIN TRES</span><span class="blink-cursor">_</span>
         </h1>
+
+        <!-- BOTÓN DE HYPE PARA VOL. 3 -->
+        <div>
+            <button id="btn-hype-vol3" class="neon-btn-secondary" type="button">
+                &nbsp;HYPEAR&nbsp;VOL.&nbsp;3:&nbsp;MODO&nbsp;CUBATERO&nbsp;
+            </button>
+        </div>
     </main>
+
+    <!-- JUEGO ARCADE LLENAR CUBATA -->
+    <div id="game-modal" class="game-fullscreen">
+        <div class="game-header">
+            <div id="game-score-badge" class="game-score-badge">CUBATAS: 0</div>
+            <button id="btn-exit-game" class="btn-exit-game" type="button">[ ESCAPAR ]</button>
+        </div>
+
+        <canvas id="cubata-canvas-play"></canvas>
+
+        <div class="pour-control-area">
+            <button id="btn-pour-hold" class="btn-pour-hold" type="button">MANTÉN PARA LLENAR</button>
+            <div class="pour-hint">Suelta justo en la zona neon sin derramar ni una gota</div>
+        </div>
+
+        <div id="game-over-screen">
+            <h2 class="neon-accent" id="go-title">¡DERRAMADO!</h2>
+            <p id="final-score">Cubatas seguidos: 0</p>
+            <p id="high-score-text">Récord de la sesión: 0</p>
+            <p id="final-message"></p>
+            <button id="btn-restart-game" class="neon-btn-secondary" style="margin-top: 10px; padding: 15px 30px;" type="button">OTRA RONDA Y REINICIAR</button>
+        </div>
+    </div>
 
     <footer class="disclaimer-footer">
         <div class="disclaimer-left">
@@ -196,6 +415,458 @@
             <span onclick="gtag('event', 'click_privacy_alert'); alert('Esta web es un sitio privado y no comercial para la organización de Pablo\'s House.\n\nNo te pongas pesado con tu privacidad, que aquí lo verdaderamente importante es beber y venir preparado para la fiesta. Únicamente usamos Google Analytics para saber cuánta gente entra a la web y ver si el servidor aganta. Tranquilo, que te vamos a hacer bastante menos control del que te hace tu pareja. No vendemos tus datos a nadie ni nos importa lo que hagas con tu vida.\n\nSi aun así te entra la paranoia y quieres borrar cualquier registro de tu paso por la web, déjate de burocracias y contacta directamente con Pablo por privado.');" style="text-decoration: underline; cursor: pointer; pointer-events: auto;">Privacidad y Analíticas</span>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnHype = document.getElementById('btn-hype-vol3');
+            const gameModal = document.getElementById('game-modal');
+            const btnExit = document.getElementById('btn-exit-game');
+            const btnRestart = document.getElementById('btn-restart-game');
+            const btnPour = document.getElementById('btn-pour-hold');
+            const scoreBadge = document.getElementById('game-score-badge');
+            const gameOverScreen = document.getElementById('game-over-screen');
+            const finalScoreText = document.getElementById('final-score');
+            const highScoreText = document.getElementById('high-score-text');
+            const finalMsgText = document.getElementById('final-message');
+            const goTitle = document.getElementById('go-title');
+
+            const canvas = document.getElementById('cubata-canvas-play');
+            const ctx = canvas ? canvas.getContext('2d') : null;
+
+            let score = 0;
+            let highScore = 0;
+            let isPouring = false;
+            let liquidLevel = 0; // 0 to 115%
+            let gameRunning = false;
+            let roundState = 'READY'; // 'READY', 'POURING', 'EVALUATING', 'SUCCESS', 'GAMEOVER'
+            let animReqId = null;
+
+            // Ice cubes floating position
+            let iceCubes = [
+                { xRel: -0.25, yOffset: 0, size: 28, rot: 0.2 },
+                { xRel: 0.15, yOffset: -10, size: 34, rot: -0.3 },
+                { xRel: 0.0, yOffset: 12, size: 24, rot: 0.5 }
+            ];
+
+            // Splash particles for overflow
+            let particles = [];
+            let bubbles = [];
+
+            function resizeCanvas() {
+                if (!canvas || !gameModal) return;
+                canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
+                canvas.height = canvas.parentElement.clientHeight || (window.innerHeight - 150);
+            }
+            window.addEventListener('resize', resizeCanvas);
+
+            // Difficulty calculations based on score
+            function getDifficulty() {
+                // Speed of liquid filling increases as score grows
+                const fillSpeed = 0.45 + (score * 0.08) + (Math.sin(score * 0.7) * 0.03);
+
+                // Safe target zone (min percentage to max percentage before 100% overflow)
+                const minTarget = Math.min(93, 75 + Math.floor(score * 1.2));
+                const maxTarget = 98.5;
+
+                return { fillSpeed, minTarget, maxTarget };
+            }
+
+            function openGame() {
+                gameModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                if (typeof gtag === 'function') {
+                    gtag('event', 'vol3_game_start');
+                }
+                score = 0;
+                highScore = parseInt(localStorage.getItem('ph_cubata_highscore') || '0', 10);
+                startRound();
+                gameRunning = true;
+                loop();
+            }
+
+            function closeGame() {
+                gameRunning = false;
+                gameModal.classList.remove('active');
+                document.body.style.overflow = '';
+                if (animReqId) cancelAnimationFrame(animReqId);
+                if (typeof gtag === 'function') {
+                    gtag('event', 'vol3_game_exit', { final_score: score });
+                }
+            }
+
+            function startRound() {
+                liquidLevel = 0;
+                isPouring = false;
+                roundState = 'READY';
+                particles = [];
+                bubbles = [];
+                gameOverScreen.classList.remove('active');
+                btnPour.classList.remove('pouring');
+                scoreBadge.innerText = `CUBATAS: ${score}`;
+                resizeCanvas();
+            }
+
+            function startPouring(e) {
+                if (e) e.preventDefault();
+                if (roundState === 'READY' || roundState === 'POURING') {
+                    isPouring = true;
+                    roundState = 'POURING';
+                    btnPour.classList.add('pouring');
+                }
+            }
+
+            function stopPouring(e) {
+                if (e) e.preventDefault();
+                if (roundState === 'POURING') {
+                    isPouring = false;
+                    btnPour.classList.remove('pouring');
+                    evaluatePour();
+                }
+            }
+
+            function evaluatePour() {
+                roundState = 'EVALUATING';
+                const { minTarget, maxTarget } = getDifficulty();
+
+                if (liquidLevel > 100) {
+                    // Overfilled & spilled!
+                    triggerOverflowAnimation();
+                } else if (liquidLevel >= minTarget && liquidLevel <= maxTarget) {
+                    // Success!
+                    roundState = 'SUCCESS';
+                    score++;
+                    if (score > highScore) {
+                        highScore = score;
+                        localStorage.setItem('ph_cubata_highscore', highScore.toString());
+                    }
+                    scoreBadge.innerText = `CUBATAS: ${score}`;
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'vol3_cubata_success', { score: score });
+                    }
+
+                    setTimeout(() => {
+                        if (gameRunning) startRound();
+                    }, 900);
+                } else {
+                    // Underfilled (Medio vacío)
+                    triggerGameOver('RATA / MEDIO VACÍO', `Has llenado el vaso solo un ${Math.floor(liquidLevel)}%. En Pablo's House no servimos cubatas de rata.`);
+                }
+            }
+
+            function triggerOverflowAnimation() {
+                roundState = 'GAMEOVER';
+                // Spawn splash particles
+                const { glassTopY, glassLeftX, glassRightX } = getGlassDimensions();
+                for (let i = 0; i < 60; i++) {
+                    const side = Math.random() > 0.5 ? glassLeftX : glassRightX;
+                    particles.push({
+                        x: side,
+                        y: glassTopY,
+                        vx: (side === glassLeftX ? -1 : 1) * (Math.random() * 8 + 2),
+                        vy: -Math.random() * 8 - 2,
+                        size: Math.random() * 6 + 3,
+                        alpha: 1,
+                        color: Math.random() > 0.4 ? '#ff4500' : '#ffaa00'
+                    });
+                }
+
+                setTimeout(() => {
+                    triggerGameOver('¡SE TE HA DERRAMADO!', 'Has querido apurar tanto que has tirado el cubata al suelo. ¡A limpiar!');
+                }, 600);
+            }
+
+            function triggerGameOver(title, msg) {
+                roundState = 'GAMEOVER';
+                goTitle.innerText = title;
+                finalScoreText.innerText = `Cubatas seguidos: ${score}`;
+                highScoreText.innerText = `Récord de la sesión: ${highScore}`;
+                finalMsgText.innerText = msg;
+                gameOverScreen.classList.add('active');
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'vol3_game_over', { score: score, high_score: highScore });
+                }
+            }
+
+            function getGlassDimensions() {
+                const w = canvas.width;
+                const h = canvas.height;
+                const glassH = Math.min(h * 0.52, 320);
+                const glassBottomY = h * 0.78;
+                const glassTopY = glassBottomY - glassH;
+                const topW = Math.min(w * 0.55, 210);
+                const bottomW = topW * 0.72;
+                const centerX = w / 2;
+                const glassLeftX = centerX - topW / 2;
+                const glassRightX = centerX + topW / 2;
+
+                return { w, h, glassH, glassBottomY, glassTopY, topW, bottomW, centerX, glassLeftX, glassRightX };
+            }
+
+            function update() {
+                if (!gameRunning) return;
+
+                const { fillSpeed } = getDifficulty();
+
+                if (isPouring && roundState === 'POURING') {
+                    liquidLevel += fillSpeed;
+
+                    // Spawn bubbles inside liquid
+                    if (Math.random() < 0.4) {
+                        const { centerX, topW } = getGlassDimensions();
+                        bubbles.push({
+                            x: centerX + (Math.random() - 0.5) * topW * 0.6,
+                            yRel: 0.05,
+                            speed: Math.random() * 1.5 + 1,
+                            size: Math.random() * 4 + 2,
+                            alpha: 0.8
+                        });
+                    }
+
+                    if (liquidLevel > 105) {
+                        isPouring = false;
+                        btnPour.classList.remove('pouring');
+                        evaluatePour();
+                    }
+                }
+
+                // Update particles
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.4; // gravity
+                    p.alpha -= 0.02;
+                    if (p.alpha <= 0) particles.splice(i, 1);
+                }
+
+                // Update bubbles
+                for (let i = bubbles.length - 1; i >= 0; i--) {
+                    const b = bubbles[i];
+                    b.yRel += b.speed * 0.008;
+                    b.alpha -= 0.01;
+                    if (b.yRel >= 1 || b.alpha <= 0) bubbles.splice(i, 1);
+                }
+            }
+
+            function draw() {
+                if (!ctx || !canvas) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const { glassH, glassBottomY, glassTopY, topW, bottomW, centerX, glassLeftX, glassRightX } = getGlassDimensions();
+                const { minTarget, maxTarget } = getDifficulty();
+
+                // 1. DIBUJAR BOTELLA / GRIFO DE DERRAME ARRIBA
+                const tapY = Math.max(20, glassTopY - 70);
+                ctx.save();
+                ctx.fillStyle = '#ff4500';
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#ff4500';
+                ctx.fillRect(centerX - 12, tapY - 15, 24, 15);
+                ctx.restore();
+
+                // 2. CHORRO DE BEBIDA SI SE ESTÁ LLENANDO
+                if (isPouring || (roundState === 'POURING' && liquidLevel > 0)) {
+                    const currentLiquidY = glassBottomY - (glassH * Math.min(1.0, liquidLevel / 100));
+                    ctx.save();
+                    const streamGrad = ctx.createLinearGradient(centerX - 8, 0, centerX + 8, 0);
+                    streamGrad.addColorStop(0, 'rgba(255, 69, 0, 0.9)');
+                    streamGrad.addColorStop(0.5, 'rgba(255, 170, 0, 0.95)');
+                    streamGrad.addColorStop(1, 'rgba(255, 69, 0, 0.9)');
+                    ctx.fillStyle = streamGrad;
+                    ctx.shadowBlur = 20;
+                    ctx.shadowColor = '#ff4500';
+                    ctx.fillRect(centerX - 7, tapY, 14, Math.max(0, currentLiquidY - tapY));
+                    ctx.restore();
+                }
+
+                // 3. SILUETA DEL VASO (Fondo translúcido)
+                const glassBottomLeftX = centerX - bottomW / 2;
+                const glassBottomRightX = centerX + bottomW / 2;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(glassLeftX, glassTopY);
+                ctx.lineTo(glassRightX, glassTopY);
+                ctx.lineTo(glassBottomRightX, glassBottomY);
+                ctx.lineTo(glassBottomLeftX, glassBottomY);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(20, 20, 25, 0.65)';
+                ctx.fill();
+
+                // CLIP PARA EL LÍQUIDO DENTRO DEL VASO
+                ctx.save();
+                ctx.clip(); // Limita todo el renderizado del líquido a la forma del vaso
+
+                // RENDER LÍQUIDO
+                if (liquidLevel > 0) {
+                    const fillHeight = glassH * (liquidLevel / 100);
+                    const liquidY = glassBottomY - fillHeight;
+
+                    const liqGrad = ctx.createLinearGradient(0, glassBottomY, 0, glassTopY);
+                    liqGrad.addColorStop(0, '#991b00');
+                    liqGrad.addColorStop(0.5, '#ff4500');
+                    liqGrad.addColorStop(1, '#ffaa00');
+
+                    ctx.fillStyle = liqGrad;
+                    ctx.fillRect(centerX - topW, liquidY, topW * 2, fillHeight + 50);
+
+                    // Espuma / Brillo en la superficie del líquido
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#ffffff';
+                    ctx.fillRect(centerX - topW, liquidY - 2, topW * 2, 4);
+
+                    // DIBUJAR CUBOS DE HIELO FLOTANTES
+                    iceCubes.forEach(cube => {
+                        const cubeY = glassBottomY - Math.min(fillHeight * 0.85, fillHeight - 20) + cube.yOffset;
+                        const cubeX = centerX + (cube.xRel * topW);
+                        if (cubeY < glassBottomY && cubeY > liquidY - 15) {
+                            ctx.save();
+                            ctx.translate(cubeX, cubeY);
+                            ctx.rotate(cube.rot);
+                            ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+                            ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+                            ctx.lineWidth = 1.5;
+                            ctx.fillRect(-cube.size / 2, -cube.size / 2, cube.size, cube.size);
+                            ctx.strokeRect(-cube.size / 2, -cube.size / 2, cube.size, cube.size);
+                            ctx.restore();
+                        }
+                    });
+
+                    // DIBUJAR BURBUJAS
+                    bubbles.forEach(b => {
+                        const bY = glassBottomY - (fillHeight * b.yRel);
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.arc(b.x, bY, b.size, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${b.alpha})`;
+                        ctx.fill();
+                        ctx.restore();
+                    });
+                }
+                ctx.restore(); // Fin clip líquido
+
+                // 4. ZONA DE LLENADO PERFECTO (OBJETIVO NEÓN)
+                const minTargetY = glassBottomY - (glassH * (minTarget / 100));
+                const maxTargetY = glassBottomY - (glassH * (maxTarget / 100));
+                const targetH = minTargetY - maxTargetY;
+
+                ctx.save();
+                ctx.fillStyle = 'rgba(255, 69, 0, 0.22)';
+                ctx.fillRect(glassLeftX - 15, maxTargetY, topW + 30, targetH);
+
+                // Líneas guía neón del objetivo
+                ctx.strokeStyle = '#ff4500';
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#ff4500';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([6, 4]);
+
+                ctx.beginPath();
+                ctx.moveTo(glassLeftX - 20, minTargetY);
+                ctx.lineTo(glassRightX + 20, minTargetY);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(glassLeftX - 20, maxTargetY);
+                ctx.lineTo(glassRightX + 20, maxTargetY);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Texto ZONA LÍMITE
+                ctx.fillStyle = '#ff8255';
+                ctx.font = '700 11px "Space Mono", monospace';
+                ctx.fillText('LÍMITE CUBATA', glassRightX + 25, maxTargetY + targetH / 2 + 4);
+                ctx.restore();
+
+                // 5. CONTORNO Y CRISTAL DEL VASO
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(glassLeftX, glassTopY);
+                ctx.lineTo(glassRightX, glassTopY);
+                ctx.lineTo(glassBottomRightX, glassBottomY);
+                ctx.lineTo(glassBottomLeftX, glassBottomY);
+                ctx.closePath();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 3.5;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#ffffff';
+                ctx.stroke();
+
+                // Reflejo en el cristal
+                ctx.beginPath();
+                ctx.moveTo(glassLeftX + 10, glassTopY + 15);
+                ctx.lineTo(glassBottomLeftX + 8, glassBottomY - 15);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+
+                // 6. MENSAJE DE ÉXITO EN PANTALLA
+                if (roundState === 'SUCCESS') {
+                    ctx.save();
+                    ctx.font = '900 2.2rem "Anton", sans-serif';
+                    ctx.fillStyle = '#ffffff';
+                    ctx.shadowBlur = 20;
+                    ctx.shadowColor = '#ff4500';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('¡CUBATA PERFECTO! +1', centerX, glassTopY - 30);
+                    ctx.restore();
+                }
+
+                // 7. PARTICULAS DE DERRAME
+                particles.forEach(p => {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = p.color;
+                    ctx.globalAlpha = Math.max(0, p.alpha);
+                    ctx.fill();
+                    ctx.restore();
+                });
+            }
+
+            function loop() {
+                if (!gameRunning) return;
+                update();
+                draw();
+                animReqId = requestAnimationFrame(loop);
+            }
+
+            // EVENTOS DE CONTROL PARA BOTÓN HYPE Y JUEGO
+            if (btnHype) btnHype.addEventListener('click', openGame);
+            if (btnExit) btnExit.addEventListener('click', closeGame);
+            if (btnRestart) btnRestart.addEventListener('click', startRound);
+
+            // Controles de llenado (Mouse, Touch, Teclado)
+            if (btnPour) {
+                btnPour.addEventListener('mousedown', startPouring);
+                btnPour.addEventListener('mouseup', stopPouring);
+                btnPour.addEventListener('mouseleave', stopPouring);
+
+                btnPour.addEventListener('touchstart', startPouring, { passive: false });
+                btnPour.addEventListener('touchend', stopPouring, { passive: false });
+                btnPour.addEventListener('touchcancel', stopPouring, { passive: false });
+            }
+
+            window.addEventListener('keydown', (e) => {
+                if (e.code === 'Space' && gameRunning && (roundState === 'READY' || roundState === 'POURING') && !isPouring) {
+                    e.preventDefault();
+                    startPouring();
+                }
+            });
+
+            window.addEventListener('keyup', (e) => {
+                if (e.code === 'Space' && gameRunning && isPouring) {
+                    e.preventDefault();
+                    stopPouring();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

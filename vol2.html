@@ -47,29 +47,20 @@
             color: #ffffff;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-image: radial-gradient(circle at 50% 50%, rgba(var(--main-color-rgb), 0.15) 0%, transparent 75%);
         }
 
-        /* Neon Glow & Typography */
-        .heading-heavy {
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -1px;
+        body.show-full {
+            justify-content: flex-start;
         }
 
-        .glow-white {
-            color: #ffffff;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6),
-                         0 0 25px rgba(255, 255, 255, 0.4);
-        }
-
-        .neon-accent {
-            color: var(--main-color); 
-            text-shadow: 0 0 10px rgba(var(--main-color-rgb), 0.8),
-                         0 0 25px rgba(var(--main-color-rgb), 0.6),
-                         0 0 45px rgba(var(--main-color-rgb), 0.3);
-        }
-
-        /* CABECERA FLOTANTE PERMANENTE CON GRID PARA CENTRADO ESTRICTO */
+        /* CABECERA FLOTANTE CON GRID (ESTRUCTURA VOL 1 + ENLACE A INDEX.HTML) */
         .sticky-header-brand {
             position: fixed;
             top: 0;
@@ -81,13 +72,8 @@
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: baseline;
-            opacity: 0;
-            transform: translateY(-100%);
-            transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.17, 0.85, 0.43, 1);
-            pointer-events: none;
-        }
-
-        .sticky-header-brand.visible {
+            text-decoration: none;
+            cursor: pointer;
             opacity: 1;
             transform: translateY(0);
         }
@@ -126,14 +112,108 @@
             letter-spacing: 0.5px;
         }
 
-        /* Hero Section */
+        /* SELECTOR VOLÚMENES (ESTILOS ESTRUCTURALES VOL 1) */
+        .vol-selector {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .vol-btn {
+            display: block;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 10px rgba(0,0,0,0.8);
+            transition: all 0.3s cubic-bezier(0.17, 0.85, 0.43, 1);
+            background-color: #111111;
+        }
+
+        .vol-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .vol-btn:hover, .vol-btn.active {
+            border-color: var(--main-color);
+            transform: scale(1.12);
+            box-shadow: 0 0 18px rgba(var(--main-color-rgb), 0.8);
+        }
+
+        /* ESTRUCTURA MAIN HERO VOL 1 CON COLORES VOL 2 */
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            padding: 0 20px;
+            max-width: 1000px;
+        }
+
+        .sub-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+            letter-spacing: 0.3em;
+            color: #888888;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .neon-accent {
+            color: var(--main-color); 
+            text-shadow: 0 0 10px rgba(var(--main-color-rgb), 0.8),
+                         0 0 25px rgba(var(--main-color-rgb), 0.6),
+                         0 0 45px rgba(var(--main-color-rgb), 0.3);
+        }
+
+        .blink-cursor {
+            color: var(--main-color);
+            font-family: 'Space Mono', monospace;
+            font-weight: 900;
+            animation: cursorBlink 1s step-end infinite;
+        }
+
+        /* CONTENEDOR DESPLEGABLE CON TODO EL HTML DE VOL 2 */
+        #vol2-full-content {
+            display: none;
+            width: 100%;
+        }
+
+        #vol2-full-content.visible {
+            display: block;
+        }
+
+        .heading-heavy {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .glow-white {
+            color: #ffffff;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6),
+                         0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Hero Section Vol 2 */
         #hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 40px 20px 20px 20px;
+            padding: 80px 20px 20px 20px;
             position: relative;
             background-color: #000000;
             background-image: radial-gradient(circle at 50% 55%, rgba(var(--main-color-rgb), 0.12) 0%, transparent 75%);
@@ -165,8 +245,7 @@
             pointer-events: none;
             filter: contrast(115%) brightness(105%);
         }
-        
-        /* Mensaje de error/carga del vídeo */
+
         .video-error-message {
             position: absolute;
             top: 50%;
@@ -194,9 +273,7 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.9);
         }
 
-        .video-error-message.visible {
-            opacity: 1;
-        }
+        .video-error-message.visible { opacity: 1; }
 
         .scroll-prompt {
             text-align: center;
@@ -204,7 +281,7 @@
             margin-bottom: 15px;
             opacity: 0;
             animation: fadeInPrompt 1.5s ease-out forwards;
-            animation-delay: 7s;
+            animation-delay: 2s;
             z-index: 10;
         }
 
@@ -234,7 +311,6 @@
             60% { transform: translateY(-5px); }
         }
 
-        /* ELEMENTO FLOTANTE PERMANENTE DE SCROLL */
         .scroll-floater {
             position: fixed;
             bottom: 30px;
@@ -282,7 +358,6 @@
             50% { transform: translateY(3px); }
         }
 
-        /* Layout Sections */
         section.story-panel {
             min-height: 100vh;
             display: flex;
@@ -317,7 +392,6 @@
             .story-text-sub { font-size: 1.1rem; margin-top: 15px; }
         }
 
-        /* Scroll Animations */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -342,7 +416,6 @@
             transform: scale(1);
         }
 
-        /* Date & Time Section */
         #datetime {
             background-color: #030100;
             border-bottom: 1px solid rgba(var(--main-color-rgb), 0.2);
@@ -376,15 +449,6 @@
             animation: terminalPulse 2.5s infinite alternate ease-in-out;
         }
 
-        .blink-cursor {
-            color: var(--main-color);
-            font-family: 'Space Mono', monospace;
-            font-weight: 900;
-            animation: cursorBlink 1s step-end infinite;
-            margin-left: 4px;
-        }
-
-        /* BOTÓN CALENDARIO NATIVO BLINDADO */
         .native-cal-wrapper {
             position: relative;
             display: inline-block;
@@ -469,7 +533,6 @@
             50% { opacity: 0; }
         }
 
-        /* Location Section */
         #location {
             background: radial-gradient(circle at center, rgba(var(--main-color-rgb), 0.12) 0%, #000000 85%);
             overflow: hidden;
@@ -486,16 +549,14 @@
             pointer-events: none;
         }
 
-        .location-content {
-            z-index: 2;
-        }
+        .location-content { z-index: 2; }
 
-        /* Parking Section */
         #parking {
             background-color: #010101;
             border-bottom: 1px solid rgba(var(--main-color-rgb), 0.15);
         }
 
+        /* BOTÓN ESTÉTICA VOL 2 */
         .neon-btn-secondary {
             display: inline-block;
             font-size: 1.1rem;
@@ -521,7 +582,6 @@
             transform: translateY(-2px);
         }
 
-        /* BYOB Warning Box */
         .byob-container {
             max-width: 850px;
             width: 100%;
@@ -586,7 +646,6 @@
             .neon-btn-secondary { font-size: 0.95rem; padding: 15px 30px; width: 90%; }
         }
 
-        /* Rules Section */
         .rules-wrapper {
             max-width: 850px;
             width: 100%;
@@ -632,7 +691,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* NORMA DESTACADA (06) */
         .rule-highlight {
             background: linear-gradient(135deg, rgba(var(--main-color-rgb), 0.15) 0%, rgba(20, 20, 20, 0.9) 100%);
             border: 2px solid var(--main-color);
@@ -649,7 +707,6 @@
             font-weight: 900;
         }
         
-        /* ADVERTENCIA FINAL DE NORMAS */
         .rules-warning {
             font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.35);
@@ -668,7 +725,6 @@
             .rules-warning { font-size: 0.55rem; padding: 0 10px; }
         }
 
-        /* Easter egg DAILA cursor */
         #daila-btn {
             cursor: pointer;
             transition: color 0.2s ease;
@@ -677,7 +733,6 @@
             color: var(--main-color);
         }
 
-        /* CTA / Tickets Button Section */
         #cta-section {
             background: radial-gradient(circle at center, rgba(var(--main-color-rgb), 0.15) 0%, #000000 80%);
             text-align: center;
@@ -688,7 +743,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Necesario para que el marque no desborde la web horizontalmente */
+            overflow: hidden;
         }
 
         .cta-subtitle {
@@ -708,7 +763,6 @@
             letter-spacing: -1px;
         }
 
-        /* Animación de parpadeo (relleno) del botón principal */
         @keyframes pulseBtnFill {
             0% {
                 background: rgba(var(--main-color-rgb), 0.1);
@@ -740,8 +794,6 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.17, 0.85, 0.43, 1);
             cursor: pointer;
-            
-            /* Efecto añadido de parpadeo que llena el cuadrado */
             animation: pulseBtnFill 1.5s infinite alternate ease-in-out;
         }
 
@@ -755,17 +807,16 @@
         }
 
         .neon-btn:hover {
-            animation: none; /* Quitamos el parpadeo cuando lo va a pulsar */
+            animation: none;
             background: var(--main-color);
             color: #000000;
             box-shadow: 0 0 50px rgba(var(--main-color-rgb), 0.9);
             transform: scale(1.05);
         }
 
-        .neon-btn:hover::before {
-            left: 100%;
-        }
+        .neon-btn:hover::before { left: 100%; }
 
+        /* FOOTER ESTÁNDAR Y REUTILIZADO DE VOL 1 Y VOL 2 */
         .disclaimer-footer {
             position: absolute;
             bottom: 15px;
@@ -782,13 +833,11 @@
             line-height: 1.4;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000000; }
         ::-webkit-scrollbar-thumb { background: #222222; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--main-color); }
     
-        /* Side Vertical Marquees */
         .side-marquee {
             position: absolute;
             top: 0;
@@ -811,13 +860,8 @@
             align-items: center;
         }
 
-        .side-marquee.left .marquee-track {
-            animation: moveDown 25s linear infinite;
-        }
-
-        .side-marquee.right .marquee-track {
-            animation: moveUp 25s linear infinite;
-        }
+        .side-marquee.left .marquee-track { animation: moveDown 25s linear infinite; }
+        .side-marquee.right .marquee-track { animation: moveUp 25s linear infinite; }
 
         .marquee-item {
             writing-mode: vertical-rl;
@@ -831,9 +875,7 @@
             margin-bottom: 60px;
         }
 
-        .side-marquee.left .marquee-item {
-            transform: rotate(180deg);
-        }
+        .side-marquee.left .marquee-item { transform: rotate(180deg); }
 
         @keyframes moveUp {
             0% { transform: translateY(0); }
@@ -845,19 +887,15 @@
             100% { transform: translateY(0); }
         }
     
-        /* Canvas Explosion Overlay */
         #explosion-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            height: 100dvh; /* FIX de altura para viewport dinámico en iOS/Android */
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            height: 100dvh;
             pointer-events: none;
             z-index: 9999;
         }
     
-        /* CAOS VISUAL - ROTURA DEL SISTEMA */
         @keyframes shakeScreen {
             0% { transform: translate(2px, 1px) rotate(0deg); filter: hue-rotate(0deg); }
             20% { transform: translate(-5px, 0px) rotate(1deg); filter: hue-rotate(45deg); }
@@ -880,15 +918,12 @@
             100% { transform: translateY(150vh) rotate(var(--fall-rot)); opacity: 0; }
         }
 
-        /* ----------------NUEVAS CLASES PARA EL IDLE MODAL Y EL JUEGO---------------- // Siii se que el juego va atado a los fps, pero es un guiño a los antiguos GTAs*/
-
-        /* INACTIVITY MODAL */
+        /* MODAL INACTIVIDAD */
         .idle-modal-overlay {
             position: fixed;
             top: 0; left: 0;
-            width: 100%; 
-            height: 100%;
-            height: 100dvh; /* FIX para respetar barras de navegación móviles */
+            width: 100%; height: 100%;
+            height: 100dvh;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -918,7 +953,6 @@
             position: relative;
         }
 
-        /* FUENTE CORREGIDA: Hereda el mismo estilo exacto de los textos gruesos naranjas principales para evitar renderizado borroso en iOS Safari */
         .idle-modal-box h2 {
             font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
             font-weight: 900;
@@ -944,23 +978,20 @@
             flex-wrap: wrap;
         }
 
-        /* GAME CONTAINER */
+        /* JUEGO ARCADE */
         .game-fullscreen {
             position: fixed;
             top: 0; left: 0;
-            width: 100%; 
-            height: 100%;
-            height: 100dvh; /* FIX VITAL: Se adapta dinámicamente si la barra de la url está visible u oculta en Safari/Chrome iOS */
+            width: 100%; height: 100%;
+            height: 100dvh;
             background: #000000;
             z-index: 15000;
             display: none;
             overflow: hidden;
-            touch-action: none; /* FIX: Evita que al arrastrar la moto el navegador intente hacer scroll o recargar la página en móviles */
+            touch-action: none;
         }
 
-        .game-fullscreen.active {
-            display: block;
-        }
+        .game-fullscreen.active { display: block; }
 
         #game-canvas-play {
             width: 100%;
@@ -1015,11 +1046,8 @@
             display: none;
         }
 
-        #game-over-screen.active {
-            display: block;
-        }
+        #game-over-screen.active { display: block; }
 
-        /* FUENTE CORREGIDA: Idéntico estilo para este header en el game over */
         #game-over-screen h2 {
             font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
             font-weight: 900;
@@ -1053,327 +1081,306 @@
             pointer-events: none;
             z-index: 15010;
         }
-
     </style>
 </head>
 <body>
-<!-- SELECTOR VOLÚMENES -->
-<nav style="position: fixed; top: 20px; right: 25px; display: flex; gap: 14px; align-items: center; z-index: 10001;">
-    <a href="vol1.html" style="display: block; width: 46px; height: 46px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,255,255,0.25); box-shadow: 0 0 10px rgba(0,0,0,0.8);" title="Volumen 1">
-        <img src="vol1.png" alt="Vol. 1" style="width: 100%; height: 100%; object-fit: cover;">
-    </a>
-    <a href="vol2.html" style="display: block; width: 46px; height: 46px; border-radius: 50%; overflow: hidden; border: 2px solid #ff4500; box-shadow: 0 0 18px rgba(255,69,0,0.8);" title="Volumen 2">
-        <img src="vol2.png" alt="Vol. 2" style="width: 100%; height: 100%; object-fit: cover;">
-    </a>
-</nav>
 
-    <!-- MODAL DE INACTIVIDAD -->
-    <div id="idle-modal" class="idle-modal-overlay">
-        <div class="idle-modal-box">
-            <h2 class="neon-accent">¿EYY TE HA DADO UN COMA ETÍLICO O ES QUE NO SABES LEER?</h2>
-            <p>Si te aburres tanto mirando a la nada, puedes jugar a este fantástico juego. Demuestra que controlas la moto con unas copas de más mientras esquivas gatos indeseables y árboles que parten vértebras.</p>
-            <div class="idle-buttons">
-                <button id="btn-play-game" class="neon-btn-secondary" style="padding: 15px 30px;">JUGAR</button>
-                <button id="btn-continue-reading" class="neon-btn-secondary" style="padding: 15px 30px; border-color: #444; color: #ccc;">SEGUIR LEYENDO</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONTENEDOR DEL JUEGO -->
-    <div id="game-container" class="game-fullscreen">
-        <button id="btn-exit-game" class="cal-btn-terminal">[ SALIR ]</button>
-        <div id="game-score">CUBATAS: 0</div>
-        
-        <canvas id="game-canvas-play"></canvas>
-        <div class="mobile-controls-hint">Concéntrate al máximo y evita la baja laboral a toda costa</div>
-
-        <div id="game-over-screen">
-            <h2 class="neon-accent">GAME OVER: A DORMIR LA MONA</h2>
-            <p id="final-score">Cubatas: 0</p>
-            <p id="final-message"></p>
-            <button id="btn-restart-game" class="neon-btn-secondary">OTRA COPA Y REINICIAR</button>
-        </div>
-    </div>
-
-    <!-- CABECERA FLOTANTE -->
-    <header id="sticky-header" class="sticky-header-brand">
+    <!-- CABECERA FLOTANTE CON ENLACE A INDEX.HTML (ESTRUCTURA DE VOL 1 CON COLORES DE VOL 2) -->
+    <a href="index.html" class="sticky-header-brand">
         <span class="sticky-brand-pablo">PABLO'S HOUSE</span>
         <span class="sticky-brand-comeback">COMEBACK</span>
         <div class="sticky-right-container">
             <sup class="sticky-brand-vol">&nbsp;VOL. 2</sup>
         </div>
-    </header>
+    </a>
 
-    <!-- ELEMENTO FLOTANTE DE SCROLL -->
-    <div id="scroll-floater" class="scroll-floater">
-        <span>Sigue bajando para enterarte de toda la vaina</span>
-        <span class="floater-arrow">↓</span>
+    <!-- SELECTOR DE VOLÚMENES (ESTRUCTURA DE VOL 1) -->
+    <nav class="vol-selector">
+        <a href="vol1.html" class="vol-btn" title="Volumen 1">
+            <img src="vol1.png" alt="Vol. 1">
+        </a>
+        <a href="vol2.html" class="vol-btn active" title="Volumen 2">
+            <img src="vol2.png" alt="Vol. 2">
+        </a>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL CENTRADO (ESTRUCTURA VOL 1) -->
+    <main style="text-align: center; padding: 20px;">
+        <div class="sub-tag">[ 05/09/2026 ]</div>
+        <h1 class="hero-title neon-accent">
+            COMEBACK<span class="blink-cursor">_</span>
+        </h1>
+
+        <!-- BOTONES DE LA SECCIÓN PRINCIPAL -->
+        <div style="margin-top: 35px; display: flex; flex-direction: column; align-items: center; gap: 18px;">
+            <!-- BOTÓN PRINCIPAL: ABRE www.prueba.com EN OTRA PESTAÑA -->
+            <a href="https://www.instagram.com/stories/highlights/18108495050605287/" target="_blank" rel="noopener noreferrer" class="neon-btn-secondary">
+                VOLVER AL PASADO
+            </a>
+
+            <!-- BOTÓN SECUNDARIO MÁS PEQUEÑO: VER WEB ANTIGUA -->
+            <button id="btn-toggle-vol2" class="cal-btn-terminal" type="button">
+                [&nbsp;VER&nbsp;WEB&nbsp;ANTIGUA&nbsp;]
+            </button>
+        </div>
+    </main>
+
+    <!-- FOOTER EN PANTALLA INICIAL VOL 1 -->
+    <footer id="main-vol1-footer" class="disclaimer-footer">
+        <div class="disclaimer-left">
+            <span style="color: var(--main-color);">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
+        </div>
+        <div class="disclaimer-right" style="text-align: right;">
+            Contenido satírico. Evento privado no comercial. <span style="margin: 0 5px;">-</span> 
+            <span onclick="gtag('event', 'click_privacy_alert'); alert('Esta web es un sitio privado y no comercial para la organización de Pablo\'s House.\n\nNo te pongas pesado con tu privacidad, que aquí lo verdaderamente importante es beber y venir preparado para la fiesta. Únicamente usamos Google Analytics para saber cuánta gente entra a la web y ver si el servidor aganta. Tranquilo, que te vamos a hacer bastante menos control del que te hace tu pareja. No vendemos tus datos a nadie ni nos importa lo que hagas con tu vida.\n\nSi aun así te entra la paranoia y quieres borrar cualquier registro de tu paso por la web, déjate de burocracias y contacta directamente con Pablo por privado.');" style="text-decoration: underline; cursor: pointer; pointer-events: auto;">Privacidad y Analíticas</span>
+        </div>
+    </footer>
+
+    <!-- CONTENEDOR DESPLEGABLE CON TODO EL HTML ORIGINAL DEL VOL 2 -->
+    <div id="vol2-full-content">
+
+        <!-- MODAL DE INACTIVIDAD -->
+        <div id="idle-modal" class="idle-modal-overlay">
+            <div class="idle-modal-box">
+                <h2 class="neon-accent">¿EYY TE HA DADO UN COMA ETÍLICO O ES QUE NO SABES LEER?</h2>
+                <p>Si te aburres tanto mirando a la nada, puedes jugar a este fantástico juego. Demuestra que controlas la moto con unas copas de más mientras esquivas gatos indeseables y árboles que parten vértebras.</p>
+                <div class="idle-buttons">
+                    <button id="btn-play-game" class="neon-btn-secondary" style="padding: 15px 30px;">JUGAR</button>
+                    <button id="btn-continue-reading" class="neon-btn-secondary" style="padding: 15px 30px; border-color: #444; color: #ccc;">SEGUIR LEYENDO</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENEDOR DEL JUEGO -->
+        <div id="game-container" class="game-fullscreen">
+            <button id="btn-exit-game" class="cal-btn-terminal">[ SALIR ]</button>
+            <div id="game-score">CUBATAS: 0</div>
+            
+            <canvas id="game-canvas-play"></canvas>
+            <div class="mobile-controls-hint">Concéntrate al máximo y evita la baja laboral a toda costa</div>
+
+            <div id="game-over-screen">
+                <h2 class="neon-accent">GAME OVER: A DORMIR LA MONA</h2>
+                <p id="final-score">Cubatas: 0</p>
+                <p id="final-message"></p>
+                <button id="btn-restart-game" class="neon-btn-secondary">OTRA COPA Y REINICIAR</button>
+            </div>
+        </div>
+
+        <!-- ELEMENTO FLOTANTE DE SCROLL -->
+        <div id="scroll-floater" class="scroll-floater">
+            <span>Sigue bajando para enterarte de toda la vaina</span>
+            <span class="floater-arrow">↓</span>
+        </div>
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero">
+            <div style="height: 1px;"></div> 
+            
+            <div class="hero-content-stack">
+                <div class="hero-video-container">
+                    <div id="video-error-msg" class="video-error-message">
+                        [ TU INTERNET VA MÁS LENTO QUE TÚ UN DOMINGO DE RESACA. CARGANDO INTRO, DAME UN SEC... ]<span class="blink-cursor">_</span>
+                    </div>
+                    
+                    <video id="hero-intro-video-main" class="hero-video-player" autoplay muted playsinline disablePictureInPicture preload="auto">
+                        <source src="LogoAnimadoPrincipal.mp4" type="video/mp4">
+                        Tu navegador no soporta el reproductor de vídeo nativo.
+                    </video>
+                    
+                    <video id="hero-intro-video-loop" class="hero-video-player" muted playsinline disablePictureInPicture loop preload="auto" style="display: none;">
+                        <source src="LogoAnimadoBucle.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="scroll-prompt">
+                    <p>Empieza a bajar para descubrir lo que te espera</p>
+                    <div class="arrow-down">↓</div>
+                </div>
+            </div>
+
+            <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 11px; color: rgba(255, 255, 255, 0.1); white-space: nowrap; margin-bottom: 12px; z-index: 1; pointer-events: none; letter-spacing: 0.5px;">Usamos Google Analytics para medir el hype. Al bajar, las aceptas.</div>
+        </section>
+
+        <!-- 2. STORY PANEL 1 -->
+        <section id="story-start" class="story-panel">
+            <div class="story-text reveal">
+                Por fin ha llegado la segunda edición de la fiesta que <span class="neon-accent">cierra el verano</span>.
+            </div>
+        </section>
+
+        <!-- 3. STORY PANEL 2 -->
+        <section id="story-botellon" class="story-panel" style="position: relative; overflow: hidden;">
+            <div class="side-marquee left">
+                <div class="marquee-track">
+                    <span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span>
+                </div>
+            </div>
+            <div class="side-marquee right">
+                <div class="marquee-track">
+                    <span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span>
+                </div>
+            </div>
+
+            <div class="story-text reveal" style="max-width: 1050px; position: relative; z-index: 2;">
+                Una fiesta en condiciones para <span class="neon-accent">celebrarlo como nos merecemos</span>.
+            </div>
+            <div class="story-text-sub reveal" style="position: relative; z-index: 2;">
+                Cinco años de espera, logística imposible y un regreso triunfal. Esta noche pasará a la historia.
+            </div>
+        </section>
+
+        <!-- 4. DATE & TIME SECTION -->
+        <section id="datetime" class="story-panel">
+            <div class="date-box scale-reveal">
+                <div class="date-label">[&nbsp;SECUENCIA&nbsp;DE&nbsp;ARRANQUE&nbsp;]</div>
+                <div class="story-text neon-accent date-text-glow">
+                    5&nbsp;SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
+                </div>
+
+                <div class="native-cal-wrapper">
+                    <button class="cal-btn-terminal" type="button">[&nbsp;+&nbsp;GUARDAR&nbsp;EN&nbsp;CALENDARIO&nbsp;]</button>
+                    
+                    <div class="cal-menu-terminal">
+                        <a id="btn-cal-google" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pablo%27s+House%3A+Comeback+Vol.+2&dates=20260905T220000/20260906T080000&ctz=Europe/Madrid&details=%C2%A1El+regreso+que+estabas+esperando%21+Ha+costado%2C+pero+por+fin+abrimos+las+puertas+de+nuevo.%0A%0A%E2%9A%A0%EF%B8%8F+RECORDATORIOS+IMPORTANTES%3A%0A%E2%80%A2+Trae+tu+alcohol%2C+tu+entrada+y%2C+sobre+todo%2C+ganas+de+tajarla.%0A%E2%80%A2+Aseg%C3%BArate+de+haber+le%C3%ADdo+las+normas+del+evento+antes+de+venir.&location=Pablo%27s+House" target="_blank">
+                            <span class="cal-opt">[G]</span> Google Calendar
+                        </a>
+                        <a id="btn-cal-apple" href="data:text/calendar;charset=utf-8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//Pablos%20House//Comeback%20Vol%202//ES%0ACALSCALE:GREGORIAN%0ABEGIN:VEVENT%0ASUMMARY:Pablo%27s%20House:%20Comeback%20Vol.%202%0ADTSTART;TZID=Europe/Madrid:20260905T220000%0ADTEND;TZID=Europe/Madrid:20260906T080000%0ALOCATION:Pablo%27s%20House%0ADESCRIPTION:%C2%A1El%20regreso%20que%20estabas%20esperando!%20Ha%20costado,%20pero%20por%20fin%20abrimos%20las%20puertas%20de%20nuevo.%5Cn%5Cn%E2%9A%A0%EF%B8%8F%20RECORDATORIOS%20IMPORTANTES:%5Cn%E2%80%A2%20Trae%20tu%20alcohol,%20tu%20entrada%20y,%20sobre%20todo,%20ganas%20de%20tajarla.%5Cn%E2%80%A2%20Aseg%C3%BArate%20de%20haber%20le%C3%ADdo%20las%20normas%20del%20evento%20antes%20de%20venir.%0ASTATUS:CONFIRMED%0AEND:VEVENT%0AEND:VCALENDAR" download="pablos-house-vol2.ics">
+                            <span class="cal-opt">[A]</span> Apple / iOS
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. LOCATION PANEL -->
+        <section id="location" class="story-panel">
+            <div class="map-bg"></div>
+            <div class="location-content reveal">
+                <div class="story-text glow-white" style="font-size: 2.4rem; margin-bottom: 15px;">
+                    No hace falta que te diga la ubicación...
+                </div>
+                <div class="story-text neon-accent" style="font-size: 3.2rem;">
+                    Ya la sabes.
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. PARKING SECTION -->
+        <section id="parking" class="story-panel">
+            <div class="story-text reveal" style="font-size: clamp(1.8rem, 4.5vw, 2.6rem); max-width: 900px;">
+                ...Pero a lo mejor te cunde saber <span class="neon-accent">dónde aparcar</span>.
+            </div>
+            <div class="story-text-sub reveal" style="margin-top: 20px; font-size: clamp(1rem, 2vw, 1.25rem); max-width: 750px;">
+                La gran mayoría no sabéis dónde dejar el coche. Para no bloquear la entrada de los vecinos ni caminos de paso, aparcad todos aquí:
+            </div>
+            <div class="reveal" style="margin-top: 35px;">
+                <a id="btn-parking-map" href="https://www.google.es/maps/search/TOP+SECRET" target="_blank" class="neon-btn-secondary">VER UBICACIÓN DEL PARKING</a>
+            </div>
+        </section>
+
+        <!-- 7. BYOB SECTION -->
+        <section id="byob-section" class="story-panel" style="background-color: #020202;">
+            <div class="byob-container scale-reveal">
+                <div class="byob-title">ESTE ES UN EVENTO AUTO-GESTIONADO</div>
+                <div class="byob-desc">
+                    Para mantener la legendaria soberanía de <span class="glow-white">Pablo's House</span>, nos regimos strictly por el formato <span class="byob-highlight">BYOB (Bring Your Own Booze)</span>. 
+                </div>
+                <div class="byob-desc">
+                    Es <span class="byob-highlight">obligatorio</span> que cada asistente se encargue de traer todo lo necesario para su propio botellón: <span class="glow-white">alcohol, refrescos, mezcla, vasos e hielo</span>. No se facilitará material ni bebida en las barras.
+                </div>
+                <div class="byob-footer">
+                    *Nota: Si quieres que Pablo se encargue de gestionar tu bebida, contacta con él por privado. De lo contrario, ven preparado.
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. RULES SECTION -->
+        <section id="rules-section" class="story-panel" style="background-color: #000000;">
+            <div class="rules-wrapper">
+                <h2 class="rules-header neon-accent reveal">NORMAS BÁSICAS</h2>
+                
+                <div class="rule-item reveal">
+                    <div class="rule-number">01</div>
+                    <div class="rule-text">OBLIGATORIO PRESENTAR LA ENTRADA EN PUERTA.</div>
+                </div>
+                
+                <div class="rule-item reveal">
+                    <div class="rule-number">02</div>
+                    <div class="rule-text">NO ESTARÁ PERMITIDO EL ACCESO AL INTERIOR DE LA VIVIENDA.</div>
+                </div>
+                
+                <div class="rule-item reveal">
+                    <div class="rule-number">03</div>
+                    <div class="rule-text">MANTENER LAS BOTELLAS DE VIDRIO ALEJADAS DE LA ZONA DE PISCINA.</div>
+                </div>
+                
+                <div class="rule-item reveal">
+                    <div class="rule-number">04</div>
+                    <div class="rule-text">SE LE DEBERÁ VENERAR A LA REINA <span id="daila-btn">DAILA</span>.</div>
+                </div>
+                
+                <div class="rule-item reveal">
+                    <div class="rule-number">05</div>
+                    <div class="rule-text">QUEDAN PROHIBIDAS LAS MICCIONES DENTRO DEL RECINTO (INCLUYENDO LA ZONA BAÑO).</div>
+                </div>
+
+                <div class="rule-item rule-highlight reveal">
+                    <div class="rule-number">06</div>
+                    <div class="rule-text">TRATA LA CASA COMO SI FUERA TUYA. CUIDA EL ENTORNO Y RESPETA LAS INSTALACIONES.</div>
+                </div>
+                
+                <div class="rules-warning reveal">
+                    Quebrantar cualquiera de estas normas puede suponer la expulsión del evento (con probabilidad de sufrir una paliza).
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. CTA SECTION -->
+        <section id="cta-section">
+            <div class="side-marquee left">
+                <div class="marquee-track">
+                    <span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span><span class="marquee-item">#BOTELLÓN</span>
+                </div>
+            </div>
+            <div class="side-marquee right">
+                <div class="marquee-track">
+                    <span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span><span class="marquee-item">#PREVIA</span>
+                </div>
+            </div>
+
+            <div class="cta-subtitle reveal glow-white" style="position: relative; z-index: 2;">
+                Después de esta presentación no te vas a quedar sin entradas...
+            </div>
+            <div class="cta-hook neon-accent reveal" style="position: relative; z-index: 2;">
+                ¿A qué esperas?
+            </div>
+            <div class="reveal" style="margin-top: 20px; position: relative; z-index: 2;">
+                <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="neon-btn">COMPRAR ENTRADA</a>
+            </div>
+
+            <div class="rules-warning reveal" style="margin-top: 25px; position: relative; z-index: 2;">
+                Recibirás la confirmación de asistencia a través de Instagram. Si no hay follow, no hay paraíso.
+            </div>
+
+            <div class="disclaimer-footer" style="position: absolute; z-index: 2;">
+                <div class="disclaimer-left">
+                    <span style="color: var(--main-color);">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
+                </div>
+                <div class="disclaimer-right" style="text-align: right;">
+                    Contenido satírico. Evento privado no comercial. <span style="margin: 0 5px;">-</span> 
+                    <span onclick="gtag('event', 'click_privacy_alert'); alert('Esta web es un sitio privado y no comercial para la organización de Pablo\'s House.\n\nNo te pongas pesado con tu privacidad, que aquí lo verdaderamente importante es beber y venir preparado para la fiesta. Únicamente usamos Google Analytics para saber cuánta gente entra a la web y ver si el servidor aganta. Tranquilo, que te vamos a hacer bastante menos control del que te hace tu pareja. No vendemos tus datos a nadie ni nos importa lo que hagas con tu vida.\n\nSi aun así te entra la paranoia y quieres borrar cualquier registro de tu paso por la web, déjate de burocracias y contacta directamente con Pablo por privado.');" style="text-decoration: underline; cursor: pointer; pointer-events: auto;">Privacidad y Analíticas</span>
+                </div>
+            </div>
+        </section>
+
     </div>
-
-    <!-- 1. HERO SECTION -->
-    <section id="hero">
-        <div style="height: 1px;"></div> 
-        
-        <div class="hero-content-stack">
-            <div class="hero-video-container">
-                <div id="video-error-msg" class="video-error-message">
-                    [ TU INTERNET VA MÁS LENTO QUE TÚ UN DOMINGO DE RESACA. CARGANDO INTRO, DAME UN SEC... ]<span class="blink-cursor">_</span>
-                </div>
-                
-                <!-- Video principal de introducción -->
-                <video id="hero-intro-video-main" class="hero-video-player" autoplay muted playsinline disablePictureInPicture preload="auto">
-                    <source src="LogoAnimadoPrincipal.mp4" type="video/mp4">
-                    Tu navegador no soporta el reproductor de vídeo nativo.
-                </video>
-                
-                <!-- Video en bucle (oculto inicialmente) -->
-                <video id="hero-intro-video-loop" class="hero-video-player" muted playsinline disablePictureInPicture loop preload="auto" style="display: none;">
-                    <source src="LogoAnimadoBucle.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <!-- SCROLL PROMPT MOVido DENTRO DEL CONTENEDOR PRINCIPAL PARA NO QUEDAR PEGADO ABAJO -->
-            <div class="scroll-prompt">
-                <p>Empieza a bajar para descubrir lo que te espera</p>
-                <div class="arrow-down">↓</div>
-            </div>
-        </div>
-
-        <!-- AVISO GOOGLE ANALYTICS INTEGRADO -->
-        <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 11px; color: rgba(255, 255, 255, 0.1); white-space: nowrap; margin-bottom: 12px; z-index: 1; pointer-events: none; letter-spacing: 0.5px;">Usamos Google Analytics para medir el hype. Al bajar, las aceptas.</div>
-    </section>
-
-    <!-- 2. STORY PANEL 1: CIERRE DE VERANO -->
-    <section id="story-start" class="story-panel">
-        <div class="story-text reveal">
-            Por fin ha llegado la segunda edición de la fiesta que <span class="neon-accent">cierra el verano</span>.
-        </div>
-    </section>
-
-    <!-- 3. STORY PANEL 2: CELEBRARLO COMO MERECEMOS -->
-    <section id="story-botellon" class="story-panel" style="position: relative; overflow: hidden;">
-        
-        <!-- LEFT MARQUEE (BOTELLÓN) -->
-        <div class="side-marquee left">
-            <div class="marquee-track">
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-            </div>
-        </div>
-
-        <!-- RIGHT MARQUEE (PREVIA) -->
-        <div class="side-marquee right">
-            <div class="marquee-track">
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-            </div>
-        </div>
-
-        <div class="story-text reveal" style="max-width: 1050px; position: relative; z-index: 2;">
-            Una fiesta en condiciones para <span class="neon-accent">celebrarlo como nos merecemos</span>.
-        </div>
-        <div class="story-text-sub reveal" style="position: relative; z-index: 2;">
-            Cinco años de espera, logística imposible y un regreso triunfal. Esta noche pasará a la historia.
-        </div>
-    </section>
-
-    <!-- 4. DATE & TIME SECTION -->
-    <section id="datetime" class="story-panel">
-        <div class="date-box scale-reveal">
-            <div class="date-label">[&nbsp;SECUENCIA&nbsp;DE&nbsp;ARRANQUE&nbsp;]</div>
-            <div class="story-text neon-accent date-text-glow">
-                5&nbsp;SEPTIEMBRE // 22:00<span class="blink-cursor">_</span>
-            </div>
-
-            <div class="native-cal-wrapper">
-                <button class="cal-btn-terminal" type="button">[&nbsp;+&nbsp;GUARDAR&nbsp;EN&nbsp;CALENDARIO&nbsp;]</button>
-                
-                <div class="cal-menu-terminal">
-                    <a id="btn-cal-google" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pablo%27s+House%3A+Comeback+Vol.+2&dates=20260905T220000/20260906T080000&ctz=Europe/Madrid&details=%C2%A1El+regreso+que+estabas+esperando%21+Ha+costado%2C+pero+por+fin+abrimos+las+puertas+de+nuevo.%0A%0A%E2%9A%A0%EF%B8%8F+RECORDATORIOS+IMPORTANTES%3A%0A%E2%80%A2+Trae+tu+alcohol%2C+tu+entrada+y%2C+sobre+todo%2C+ganas+de+tajarla.%0A%E2%80%A2+Aseg%C3%BArate+de+haber+le%C3%ADdo+las+normas+del+evento+antes+de+venir.&location=Pablo%27s+House" target="_blank">
-                        <span class="cal-opt">[G]</span> Google Calendar
-                    </a>
-                    <a id="btn-cal-apple" href="data:text/calendar;charset=utf-8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//Pablos%20House//Comeback%20Vol%202//ES%0ACALSCALE:GREGORIAN%0ABEGIN:VEVENT%0ASUMMARY:Pablo%27s%20House:%20Comeback%20Vol.%202%0ADTSTART;TZID=Europe/Madrid:20260905T220000%0ADTEND;TZID=Europe/Madrid:20260906T080000%0ALOCATION:Pablo%27s%20House%0ADESCRIPTION:%C2%A1El%20regreso%20que%20estabas%20esperando!%20Ha%20costado,%20pero%20por%20fin%20abrimos%20las%20puertas%20de%20nuevo.%5Cn%5Cn%E2%9A%A0%EF%B8%8F%20RECORDATORIOS%20IMPORTANTES:%5Cn%E2%80%A2%20Trae%20tu%20alcohol,%20tu%20entrada%20y,%20sobre%20todo,%20ganas%20de%20tajarla.%5Cn%E2%80%A2%20Aseg%C3%BArate%20de%20haber%20le%C3%ADdo%20las%20normas%20del%20evento%20antes%20de%20venir.%0ASTATUS:CONFIRMED%0AEND:VEVENT%0AEND:VCALENDAR" download="pablos-house-vol2.ics">
-                        <span class="cal-opt">[A]</span> Apple / iOS
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- 5. LOCATION PANEL -->
-    <section id="location" class="story-panel">
-        <div class="map-bg"></div>
-        <div class="location-content reveal">
-            <div class="story-text glow-white" style="font-size: 2.4rem; margin-bottom: 15px;">
-                No hace falta que te diga la ubicación...
-            </div>
-            <div class="story-text neon-accent" style="font-size: 3.2rem;">
-                Ya la sabes.
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. PARKING SECTION -->
-    <section id="parking" class="story-panel">
-        <div class="story-text reveal" style="font-size: clamp(1.8rem, 4.5vw, 2.6rem); max-width: 900px;">
-            ...Pero a lo mejor te cunde saber <span class="neon-accent">dónde aparcar</span>.
-        </div>
-        <div class="story-text-sub reveal" style="margin-top: 20px; font-size: clamp(1rem, 2vw, 1.25rem); max-width: 750px;">
-            La gran mayoría no sabéis dónde dejar el coche. Para no bloquear la entrada de los vecinos ni caminos de paso, aparcad todos aquí:
-        </div>
-        <div class="reveal" style="margin-top: 35px;">
-            <a id="btn-parking-map" href="https://maps.app.goo.gl/LZVDSkJFwppdsczd8" target="_blank" class="neon-btn-secondary">VER UBICACIÓN DEL PARKING</a>
-        </div>
-    </section>
-
-    <!-- 7. BYOB DETAILED NOTICE -->
-    <section id="byob-section" class="story-panel" style="background-color: #020202;">
-        <div class="byob-container scale-reveal">
-            <div class="byob-title">ESTE ES UN EVENTO AUTO-GESTIONADO</div>
-            <div class="byob-desc">
-                Para mantener la legendaria soberanía de <span class="glow-white">Pablo's House</span>, nos regimos estrictamente por el formato <span class="byob-highlight">BYOB (Bring Your Own Booze)</span>. 
-            </div>
-            <div class="byob-desc">
-                Es <span class="byob-highlight">obligatorio</span> que cada asistente se encargue de traer todo lo necesario para su propio botellón: <span class="glow-white">alcohol, refrescos, mezcla, vasos e hielo</span>. No se facilitará material ni bebida en las barras.
-            </div>
-            <div class="byob-footer">
-                *Nota: Si quieres que Pablo se encargue de gestionar tu bebida, contacta con él por privado. De lo contrario, ven preparado.
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. RULES SECTION -->
-    <section id="rules-section" class="story-panel" style="background-color: #000000;">
-        <div class="rules-wrapper">
-            <h2 class="rules-header neon-accent reveal">NORMAS BÁSICAS</h2>
-            
-            <div class="rule-item reveal">
-                <div class="rule-number">01</div>
-                <div class="rule-text">OBLIGATORIO PRESENTAR LA ENTRADA EN PUERTA.</div>
-            </div>
-            
-            <div class="rule-item reveal">
-                <div class="rule-number">02</div>
-                <div class="rule-text">NO ESTARÁ PERMITIDO EL ACCESO AL INTERIOR DE LA VIVIENDA.</div>
-            </div>
-            
-            <div class="rule-item reveal">
-                <div class="rule-number">03</div>
-                <div class="rule-text">MANTENER LAS BOTELLAS DE VIDRIO ALEJADAS DE LA ZONA DE PISCINA.</div>
-            </div>
-            
-            <!-- NORMA DAILA ACTUALIZADA CON EL BOTÓN OCULTO -->
-            <div class="rule-item reveal">
-                <div class="rule-number">04</div>
-                <div class="rule-text">SE LE DEBERÁ VENERAR A LA REINA <span id="daila-btn">DAILA</span>.</div>
-            </div>
-            
-            <div class="rule-item reveal">
-                <div class="rule-number">05</div>
-                <div class="rule-text">QUEDAN PROHIBIDAS LAS MICCIONES DENTRO DEL RECINTO (INCLUYENDO LA ZONA BAÑO).</div>
-            </div>
-
-            <div class="rule-item rule-highlight reveal">
-                <div class="rule-number">06</div>
-                <div class="rule-text">TRATA LA CASA COMO SI FUERA TUYA. CUIDA EL ENTORNO Y RESPETA LAS INSTALACIONES.</div>
-            </div>
-            
-            <div class="rules-warning reveal">
-                Quebrantar cualquiera de estas normas puede suponer la expulsión del evento (con probabilidad de sufrir una paliza).
-            </div>
-        </div>
-    </section>
-
-    <!-- 9. CTA / TICKETS BUTTON -->
-    <section id="cta-section">
-        <!-- LEFT MARQUEE -->
-        <div class="side-marquee left">
-            <div class="marquee-track">
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-                <span class="marquee-item">#BOTELLÓN</span>
-            </div>
-        </div>
-
-        <!-- RIGHT MARQUEE -->
-        <div class="side-marquee right">
-            <div class="marquee-track">
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-                <span class="marquee-item">#PREVIA</span>
-            </div>
-        </div>
-
-        <div class="cta-subtitle reveal glow-white" style="position: relative; z-index: 2;">
-            Después de esta presentación no te vas a quedar sin entradas...
-        </div>
-        <div class="cta-hook neon-accent reveal" style="position: relative; z-index: 2;">
-            ¿A qué esperas?
-        </div>
-        <div class="reveal" style="margin-top: 20px; position: relative; z-index: 2;">
-            <a href="https://xceed.me/es/illes-balears/event/pablos-house-comeback/235245/channel/pablo" target="_blank" class="neon-btn">COMPRAR ENTRADA</a>
-        </div>
-
-        <div class="rules-warning reveal" style="margin-top: 25px; position: relative; z-index: 2;">
-            Recibirás la confirmación de asistencia a través de Instagram. Si no hay follow, no hay paraíso.
-        </div>
-
-        <div class="disclaimer-footer" style="position: absolute; z-index: 2;">
-            <div class="disclaimer-left">
-                <span style="color: var(--main-color);">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
-            </div>
-            <!-- ALERTA DE PRIVACIDAD INTEGRADA EN EL FOOTER -->
-            <div class="disclaimer-right" style="text-align: right;">
-                Contenido satírico. Evento privado no comercial. <span style="margin: 0 5px;">-</span> 
-                <span onclick="gtag('event', 'click_privacy_alert'); alert('Esta web es un sitio privado y no comercial para la organización de Pablo\'s House.\n\nNo te pongas pesado con tu privacidad, que aquí lo verdaderamente importante es beber y venir preparado para la fiesta. Únicamente usamos Google Analytics para saber cuánta gente entra a la web y ver si el servidor aganta. Tranquilo, que te vamos a hacer bastante menos control del que te hace tu pareja. No vendemos tus datos a nadie ni nos importa lo que hagas con tu vida.\n\nSi aun así te entra la paranoia y quieres borrar cualquier registro de tu paso por la web, déjate de burocracias y contacta directamente con Pablo por privado.');" style="text-decoration: underline; cursor: pointer; pointer-events: auto;">Privacidad y Analíticas</span>
-            </div>
-        </div>
-    </section>
 
     <!-- CANVAS DE EXPLOSIÓN -->
     <canvas id="explosion-canvas"></canvas>
 
     <script>
-        const MAIN_COLOR = '#ff4500'; // Constante para Canvas donde la variable CSS nativa no se lee directamente
+        const MAIN_COLOR = '#ff4500';
         
         console.log(`%c
 Pablo's House
@@ -1385,17 +1392,52 @@ Pablo's House
         document.addEventListener('DOMContentLoaded', () => {
 
             // -------------------------------------------------------------
+            // LÓGICA DE MOSTRAR / OCULTAR TODO EL HTML DEL VOL 2
+            // -------------------------------------------------------------
+            const btnToggleVol2 = document.getElementById('btn-toggle-vol2');
+            const fullContent = document.getElementById('vol2-full-content');
+            const mainVol1Footer = document.getElementById('main-vol1-footer');
+
+            if (btnToggleVol2 && fullContent) {
+                btnToggleVol2.addEventListener('click', () => {
+                    const isVisible = fullContent.classList.contains('visible');
+                    if (isVisible) {
+                        fullContent.classList.remove('visible');
+                        document.body.classList.remove('show-full');
+                        btnToggleVol2.innerHTML = '[&nbsp;VER&nbsp;WEB&nbsp;ANTIGUA&nbsp;]';
+                        if (mainVol1Footer) mainVol1Footer.style.display = 'flex';
+                    } else {
+                        fullContent.classList.add('visible');
+                        document.body.classList.add('show-full');
+                        btnToggleVol2.innerHTML = '[&nbsp;OCULTAR&nbsp;WEB&nbsp;ANTIGUA&nbsp;]';
+                        if (mainVol1Footer) mainVol1Footer.style.display = 'none';
+                        
+                        // Reproducir vídeo de intro al desplegar
+                        const videoMain = document.getElementById('hero-intro-video-main');
+                        if (videoMain) {
+                            videoMain.play().catch(() => {});
+                        }
+
+                        // Scroll suave hacia las secciones desplegadas
+                        document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
+                    }
+
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'toggle_vol2_full_content', { state: isVisible ? 'hidden' : 'shown' });
+                    }
+                });
+            }
+
+            // -------------------------------------------------------------
             // TRACKING: Control de Tiempo y Scroll por Secciones
             // -------------------------------------------------------------
             const sectionObserverTracking = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     const sectionId = entry.target.id || 'seccion_desconocida';
                     if (entry.isIntersecting) {
-                        // Guardamos el momento en el que el usuario entró a la sección
                         entry.target.dataset.entryTime = Date.now();
                         gtag('event', 'section_view', { section: sectionId });
                     } else {
-                        // Calculamos cuánto tiempo estuvo visible al salir
                         if (entry.target.dataset.entryTime) {
                             const timeSpent = Math.round((Date.now() - entry.target.dataset.entryTime) / 1000);
                             gtag('event', 'section_time_spent', { 
@@ -1406,7 +1448,7 @@ Pablo's House
                         }
                     }
                 });
-            }, { threshold: 0.3 }); // 30% de visibilidad para contar como "vista"
+            }, { threshold: 0.3 });
             
             document.querySelectorAll('section').forEach(sec => sectionObserverTracking.observe(sec));
 
@@ -1415,7 +1457,7 @@ Pablo's House
             // -------------------------------------------------------------
             let idleTime = 0;
             let idleInterval;
-            const idleThreshold = 20; // 20 segundos
+            const idleThreshold = 20;
             let gameIsRunning = false;
 
             const idleModal = document.getElementById('idle-modal');
@@ -1423,61 +1465,59 @@ Pablo's House
             const btnPlay = document.getElementById('btn-play-game');
             const gameContainer = document.getElementById('game-container');
 
-            function resetIdleTime() {
-                idleTime = 0;
-            }
+            function resetIdleTime() { idleTime = 0; }
 
             function startIdleTimer() {
                 clearInterval(idleInterval);
                 idleInterval = setInterval(() => {
-                    // Validar si la ventana tiene el foco y la pestaña está en primer plano
-                    if(document.hasFocus() && document.visibilityState === 'visible' && !gameIsRunning && !idleModal.classList.contains('active')) {
+                    if(document.hasFocus() && document.visibilityState === 'visible' && !gameIsRunning && idleModal && !idleModal.classList.contains('active')) {
                         idleTime++;
-                        if (idleTime >= idleThreshold) {
+                        if (idleTime >= idleThreshold && fullContent && fullContent.classList.contains('visible')) {
                             showIdleModal();
                         }
                     }
                 }, 1000);
             }
 
-            // Escuchar eventos de interacción básicos
             ['mousemove', 'mousedown', 'keypress', 'scroll', 'touchstart'].forEach(evt => {
                 document.addEventListener(evt, resetIdleTime, { passive: true });
             });
 
-            // Si se pierde el foco (p. ej. cambian a otra pestaña o ventana) se reinicia el tiempo
             window.addEventListener('blur', resetIdleTime);
             document.addEventListener('visibilitychange', () => {
-                if(document.hidden) {
-                    resetIdleTime();
-                }
+                if(document.hidden) resetIdleTime();
             });
 
             startIdleTimer();
 
             function showIdleModal() {
-                idleModal.classList.add('active');
-                gtag('event', 'idle_modal_shown'); // Evento analítico: Muestra de modal inactividad
+                if(idleModal) {
+                    idleModal.classList.add('active');
+                    gtag('event', 'idle_modal_shown');
+                }
             }
 
-            btnContinue.addEventListener('click', () => {
-                idleModal.classList.remove('active');
-                gtag('event', 'idle_modal_decision', { choice: 'continue_reading' }); // Evento analítico: Decisión
-                resetIdleTime();
-            });
+            if(btnContinue) {
+                btnContinue.addEventListener('click', () => {
+                    idleModal.classList.remove('active');
+                    gtag('event', 'idle_modal_decision', { choice: 'continue_reading' });
+                    resetIdleTime();
+                });
+            }
 
-            btnPlay.addEventListener('click', () => {
-                idleModal.classList.remove('active');
-                gtag('event', 'idle_modal_decision', { choice: 'play_game' }); // Evento analítico: Decisión
-                startGame();
-            });
-
+            if(btnPlay) {
+                btnPlay.addEventListener('click', () => {
+                    idleModal.classList.remove('active');
+                    gtag('event', 'idle_modal_decision', { choice: 'play_game' });
+                    startGame();
+                });
+            }
 
             // -------------------------------------------------------------
             // LÓGICA DEL MINIJUEGO (MOTO ARCADE NEÓN)
             // -------------------------------------------------------------
             const gCanvas = document.getElementById('game-canvas-play');
-            const gCtx = gCanvas.getContext('2d');
+            const gCtx = gCanvas ? gCanvas.getContext('2d') : null;
             const gameOverScreen = document.getElementById('game-over-screen');
             const scoreDisplay = document.getElementById('game-score');
             const finalScoreDisplay = document.getElementById('final-score');
@@ -1491,14 +1531,11 @@ Pablo's House
             let touchLeft = false, touchRight = false;
             let gameSpeedBase = 5;
 
-            // Manejo de ventana del juego FIX
             function resizeGame() {
-                // Obtenemos el ancho exacto del contenedor visible en lugar del global de la ventana
+                if(!gCanvas || !gameContainer) return;
                 gCanvas.width = gameContainer.clientWidth || window.innerWidth;
                 gCanvas.height = gameContainer.clientHeight || window.innerHeight;
                 
-                // FIX: Si el canvas se redimensiona en medio de la partida (ej. se oculta la url bar en Safari),
-                // actualizamos la posición del jugador para que no se hunda o desaparezca
                 if (player) {
                     player.y = gCanvas.height - 100;
                     if(player.x > gCanvas.width) player.x = gCanvas.width / 2;
@@ -1506,7 +1543,6 @@ Pablo's House
             }
             window.addEventListener('resize', resizeGame);
 
-            // Controles de teclado
             window.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowLeft' || e.key === 'a') keys.left = true;
                 if (e.key === 'ArrowRight' || e.key === 'd') keys.right = true;
@@ -1516,16 +1552,17 @@ Pablo's House
                 if (e.key === 'ArrowRight' || e.key === 'd') keys.right = false;
             });
 
-            // Controles Táctiles
-            gCanvas.addEventListener('touchstart', (e) => {
-                const x = e.touches[0].clientX;
-                if (x < window.innerWidth / 2) touchLeft = true;
-                else touchRight = true;
-            }, {passive: false});
-            gCanvas.addEventListener('touchend', (e) => {
-                touchLeft = false;
-                touchRight = false;
-            });
+            if(gCanvas) {
+                gCanvas.addEventListener('touchstart', (e) => {
+                    const x = e.touches[0].clientX;
+                    if (x < window.innerWidth / 2) touchLeft = true;
+                    else touchRight = true;
+                }, {passive: false});
+                gCanvas.addEventListener('touchend', () => {
+                    touchLeft = false;
+                    touchRight = false;
+                });
+            }
 
             function initGame() {
                 resizeGame();
@@ -1545,7 +1582,6 @@ Pablo's House
                 
                 scoreDisplay.innerText = "CUBATAS: 0";
                 
-                // Generar lineas iniciales
                 for(let i=0; i<gCanvas.height; i+=100) {
                     roadLines.push(i);
                 }
@@ -1554,9 +1590,9 @@ Pablo's House
             function startGame() {
                 gameIsRunning = true;
                 gameContainer.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Evitar scroll
+                document.body.style.overflow = 'hidden';
                 
-                gtag('event', 'game_start'); // Evento analítico: Inicio del minijuego
+                gtag('event', 'game_start');
                 
                 initGame();
                 gameLoop();
@@ -1565,39 +1601,36 @@ Pablo's House
             function stopGame() {
                 gameIsRunning = false;
                 gameContainer.classList.remove('active');
-                document.body.style.overflow = 'auto'; // Recuperar scroll
+                document.body.style.overflow = 'auto';
                 cancelAnimationFrame(gameReq);
                 
-                gtag('event', 'game_exit'); // Evento analítico: Abandono voluntario del minijuego
+                gtag('event', 'game_exit');
                 resetIdleTime();
             }
 
-            btnExit.addEventListener('click', stopGame);
-            btnRestart.addEventListener('click', () => {
-                gtag('event', 'game_restart'); // Evento analítico: Reinicio del minijuego
-                initGame();
-                gameLoop();
-            });
+            if(btnExit) btnExit.addEventListener('click', stopGame);
+            if(btnRestart) {
+                btnRestart.addEventListener('click', () => {
+                    gtag('event', 'game_restart');
+                    initGame();
+                    gameLoop();
+                });
+            }
 
             function drawPlayer() {
                 gCtx.save();
                 gCtx.translate(player.x + player.w/2, player.y + player.h/2);
                 
-                // Efecto de giro según tecla
                 let tilt = 0;
                 if(keys.left || touchLeft) tilt = -0.25;
                 if(keys.right || touchRight) tilt = 0.25;
                 gCtx.rotate(tilt);
 
-                // Rueda delantera
                 gCtx.fillStyle = '#222222';
                 gCtx.shadowBlur = 0;
                 gCtx.fillRect(-4, -player.h/2 - 6, 8, 16);
-                
-                // Rueda trasera
                 gCtx.fillRect(-5, player.h/2 - 10, 10, 18);
 
-                // Cuerpo principal de la moto (Forma aerodinámica / Hexágono alargado)
                 gCtx.beginPath();
                 gCtx.moveTo(0, -player.h/2 + 2); 
                 gCtx.lineTo(12, -player.h/4); 
@@ -1614,7 +1647,6 @@ Pablo's House
                 gCtx.shadowColor = '#ffffff';
                 gCtx.stroke();
                 
-                // Manillar
                 gCtx.beginPath();
                 gCtx.moveTo(-16, -player.h/4 - 2);
                 gCtx.lineTo(16, -player.h/4 - 2);
@@ -1625,7 +1657,6 @@ Pablo's House
                 gCtx.lineCap = 'round';
                 gCtx.stroke();
                 
-                // Luz trasera de freno/motor
                 gCtx.beginPath();
                 gCtx.arc(0, player.h/2, 5, 0, Math.PI*2);
                 gCtx.fillStyle = MAIN_COLOR;
@@ -1641,7 +1672,6 @@ Pablo's House
                 gCtx.translate(enemy.x, enemy.y);
                 
                 if (enemy.type === 'tree') {
-                    // Árbol Neón (Tronco con estructura en capas de pino real)
                     gCtx.shadowBlur = 15;
                     gCtx.shadowColor = MAIN_COLOR;
                     gCtx.fillStyle = '#110000';
@@ -1649,28 +1679,25 @@ Pablo's House
                     gCtx.lineWidth = 2.5;
                     gCtx.lineJoin = 'round';
                     
-                    // Tronco
                     gCtx.beginPath();
                     gCtx.rect(enemy.w/2 - 5, enemy.h - 12, 10, 12);
                     gCtx.fill();
                     gCtx.stroke();
                     
-                    // Capas del pino (3 niveles superpuestos con picos)
                     const layers = 3;
                     for(let i = 0; i < layers; i++) {
                         gCtx.beginPath();
                         let topY = i * 14;
                         let botY = 28 + i * 11;
                         let halfW = 12 + i * 6; 
-                        gCtx.moveTo(enemy.w/2, topY); // Pico superior de la capa
-                        gCtx.lineTo(enemy.w/2 + halfW, botY); // Esquina inferior derecha
-                        gCtx.lineTo(enemy.w/2 - halfW, botY); // Esquina inferior izquierda
+                        gCtx.moveTo(enemy.w/2, topY);
+                        gCtx.lineTo(enemy.w/2 + halfW, botY);
+                        gCtx.lineTo(enemy.w/2 - halfW, botY);
                         gCtx.closePath();
                         gCtx.fill();
                         gCtx.stroke();
                     }
                 } else {
-                    // Gato Neón (Silueta de cabeza de gato, orejas, bigotes y ojos brillantes)
                     gCtx.shadowBlur = 15;
                     gCtx.shadowColor = '#a832a8';
                     gCtx.fillStyle = '#1a001a';
@@ -1678,41 +1705,34 @@ Pablo's House
                     gCtx.lineWidth = 2.5;
                     gCtx.lineJoin = 'round';
                     
-                    // Contorno de la cabeza y orejas
                     gCtx.beginPath();
-                    gCtx.moveTo(enemy.w/2, enemy.h); // Barbilla
-                    gCtx.lineTo(enemy.w, enemy.h/2 + 3); // Mejilla derecha
-                    gCtx.lineTo(enemy.w - 5, 0); // Punta oreja derecha
-                    gCtx.lineTo(enemy.w/2 + 4, 10); // Base oreja derecha
-                    gCtx.lineTo(enemy.w/2 - 4, 10); // Base oreja izquierda
-                    gCtx.lineTo(5, 0); // Punta oreja izquierda
-                    gCtx.lineTo(0, enemy.h/2 + 3); // Mejilla izquierda
+                    gCtx.moveTo(enemy.w/2, enemy.h);
+                    gCtx.lineTo(enemy.w, enemy.h/2 + 3);
+                    gCtx.lineTo(enemy.w - 5, 0);
+                    gCtx.lineTo(enemy.w/2 + 4, 10);
+                    gCtx.lineTo(enemy.w/2 - 4, 10);
+                    gCtx.lineTo(5, 0);
+                    gCtx.lineTo(0, enemy.h/2 + 3);
                     gCtx.closePath();
                     gCtx.fill();
                     gCtx.stroke();
                     
-                    // Bigotes 
                     gCtx.beginPath();
-                    // Lado derecho
                     gCtx.moveTo(enemy.w, enemy.h/2 - 2); gCtx.lineTo(enemy.w + 12, enemy.h/2 - 8);
                     gCtx.moveTo(enemy.w, enemy.h/2 + 4); gCtx.lineTo(enemy.w + 12, enemy.h/2 + 6);
-                    // Lado izquierdo
                     gCtx.moveTo(0, enemy.h/2 - 2); gCtx.lineTo(-12, enemy.h/2 - 8);
                     gCtx.moveTo(0, enemy.h/2 + 4); gCtx.lineTo(-12, enemy.h/2 + 6);
                     gCtx.lineWidth = 1.5;
                     gCtx.stroke();
                     
-                    // Ojos felinos (Verticales y muy brillantes)
                     gCtx.fillStyle = '#ff00ff';
                     gCtx.shadowColor = '#ff00ff';
                     gCtx.shadowBlur = 25;
                     
-                    // Ojo izquierdo
                     gCtx.beginPath();
                     gCtx.ellipse(enemy.w/2 - 7, enemy.h/2, 2.5, 6, 0, 0, Math.PI*2);
                     gCtx.fill();
                     
-                    // Ojo derecho
                     gCtx.beginPath();
                     gCtx.ellipse(enemy.w/2 + 7, enemy.h/2, 2.5, 6, 0, 0, Math.PI*2);
                     gCtx.fill();
@@ -1721,21 +1741,17 @@ Pablo's House
             }
 
             function drawRoad() {
-                // Suelo oscuro
                 gCtx.fillStyle = '#050505';
                 gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
                 
-                // Lineas de carretera
                 gCtx.strokeStyle = 'rgba(255, 69, 0, 0.3)';
                 gCtx.lineWidth = 4;
                 gCtx.setLineDash([40, 60]);
                 
-                // Mover líneas
                 for(let i=0; i<roadLines.length; i++) {
                     roadLines[i] += gameSpeedBase;
                     if(roadLines[i] > gCanvas.height) roadLines[i] -= gCanvas.height;
                     
-                    // Carril Central
                     gCtx.beginPath();
                     gCtx.moveTo(gCanvas.width/2, roadLines[i] - 100);
                     gCtx.lineTo(gCanvas.width/2, roadLines[i]);
@@ -1743,7 +1759,6 @@ Pablo's House
                 }
                 gCtx.setLineDash([]);
                 
-                // Bordes
                 gCtx.beginPath();
                 gCtx.moveTo(gCanvas.width*0.1, 0); gCtx.lineTo(gCanvas.width*0.1, gCanvas.height);
                 gCtx.moveTo(gCanvas.width*0.9, 0); gCtx.lineTo(gCanvas.width*0.9, gCanvas.height);
@@ -1751,7 +1766,7 @@ Pablo's House
                 gCtx.shadowBlur = 10;
                 gCtx.shadowColor = MAIN_COLOR;
                 gCtx.stroke();
-                gCtx.shadowBlur = 0; // reset
+                gCtx.shadowBlur = 0;
             }
 
             function handleCollisions() {
@@ -1762,28 +1777,23 @@ Pablo's House
                         player.y < enemy.y + enemy.h &&
                         player.y + player.h > enemy.y
                     ) {
-                        return true; // Chocó
+                        return true;
                     }
                 }
                 return false;
             }
 
             function gameLoop() {
-                if (!gameIsRunning) return;
+                if (!gameIsRunning || !gCtx) return;
                 
-                // Limpiar
                 gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
                 
-                // Incrementar dificultad
                 frameCount++;
                 if (frameCount % 300 === 0) gameSpeedBase += 0.5;
 
-                // Mover jugador
                 if ((keys.left || touchLeft) && player.x > gCanvas.width*0.1) player.x -= player.speed;
                 if ((keys.right || touchRight) && player.x + player.w < gCanvas.width*0.9) player.x += player.speed;
 
-                // Spawn Enemigos (más rápido a medida que sube el score)
-                // Utilizamos una formula parecida limitando el progreso (score antes era +10 ahora +1, escalamos base 10 el cálculo)
                 let spawnRate = Math.max(30, 90 - Math.floor((score * 10) / 100));
                 if (frameCount % spawnRate === 0) {
                     const isCat = Math.random() > 0.7;
@@ -1799,21 +1809,18 @@ Pablo's House
                         h: h,
                         type: isCat ? 'cat' : 'tree',
                         speed: gameSpeedBase * (isCat ? 1.2 : 1),
-                        startX: 0, // Para oscilación del gato
+                        startX: 0,
                         timeOffset: Math.random() * 100
                     });
                     enemies[enemies.length-1].startX = enemies[enemies.length-1].x;
                 }
 
-                // Dibujar
                 drawRoad();
                 
-                // Actualizar Enemigos
                 for (let i = enemies.length - 1; i >= 0; i--) {
                     let e = enemies[i];
                     e.y += e.speed;
                     
-                    // Movimiento serpenteante para gatos
                     if (e.type === 'cat') {
                         e.x = e.startX + Math.sin(frameCount * 0.05 + e.timeOffset) * 40;
                     }
@@ -1830,7 +1837,6 @@ Pablo's House
                 drawPlayer();
 
                 if (handleCollisions()) {
-                    // Fin del juego
                     gameOverScreen.classList.add('active');
                     finalScoreDisplay.innerText = "Cubatas: " + score;
                     
@@ -1840,20 +1846,16 @@ Pablo's House
                         finalMessageDisplay.innerText = "Bastante paquetoide. Te quedaste sin dientes.";
                     }
 
-                    gtag('event', 'game_over', { score: score }); // Evento analítico: Fin de la partida y recuento
-
-                    return; // Detiene el loop
+                    gtag('event', 'game_over', { score: score });
+                    return;
                 }
 
                 gameReq = requestAnimationFrame(gameLoop);
             }
 
-
             // -------------------------------------------------------------
-            // RESTO DE SCRIPTS EXISTENTES Y TRACKING ADICIONAL
+            // EVENTOS DE CALENDARIO, PARKING Y EASTER EGG
             // -------------------------------------------------------------
-            
-            // Tracking Eventos de Calendario y Parking
             document.getElementById('btn-cal-google')?.addEventListener('click', () => gtag('event', 'add_to_calendar', { platform: 'google' }));
             document.getElementById('btn-cal-apple')?.addEventListener('click', () => gtag('event', 'add_to_calendar', { platform: 'apple' }));
             document.getElementById('btn-parking-map')?.addEventListener('click', () => gtag('event', 'click_parking_map'));
@@ -1861,7 +1863,7 @@ Pablo's House
             const dailaBtn = document.getElementById('daila-btn');
             if (dailaBtn) {
                 dailaBtn.addEventListener('click', () => {
-                    gtag('event', 'click_easter_egg_daila'); // Evento analítico: Clic en easter egg
+                    gtag('event', 'click_easter_egg_daila');
                     alert("Un poco pesada pero buena gente. Dale el amor que se merece.");
                 });
             }
@@ -1878,7 +1880,6 @@ Pablo's House
             }, { threshold: 0.18 });
             revealElements.forEach(el => observer.observe(el));
 
-            // CORRECCIÓN: Seleccionamos específicamente el botón del calendario para que no colisione con el del juego
             const calWrapper = document.querySelector('.native-cal-wrapper');
             if (calWrapper) {
                 const calBtn = calWrapper.querySelector('.cal-btn-terminal');
@@ -1899,7 +1900,7 @@ Pablo's House
                 }
             }
 
-            // Lógica de transición de vídeos y mensaje de error
+            // VIDEOS Y EXPLOSIÓN
             const videoMain = document.getElementById('hero-intro-video-main');
             const videoLoop = document.getElementById('hero-intro-video-loop');
             const errorMsg = document.getElementById('video-error-msg');
@@ -1916,10 +1917,9 @@ Pablo's House
             }
 
             if (videoMain && videoLoop) {
-                // Transición del video principal al bucle
                 videoMain.addEventListener('ended', () => {
                     introCompleted = true;
-                    gtag('event', 'intro_video_completed'); // Evento analítico: Vió el video entero
+                    gtag('event', 'intro_video_completed');
 
                     videoMain.style.display = 'none';
                     videoLoop.style.display = 'block';
@@ -1931,7 +1931,7 @@ Pablo's House
                 let loadingTimeout = setTimeout(() => {
                     if (videoMain.readyState < 3) { 
                         errorMsg.classList.add('visible');
-                        trackVideoError(); // Trackeamos el error de carga lenta
+                        trackVideoError();
                     }
                 }, 1500);
 
@@ -1941,31 +1941,21 @@ Pablo's House
                 });
                 videoMain.addEventListener('waiting', () => {
                     errorMsg.classList.add('visible');
-                    trackVideoError(); // Trackeamos el error de carga lenta
+                    trackVideoError();
                 });
                 videoMain.addEventListener('error', () => {
                     clearTimeout(loadingTimeout);
                     errorMsg.classList.add('visible');
-                    trackVideoError(); // Trackeamos el error de carga lenta
+                    trackVideoError();
                 });
                 
-                // Mensaje de error / estado de espera también para el video bucle si hiciera falta
                 if (videoLoop) {
-                    videoLoop.addEventListener('playing', () => {
-                        errorMsg.classList.remove('visible');
-                    });
-                    videoLoop.addEventListener('waiting', () => {
-                        errorMsg.classList.add('visible');
-                        trackVideoError();
-                    });
-                    videoLoop.addEventListener('error', () => {
-                        errorMsg.classList.add('visible');
-                        trackVideoError();
-                    });
+                    videoLoop.addEventListener('playing', () => errorMsg.classList.remove('visible'));
+                    videoLoop.addEventListener('waiting', () => { errorMsg.classList.add('visible'); trackVideoError(); });
+                    videoLoop.addEventListener('error', () => { errorMsg.classList.add('visible'); trackVideoError(); });
                 }
             }
 
-            const stickyHeader = document.getElementById('sticky-header');
             const floater = document.getElementById('scroll-floater');
             const heroSec = document.getElementById('hero');
             const ctaSec = document.getElementById('cta-section');
@@ -1977,18 +1967,9 @@ Pablo's House
                     const ctaTop = ctaSec.getBoundingClientRect().top;
                     const winH = window.innerHeight;
 
-                    // Si el usuario scrollea sin haber terminado la intro
                     if (scrollY > (winH * 0.2) && !introCompleted && !introSkippedTracked) {
-                        gtag('event', 'intro_video_skipped'); // Evento analítico: Saltaron la intro haciendo scroll
+                        gtag('event', 'intro_video_skipped');
                         introSkippedTracked = true;
-                    }
-
-                    if (stickyHeader) {
-                        if (scrollY > (heroH * 0.85)) {
-                            stickyHeader.classList.add('visible');
-                        } else {
-                            stickyHeader.classList.remove('visible');
-                        }
                     }
 
                     if (floater) {
@@ -2003,20 +1984,21 @@ Pablo's House
             
             const buyBtn = document.querySelector('.neon-btn');
             const canvas = document.getElementById('explosion-canvas');
-            const ctx = canvas.getContext('2d');
+            const ctx = canvas ? canvas.getContext('2d') : null;
 
             function resizeExplosionCanvas() {
+                if(!canvas) return;
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
             resizeExplosionCanvas();
             window.addEventListener('resize', resizeExplosionCanvas);
 
-            if (buyBtn) {
+            if (buyBtn && canvas && ctx) {
                 buyBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     
-                    gtag('event', 'click_buy_ticket'); // Evento analítico: Intención de compra CTAs
+                    gtag('event', 'click_buy_ticket');
                     
                     const targetUrl = buyBtn.getAttribute('href');
                     const rect = buyBtn.getBoundingClientRect();
@@ -2056,11 +2038,8 @@ Pablo's House
                         }, delay);
                     });
 
-                    // CORRECCIÓN: Lógica adaptada para Safari (evitando el bloqueo del popup)
                     setTimeout(() => {
                         let newWin = window.open(targetUrl, '_blank');
-                        
-                        // Si el navegador bloquea la nueva pestaña (Safari o extensiones), usamos la actual
                         if(!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
                             window.location.href = targetUrl;
                         } else {
@@ -2071,6 +2050,7 @@ Pablo's House
             }
 
             function createExplosion(x, y) {
+                if(!ctx || !canvas) return;
                 const particles = [];
                 const colors = [MAIN_COLOR, '#ff8255', '#ffffff', '#ffaa00', '#ff2200'];
                 const particleCount = 400;
