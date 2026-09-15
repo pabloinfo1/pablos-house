@@ -32,6 +32,8 @@
         :root {
             --main-color: #ff4500;
             --main-color-rgb: 255, 69, 0;
+            --og-color: #b2f4f3;
+            --og-color-rgb: 178, 244, 243;
         }
 
         * {
@@ -55,16 +57,54 @@
             background-image: radial-gradient(circle at 50% 50%, rgba(var(--main-color-rgb), 0.15) 0%, transparent 75%);
         }
 
-        /* Cabecera marca */
-        .top-brand {
-            position: absolute;
-            top: 25px;
-            left: 25px;
+        /* CABECERA FLOTANTE CON GRID (IDÉNTICA A VOL 2) */
+        .sticky-header-brand {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0) 100%);
+            z-index: 1000;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: baseline;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .sticky-brand-pablo {
             font-family: 'Space Mono', monospace;
-            font-size: clamp(0.75rem, 2.2vw, 1rem);
-            letter-spacing: 0.15em;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: clamp(0.65rem, 2.2vw, 0.95rem);
+            letter-spacing: 0.1em;
+            color: #ffffff;
+            opacity: 0.8;
             text-transform: uppercase;
+            justify-self: end;
+            padding-right: 12px;
+        }
+
+        .sticky-brand-comeback {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 1.7rem);
+            letter-spacing: 1px;
+            color: #ff8255;
+            text-transform: uppercase;
+            justify-self: center;
+            animation: terminalPulse 2.5s infinite alternate ease-in-out;
+        }
+
+        .sticky-right-container {
+            justify-self: start;
+            padding-left: 4px;
+        }
+
+        .sticky-brand-vol {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(0.55rem, 1.8vw, 0.8rem);
+            vertical-align: super;
+            color: var(--main-color);
+            letter-spacing: 0.5px;
         }
 
         /* Selector Vol. 1 & Vol. 2 arriba a la derecha */
@@ -75,7 +115,7 @@
             display: flex;
             gap: 14px;
             align-items: center;
-            z-index: 1000;
+            z-index: 1001;
         }
 
         .vol-btn {
@@ -104,12 +144,12 @@
         }
 
         /* Efectos Neón y Tipografía */
-        .neon-accent {
-            color: var(--main-color);
-            text-shadow: 0 0 10px rgba(var(--main-color-rgb), 0.8),
-                         0 0 25px rgba(var(--main-color-rgb), 0.6),
-                         0 0 45px rgba(var(--main-color-rgb), 0.3);
-            animation: terminalPulse 2.5s infinite alternate ease-in-out;
+        .neon-accent-og {
+            color: var(--og-color);
+            text-shadow: 0 0 10px rgba(var(--og-color-rgb), 0.8),
+                         0 0 25px rgba(var(--og-color-rgb), 0.6),
+                         0 0 45px rgba(var(--og-color-rgb), 0.3);
+            animation: terminalPulseOG 2.5s infinite alternate ease-in-out;
         }
 
         .hero-title {
@@ -133,8 +173,8 @@
             text-align: center;
         }
 
-        .blink-cursor {
-            color: var(--main-color);
+        .blink-cursor-og {
+            color: var(--og-color);
             font-family: 'Space Mono', monospace;
             font-weight: 900;
             animation: cursorBlink 1s step-end infinite;
@@ -145,26 +185,44 @@
             100% { text-shadow: 0 0 15px var(--main-color), 0 0 30px var(--main-color), 0 0 45px rgba(var(--main-color-rgb), 0.6); }
         }
 
+        @keyframes terminalPulseOG {
+            0% { text-shadow: 0 0 8px rgba(var(--og-color-rgb), 0.6), 0 0 15px rgba(var(--og-color-rgb), 0.3); }
+            100% { text-shadow: 0 0 15px var(--og-color), 0 0 30px var(--og-color), 0 0 45px rgba(var(--og-color-rgb), 0.6); }
+        }
+
         @keyframes cursorBlink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
 
-        /* Pie de página */
+        /* Pie de página (Igual que Vol. 2) */
         .disclaimer-footer {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
             font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.3);
             letter-spacing: 0.5px;
-            text-align: center;
+            pointer-events: none;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-brand">PABLO'S HOUSE</div>
+    <!-- CABECERA FLOTANTE CON ENLACE A INDEX.HTML -->
+    <a href="index.html" class="sticky-header-brand">
+        <span class="sticky-brand-pablo">PABLO'S HOUSE</span>
+        <span class="sticky-brand-comeback">THE OG</span>
+        <div class="sticky-right-container">
+            <sup class="sticky-brand-vol">&nbsp;VOL. 1</sup>
+        </div>
+    </a>
 
     <!-- SELECTOR DE VOLÚMENES -->
     <nav class="vol-selector">
@@ -178,14 +236,22 @@
 
     <!-- CONTENIDO PRINCIPAL -->
     <main style="text-align: center;">
-        <div class="sub-tag">[ VOLUMEN 1 ]</div>
-        <h1 class="hero-title neon-accent">
-            THE OG<span class="blink-cursor">_</span>
+        <div class="sub-tag">[ 28/08/2021 ]</div>
+        <h1 class="hero-title neon-accent-og">
+            THE OG<span class="blink-cursor-og">_</span>
         </h1>
     </main>
 
+    <!-- PIE DE PÁGINA COMPLETO DE VOL 2 -->
     <footer class="disclaimer-footer">
-        <span style="color: var(--main-color);">//</span> PABLO'S HOUSE
+        <div class="disclaimer-left">
+            <span style="color: var(--main-color);">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
+        </div>
+        <!-- ALERTA DE PRIVACIDAD INTEGRADA EN EL FOOTER -->
+        <div class="disclaimer-right" style="text-align: right;">
+            Contenido satírico. Evento privado no comercial. <span style="margin: 0 5px;">-</span> 
+            <span onclick="gtag('event', 'click_privacy_alert'); alert('Esta web es un sitio privado y no comercial para la organización de Pablo\'s House.\n\nNo te pongas pesado con tu privacidad, que aquí lo verdaderamente importante es beber y venir preparado para la fiesta. Únicamente usamos Google Analytics para saber cuánta gente entra a la web y ver si el servidor aganta. Tranquilo, que te vamos a hacer bastante menos control del que te hace tu pareja. No vendemos tus datos a nadie ni nos importa lo que hagas con tu vida.\n\nSi aun así te entra la paranoia y quieres borrar cualquier registro de tu paso por la web, déjate de burocracias y contacta directamente con Pablo por privado.');" style="text-decoration: underline; cursor: pointer; pointer-events: auto;">Privacidad y Analíticas</span>
+        </div>
     </footer>
 
 </body>
