@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff4500">
+    <meta name="description" content="Pablo's House - Vol. 1 (THE OG)">
+    <title>Pablo's House: Vol. 1 - THE OG</title>
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="LogoUbi.png">
+
+    <!-- META ETIQUETAS OG -->
+    <meta property="og:title" content="PABLO'S HOUSE: VOL. 1">
+    <meta property="og:description" content="THE OG">
+    <meta property="og:image" content="Logo.png">
+    <meta property="og:type" content="website">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5XB883KRF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z5XB883KRF');
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Space+Mono:wght@400;700&display=swap');
+
+        :root {
+            --main-color: #ff4500;
+            --main-color-rgb: 255, 69, 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-image: radial-gradient(circle at 50% 50%, rgba(var(--main-color-rgb), 0.15) 0%, transparent 75%);
+        }
+
+        /* Cabecera marca */
+        .top-brand {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.75rem, 2.2vw, 1rem);
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+        }
+
+        /* Selector Vol. 1 & Vol. 2 arriba a la derecha */
+        .vol-selector {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .vol-btn {
+            display: block;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 10px rgba(0,0,0,0.8);
+            transition: all 0.3s cubic-bezier(0.17, 0.85, 0.43, 1);
+            background-color: #111111;
+        }
+
+        .vol-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .vol-btn:hover, .vol-btn.active {
+            border-color: var(--main-color);
+            transform: scale(1.12);
+            box-shadow: 0 0 18px rgba(var(--main-color-rgb), 0.8);
+        }
+
+        /* Efectos Neón y Tipografía */
+        .neon-accent {
+            color: var(--main-color);
+            text-shadow: 0 0 10px rgba(var(--main-color-rgb), 0.8),
+                         0 0 25px rgba(var(--main-color-rgb), 0.6),
+                         0 0 45px rgba(var(--main-color-rgb), 0.3);
+            animation: terminalPulse 2.5s infinite alternate ease-in-out;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            padding: 0 20px;
+            max-width: 1000px;
+        }
+
+        .sub-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+            letter-spacing: 0.3em;
+            color: #888888;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .blink-cursor {
+            color: var(--main-color);
+            font-family: 'Space Mono', monospace;
+            font-weight: 900;
+            animation: cursorBlink 1s step-end infinite;
+        }
+
+        @keyframes terminalPulse {
+            0% { text-shadow: 0 0 8px rgba(var(--main-color-rgb), 0.6), 0 0 15px rgba(var(--main-color-rgb), 0.3); }
+            100% { text-shadow: 0 0 15px var(--main-color), 0 0 30px var(--main-color), 0 0 45px rgba(var(--main-color-rgb), 0.6); }
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Pie de página */
+        .disclaimer-footer {
+            position: absolute;
+            bottom: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-brand">PABLO'S HOUSE</div>
+
+    <!-- SELECTOR DE VOLÚMENES -->
+    <nav class="vol-selector">
+        <a href="vol1.html" class="vol-btn active" title="Volumen 1">
+            <img src="vol1.png" alt="Vol. 1">
+        </a>
+        <a href="vol2.html" class="vol-btn" title="Volumen 2">
+            <img src="vol2.png" alt="Vol. 2">
+        </a>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main style="text-align: center;">
+        <div class="sub-tag">[ VOLUMEN 1 ]</div>
+        <h1 class="hero-title neon-accent">
+            THE OG<span class="blink-cursor">_</span>
+        </h1>
+    </main>
+
+    <footer class="disclaimer-footer">
+        <span style="color: var(--main-color);">//</span> PABLO'S HOUSE
+    </footer>
+
+</body>
+</html>
