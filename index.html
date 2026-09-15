@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff4500">
+    <meta name="description" content="Pablo's House - No hay dos sin tres.">
+    <title>Pablo's House</title>
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="LogoUbi.png">
+
+    <!-- META ETIQUETAS OG -->
+    <meta property="og:title" content="PABLO'S HOUSE">
+    <meta property="og:description" content="No hay dos sin tres...">
+    <meta property="og:image" content="Logo.png">
+    <meta property="og:type" content="website">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5XB883KRF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z5XB883KRF');
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Space+Mono:wght@400;700&display=swap');
+
+        :root {
+            --main-color: #ff4500;
+            --main-color-rgb: 255, 69, 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-image: radial-gradient(circle at 50% 50%, rgba(var(--main-color-rgb), 0.15) 0%, transparent 75%);
+        }
+
+        /* Cabecera marca */
+        .top-brand {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.75rem, 2.2vw, 1rem);
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+        }
+
+        /* Selector Vol. 1 & Vol. 2 arriba a la derecha */
+        .vol-selector {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .vol-btn {
+            display: block;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 10px rgba(0,0,0,0.8);
+            transition: all 0.3s cubic-bezier(0.17, 0.85, 0.43, 1);
+            background-color: #111111;
+        }
+
+        .vol-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .vol-btn:hover {
+            border-color: var(--main-color);
+            transform: scale(1.12);
+            box-shadow: 0 0 18px rgba(var(--main-color-rgb), 0.8);
+        }
+
+        /* Efectos Neón y Tipografía */
+        .neon-accent {
+            color: var(--main-color);
+            text-shadow: 0 0 10px rgba(var(--main-color-rgb), 0.8),
+                         0 0 25px rgba(var(--main-color-rgb), 0.6),
+                         0 0 45px rgba(var(--main-color-rgb), 0.3);
+            animation: terminalPulse 2.5s infinite alternate ease-in-out;
+        }
+
+        .glow-white {
+            color: #ffffff;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6),
+                         0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 7vw, 5.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            padding: 0 20px;
+            max-width: 1000px;
+        }
+
+        .blink-cursor {
+            color: var(--main-color);
+            font-family: 'Space Mono', monospace;
+            font-weight: 900;
+            animation: cursorBlink 1s step-end infinite;
+        }
+
+        @keyframes terminalPulse {
+            0% { text-shadow: 0 0 8px rgba(var(--main-color-rgb), 0.6), 0 0 15px rgba(var(--main-color-rgb), 0.3); }
+            100% { text-shadow: 0 0 15px var(--main-color), 0 0 30px var(--main-color), 0 0 45px rgba(var(--main-color-rgb), 0.6); }
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Pie de página */
+        .disclaimer-footer {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-brand">PABLO'S HOUSE</div>
+
+    <!-- SELECTOR DE VOLÚMENES -->
+    <nav class="vol-selector">
+        <a href="vol1.html" class="vol-btn" title="Volumen 1">
+            <img src="vol1.png" alt="Vol. 1">
+        </a>
+        <a href="vol2.html" class="vol-btn" title="Volumen 2">
+            <img src="vol2.png" alt="Vol. 2">
+        </a>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <h1 class="hero-title">
+            <span class="glow-white">NO HAY DOS</span><br>
+            <span class="neon-accent">SIN TRES</span><span class="blink-cursor">_</span>
+        </h1>
+    </main>
+
+    <footer class="disclaimer-footer">
+        <div class="disclaimer-left">
+            <span style="color: var(--main-color);">//</span> Creado por <a href="https://www.instagram.com/pabloinfo1/" target="_blank" style="color: inherit; text-decoration: none; pointer-events: auto;"><strong>pabloinfo1</strong></a>
+        </div>
+        <!-- ALERTA DE PRIVACIDAD INTEGRADA EN EL FOOTER -->
+        <div class="disclaimer-right" style="text-align: right;">
+            Contenido satírico. Evento privado no comercial. <span style="margin: 0 5px;">-</span> 
+            <span onclick="gtag('event', 'click_privacy_alert'); alert('Esta web es un sitio privado y no comercial para la organización de Pablo\'s House.\n\nNo te pongas pesado con tu privacidad, que aquí lo verdaderamente importante es beber y venir preparado para la fiesta. Únicamente usamos Google Analytics para saber cuánta gente entra a la web y ver si el servidor aganta. Tranquilo, que te vamos a hacer bastante menos control del que te hace tu pareja. No vendemos tus datos a nadie ni nos importa lo que hagas con tu vida.\n\nSi aun así te entra la paranoia y quieres borrar cualquier registro de tu paso por la web, déjate de burocracias y contacta directamente con Pablo por privado.');" style="text-decoration: underline; cursor: pointer; pointer-events: auto;">Privacidad y Analíticas</span>
+        </div>
+    </footer>
+
+</body>
+</html>
