@@ -146,16 +146,16 @@
             50% { opacity: 0; }
         }
 
-        /* Botón estilo Vol. 2 */
+        /* Botón estilo Vol. 2 optimizado para móviles */
         .neon-btn-secondary {
             display: inline-block;
-            font-size: 1.1rem;
+            font-size: clamp(0.85rem, 3.8vw, 1.1rem);
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: var(--main-color);
             text-decoration: none;
-            padding: 18px 45px;
+            padding: 16px 28px;
             background: rgba(var(--main-color-rgb), 0.03);
             border: 2px dashed var(--main-color);
             border-radius: 4px;
@@ -163,6 +163,8 @@
             transition: all 0.3s ease;
             cursor: pointer;
             margin-top: 35px;
+            max-width: 90vw;
+            white-space: nowrap;
         }
 
         .neon-btn-secondary:hover {
@@ -280,7 +282,10 @@
             border-radius: 8px;
             box-shadow: 0 0 25px rgba(var(--main-color-rgb), 0.4);
             cursor: pointer;
-            touch-action: manipulation;
+            touch-action: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
             transition: transform 0.1s ease, background 0.2s ease;
         }
 
@@ -377,7 +382,7 @@
         <!-- BOTÓN DE HYPE PARA VOL. 3 -->
         <div>
             <button id="btn-hype-vol3" class="neon-btn-secondary" type="button">
-                &nbsp;HYPEAR&nbsp;VOL.&nbsp;3:&nbsp;MODO&nbsp;CUBATERO&nbsp;
+                HYPEAR VOL. 3
             </button>
         </div>
     </main>
@@ -461,10 +466,7 @@
 
             // Difficulty calculations based on score
             function getDifficulty() {
-                // Speed of liquid filling increases as score grows
                 const fillSpeed = 0.45 + (score * 0.08) + (Math.sin(score * 0.7) * 0.03);
-
-                // Safe target zone (min percentage to max percentage before 100% overflow)
                 const minTarget = Math.min(93, 75 + Math.floor(score * 1.2));
                 const maxTarget = 98.5;
 
@@ -494,6 +496,11 @@
                 }
             }
 
+            function restartGame() {
+                score = 0;
+                startRound();
+            }
+
             function startRound() {
                 liquidLevel = 0;
                 isPouring = false;
@@ -507,7 +514,7 @@
             }
 
             function startPouring(e) {
-                if (e) e.preventDefault();
+                if (e && e.preventDefault) e.preventDefault();
                 if (roundState === 'READY' || roundState === 'POURING') {
                     isPouring = true;
                     roundState = 'POURING';
@@ -516,7 +523,7 @@
             }
 
             function stopPouring(e) {
-                if (e) e.preventDefault();
+                if (e && e.preventDefault) e.preventDefault();
                 if (roundState === 'POURING') {
                     isPouring = false;
                     btnPour.classList.remove('pouring');
@@ -555,7 +562,6 @@
 
             function triggerOverflowAnimation() {
                 roundState = 'GAMEOVER';
-                // Spawn splash particles
                 const { glassTopY, glassLeftX, glassRightX } = getGlassDimensions();
                 for (let i = 0; i < 60; i++) {
                     const side = Math.random() > 0.5 ? glassLeftX : glassRightX;
@@ -611,7 +617,6 @@
                 if (isPouring && roundState === 'POURING') {
                     liquidLevel += fillSpeed;
 
-                    // Spawn bubbles inside liquid
                     if (Math.random() < 0.4) {
                         const { centerX, topW } = getGlassDimensions();
                         bubbles.push({
@@ -630,17 +635,15 @@
                     }
                 }
 
-                // Update particles
                 for (let i = particles.length - 1; i >= 0; i--) {
                     const p = particles[i];
                     p.x += p.vx;
                     p.y += p.vy;
-                    p.vy += 0.4; // gravity
+                    p.vy += 0.4;
                     p.alpha -= 0.02;
                     if (p.alpha <= 0) particles.splice(i, 1);
                 }
 
-                // Update bubbles
                 for (let i = bubbles.length - 1; i >= 0; i--) {
                     const b = bubbles[i];
                     b.yRel += b.speed * 0.008;
@@ -656,7 +659,6 @@
                 const { glassH, glassBottomY, glassTopY, topW, bottomW, centerX, glassLeftX, glassRightX } = getGlassDimensions();
                 const { minTarget, maxTarget } = getDifficulty();
 
-                // 1. DIBUJAR BOTELLA / GRIFO DE DERRAME ARRIBA
                 const tapY = Math.max(20, glassTopY - 70);
                 ctx.save();
                 ctx.fillStyle = '#ff4500';
@@ -665,7 +667,6 @@
                 ctx.fillRect(centerX - 12, tapY - 15, 24, 15);
                 ctx.restore();
 
-                // 2. CHORRO DE BEBIDA SI SE ESTÁ LLENANDO
                 if (isPouring || (roundState === 'POURING' && liquidLevel > 0)) {
                     const currentLiquidY = glassBottomY - (glassH * Math.min(1.0, liquidLevel / 100));
                     ctx.save();
@@ -680,7 +681,6 @@
                     ctx.restore();
                 }
 
-                // 3. SILUETA DEL VASO (Fondo translúcido)
                 const glassBottomLeftX = centerX - bottomW / 2;
                 const glassBottomRightX = centerX + bottomW / 2;
 
@@ -694,11 +694,9 @@
                 ctx.fillStyle = 'rgba(20, 20, 25, 0.65)';
                 ctx.fill();
 
-                // CLIP PARA EL LÍQUIDO DENTRO DEL VASO
                 ctx.save();
-                ctx.clip(); // Limita todo el renderizado del líquido a la forma del vaso
+                ctx.clip();
 
-                // RENDER LÍQUIDO
                 if (liquidLevel > 0) {
                     const fillHeight = glassH * (liquidLevel / 100);
                     const liquidY = glassBottomY - fillHeight;
@@ -711,13 +709,11 @@
                     ctx.fillStyle = liqGrad;
                     ctx.fillRect(centerX - topW, liquidY, topW * 2, fillHeight + 50);
 
-                    // Espuma / Brillo en la superficie del líquido
                     ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
                     ctx.shadowBlur = 10;
                     ctx.shadowColor = '#ffffff';
                     ctx.fillRect(centerX - topW, liquidY - 2, topW * 2, 4);
 
-                    // DIBUJAR CUBOS DE HIELO FLOTANTES
                     iceCubes.forEach(cube => {
                         const cubeY = glassBottomY - Math.min(fillHeight * 0.85, fillHeight - 20) + cube.yOffset;
                         const cubeX = centerX + (cube.xRel * topW);
@@ -734,7 +730,6 @@
                         }
                     });
 
-                    // DIBUJAR BURBUJAS
                     bubbles.forEach(b => {
                         const bY = glassBottomY - (fillHeight * b.yRel);
                         ctx.save();
@@ -745,9 +740,8 @@
                         ctx.restore();
                     });
                 }
-                ctx.restore(); // Fin clip líquido
+                ctx.restore();
 
-                // 4. ZONA DE LLENADO PERFECTO (OBJETIVO NEÓN)
                 const minTargetY = glassBottomY - (glassH * (minTarget / 100));
                 const maxTargetY = glassBottomY - (glassH * (maxTarget / 100));
                 const targetH = minTargetY - maxTargetY;
@@ -756,7 +750,6 @@
                 ctx.fillStyle = 'rgba(255, 69, 0, 0.22)';
                 ctx.fillRect(glassLeftX - 15, maxTargetY, topW + 30, targetH);
 
-                // Líneas guía neón del objetivo
                 ctx.strokeStyle = '#ff4500';
                 ctx.shadowBlur = 15;
                 ctx.shadowColor = '#ff4500';
@@ -774,13 +767,11 @@
                 ctx.stroke();
                 ctx.setLineDash([]);
 
-                // Texto ZONA LÍMITE
                 ctx.fillStyle = '#ff8255';
                 ctx.font = '700 11px "Space Mono", monospace';
                 ctx.fillText('LÍMITE CUBATA', glassRightX + 25, maxTargetY + targetH / 2 + 4);
                 ctx.restore();
 
-                // 5. CONTORNO Y CRISTAL DEL VASO
                 ctx.save();
                 ctx.beginPath();
                 ctx.moveTo(glassLeftX, glassTopY);
@@ -794,7 +785,6 @@
                 ctx.shadowColor = '#ffffff';
                 ctx.stroke();
 
-                // Reflejo en el cristal
                 ctx.beginPath();
                 ctx.moveTo(glassLeftX + 10, glassTopY + 15);
                 ctx.lineTo(glassBottomLeftX + 8, glassBottomY - 15);
@@ -803,7 +793,6 @@
                 ctx.stroke();
                 ctx.restore();
 
-                // 6. MENSAJE DE ÉXITO EN PANTALLA
                 if (roundState === 'SUCCESS') {
                     ctx.save();
                     ctx.font = '900 2.2rem "Anton", sans-serif';
@@ -815,7 +804,6 @@
                     ctx.restore();
                 }
 
-                // 7. PARTICULAS DE DERRAME
                 particles.forEach(p => {
                     ctx.save();
                     ctx.beginPath();
@@ -839,17 +827,29 @@
             // EVENTOS DE CONTROL PARA BOTÓN HYPE Y JUEGO
             if (btnHype) btnHype.addEventListener('click', openGame);
             if (btnExit) btnExit.addEventListener('click', closeGame);
-            if (btnRestart) btnRestart.addEventListener('click', startRound);
+            if (btnRestart) btnRestart.addEventListener('click', restartGame);
 
-            // Controles de llenado (Mouse, Touch, Teclado)
+            // Controles de llenado táctiles y ratón mediante Pointer Events
             if (btnPour) {
-                btnPour.addEventListener('mousedown', startPouring);
-                btnPour.addEventListener('mouseup', stopPouring);
-                btnPour.addEventListener('mouseleave', stopPouring);
+                btnPour.addEventListener('contextmenu', (e) => e.preventDefault());
 
-                btnPour.addEventListener('touchstart', startPouring, { passive: false });
-                btnPour.addEventListener('touchend', stopPouring, { passive: false });
-                btnPour.addEventListener('touchcancel', stopPouring, { passive: false });
+                btnPour.addEventListener('pointerdown', (e) => {
+                    e.preventDefault();
+                    try { btnPour.setPointerCapture(e.pointerId); } catch(err) {}
+                    startPouring();
+                });
+
+                btnPour.addEventListener('pointerup', (e) => {
+                    e.preventDefault();
+                    try { if (btnPour.hasPointerCapture(e.pointerId)) btnPour.releasePointerCapture(e.pointerId); } catch(err) {}
+                    stopPouring();
+                });
+
+                btnPour.addEventListener('pointercancel', (e) => {
+                    e.preventDefault();
+                    try { if (btnPour.hasPointerCapture(e.pointerId)) btnPour.releasePointerCapture(e.pointerId); } catch(err) {}
+                    stopPouring();
+                });
             }
 
             window.addEventListener('keydown', (e) => {
